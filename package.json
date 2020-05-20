@@ -1,0 +1,27 @@
+{
+  "name": "three-nuxt",
+  "version": "1.0.0",
+  "description": "Preset for projects",
+  "author": "J-o-o",
+  "private": true,
+  "scripts": {
+    "dev": "nuxt",
+    "build": "nuxt build",
+    "start": "nuxt start",
+    "generate": "nuxt generate"
+  },
+  "dependencies": {
+    "hammerjs": "^2.0.8",
+    "image-promise": "^7.0.1",
+    "math-toolbox": "^1.12.0",
+    "nuxt": "^2.0.0",
+    "raw-loader": "^4.0.0",
+    "three": "^0.111.0"
+  },
+  "devDependencies": {
+    "@nuxtjs/style-resources": "^1.0.0",
+    "node-sass": "^4.13.0",
+    "sass-loader": "^8.0.0",
+    "terser-webpack-plugin": "^3.0.1"
+  }
+}

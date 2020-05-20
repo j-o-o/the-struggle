@@ -1,4 +1,4 @@
-# threejs-nuxt-sample
+# The struggle is part of the story
 
 ## Build Setup
 
@@ -26,10 +26,3 @@ Runs on
 - [Hammer.js](https://github.com/hammerjs/hammer.js) for touching and panning
 - [Three.js](https://github.com/mrdoob/three.js/) for WebGL
 - [Image Promise](https://github.com/fregante/image-promise) Load an image and return a promise
-
-To-Do
--
-- Adding ObjectLoader
-- Better routing
-# the-struggle
-# the-struggle
