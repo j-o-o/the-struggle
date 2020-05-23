@@ -8,6 +8,7 @@
 import Scene from "./js/Scene";
 import EventBus from "~/utils/event-bus";
 
+
 export default {
   name: 'scene',
   data () {
@@ -19,13 +20,13 @@ export default {
       $canvas: this.$refs.canvas,
     });
     EventBus.$emit("TRANSITION", this.$route.name);
+
   },
   watch: {
     "$route.name": function(_new, _old){
       EventBus.$emit("TRANSITION", _new);
     }
   },
-
 };
 </script>
 <style>

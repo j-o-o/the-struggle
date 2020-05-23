@@ -17,7 +17,6 @@ export default class Shape{
         this.material = new THREE.MeshNormalMaterial();
         this.mesh = new THREE.InstancedMesh( this.geometry, this.material, this.count );
         
-
         var i = 0;
         var offset = ( this.amount - 1 ) / 2;
         var transform = new THREE.Object3D();

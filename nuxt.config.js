@@ -1,5 +1,4 @@
 export default {
-  mode: 'universal',
   head: {
     title: process.env.npm_package_name || '',
     meta: [
@@ -11,18 +10,13 @@ export default {
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
     ]
   },
-  modules: ['@nuxtjs/style-resources'],
+  modules: [
+    '@nuxtjs/axios',
+  ],
   build: {
     vendor: ['hammerjs'],
     extend (config, ctx) {
-      if (!!config.module) {
-        config.module.rules.push(
-        { 
-          test: /\.(vert|frag)$/i, 
-          use: ["raw-loader"] 
-        },
-        );
-      }
+      config.module.rules.push();
     }
   }
 }

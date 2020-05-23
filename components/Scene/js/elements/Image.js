@@ -8,11 +8,6 @@ export default class Image{
     }
 
     init(){
-        // const image = './assets/images/mage_1f9d9.jpg';
-        // const loader = new THREE.ImageLoader().load(image, this.addObject(image));
-        // this.geometry = new THREE.PlaneBufferGeometry(1,1)
-        
-
     }
 
     addObject(image){

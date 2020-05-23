@@ -24,12 +24,12 @@ class Common{
         
         this.scene = new THREE.Scene();
         this.camera = new THREE.PerspectiveCamera(
-            45, 
+            55, 
             this.size.windowW / this.size.windowH,
             0.01, 
             10000
         );
-        this.camera.position.set(0, 10, -10);
+        this.camera.position.set(0, 0, 10);
         this.camera.lookAt(this.scene.position);
 
         this.renderer = new THREE.WebGLRenderer({
@@ -62,7 +62,6 @@ class Common{
     render(){
         this.time.delta = this.clock.getDelta();
         this.time.total += this.delta;
-
         this.renderer.render(this.scene, this.camera);
     }
 }

@@ -69,6 +69,8 @@ export default {
         wheelSpeed: null
     }
   },
+
+
   mounted () {
     EventBus.$on("MOUSEMOVE", this.mouseMove);
 
@@ -79,9 +81,7 @@ export default {
 
     EventBus.$on("RAYCASTER", this.intersectedObject);
   },
-  destroyed(){
 
-  },  
   watch: {
     "$route.name": function(_new, _old){
         this.current = _new

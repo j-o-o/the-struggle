@@ -1,5 +1,6 @@
 import * as THREE from 'three'
 import Common from '../Common'
+import Scene from '../Scene'
 
 
 if (process.browser) {
@@ -45,8 +46,6 @@ class Wheel{
         
     }
 
-    // loop because the wheelspeed does not 
-    // reset to 0
     loop(){
         EventBus.$emit("WHEELSPEED", this.wheelSpeed);
     }
