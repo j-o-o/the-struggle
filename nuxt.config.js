@@ -15,8 +15,11 @@ export default {
   ],
   build: {
     vendor: ['hammerjs'],
+    transpile: ['ImprovedNoise'],
     extend (config, ctx) {
-      config.module.rules.push();
+      if (!!config.module) {
+        config.module.rules.push({ test: /\.(vert|frag)$/i, use: ["raw-loader"] });
+      }
     }
   },
   env: {
@@ -31,7 +34,7 @@ export default {
       { id: 8, name: 'Luisa Behrendt'},
       { id: 9, name: 'Artur Maier'},
       { id: 10, name: 'Maria Alejandra Arevalo Martinez'},
-      { id: 12, name: 'Iva Mago Maria'},
+      { id: 11, name: 'Iva Mago Maria'},
       { id: 12, name: 'Zita Felizitas Frohloff'},
       { id: 13, name: 'Angle Genkov'},
       { id: 14, name: 'Jana Köhler'},

@@ -1,6 +1,12 @@
 import * as THREE from "three";
 import Common from "../Common";
 
+import { ImprovedNoise } from 'three/examples/jsm/math/ImprovedNoise.js';
+// const ImprovedNoise = require('three/examples/jsm/math/ImprovedNoise.js')
+
+import vertexShader from "../glsl/shape.vert";
+import fragmentShader from "../glsl/shape.frag";
+
 
 export default class Shape{
     constructor(){
@@ -9,27 +15,37 @@ export default class Shape{
 
     init(){
 
-        this.amount = 2;
-        this.count = Math.pow( this.amount, 3 );
+        var data = this.generateHeight( 10, 10 );
 
-        console.log(this.amount, this.count)
-        this.geometry = new THREE.SphereBufferGeometry( 0.5 );
-        this.material = new THREE.MeshNormalMaterial();
-        this.mesh = new THREE.InstancedMesh( this.geometry, this.material, this.count );
-        
-        var i = 0;
-        var offset = ( this.amount - 1 ) / 2;
-        var transform = new THREE.Object3D();
-        for ( var x = 0; x < this.amount; x ++ ) {
-            for ( var y = 0; y < this.amount; y ++ ) {
-                for ( var z = 0; z < this.amount; z ++ ) {
-                    transform.position.set( offset - x, offset - y, offset - z );
-                    transform.updateMatrix();
-                    this.mesh.setMatrixAt( i ++, transform.matrix );
-                }
-            }
-        }
+
+        let geometry = new THREE.PlaneBufferGeometry(10,10,20,20);
+        var vertices = geometry.attributes.position.array;
+        let material = new THREE.MeshNormalMaterial({wireframe:true})
+        this.mesh = new THREE.Mesh(geometry, material)
+        this.mesh.rotation.x = -0.5;
         Common.scene.add(this.mesh);
+
+    }
+
+    generateHeight( width, height ) {
+
+        var size = width * height, data = new Uint8Array( size ),
+            perlin = new ImprovedNoise(), quality = 1, z = Math.random() * 100;
+
+        for ( var j = 0; j < 4; j ++ ) {
+
+            for ( var i = 0; i < size; i ++ ) {
+
+                var x = i % width, y = ~ ~ ( i / width );
+                data[ i ] += Math.abs( perlin.noise( x / quality, y / quality, z ) * quality * 1.75 );
+
+            }
+
+            quality *= 5;
+
+        }
+
+        return data;
 
     }
 
