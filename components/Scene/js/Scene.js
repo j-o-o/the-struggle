@@ -62,7 +62,7 @@ export default class Scene{
     loop(){
         this.render();
         requestAnimationFrame(this.loop.bind(this));
-        this.camPos.x += Wheel.wheelSpeed/400;
+        this.camPos.x += Wheel.wheelSpeed/200;
         const easing = Math.min(1.0, 3.5 * Common.time.delta)
 
 
@@ -75,6 +75,7 @@ export default class Scene{
 
     render(){
         Common.render();
+        this.shape.loop()
         Wheel.loop();
     }
 }

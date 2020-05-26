@@ -15,7 +15,7 @@ export default {
   ],
   build: {
     vendor: ['hammerjs'],
-    transpile: ['ImprovedNoise'],
+    transpile: ['ImprovedNoise', 'SimplexNoise', 'ImprovedNoise'],
     extend (config, ctx) {
       if (!!config.module) {
         config.module.rules.push({ test: /\.(vert|frag)$/i, use: ["raw-loader"] });
