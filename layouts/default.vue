@@ -2,18 +2,15 @@
   <div>
     <Scene />
     <nuxt />
-    <Menu />
   </div>
 </template>
 
 <script>
-import Scene from "~/components/Scene";
-import Menu from "~/components/Menu";
 
+import Scene from "~/components/Scene";
 export default {
   components: {
-    Scene,
-    Menu
+      Scene,
   }
 }
 </script>

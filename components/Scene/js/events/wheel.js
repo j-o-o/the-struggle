@@ -41,6 +41,7 @@ class Wheel{
         if(this.stopWheelTimer!==undefined){
             clearTimeout(this.stopWheelTimer)
         };
+        
         this.stopWheelTimer = setTimeout(() => this.onStopWheel(), 200);
         EventBus.$emit("WHEELED", this.wheeled);
         

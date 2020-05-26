@@ -12,12 +12,6 @@
                 <li>
                     <nuxt-link to="/">Index</nuxt-link>
                 </li>
-                <li>
-                    <nuxt-link to="/about">About</nuxt-link>
-                </li>
-                <li>
-                    <nuxt-link to="/contact">Contact</nuxt-link>
-                </li>
             </ul>
         </section>
         <section class="meta">
@@ -48,6 +42,9 @@
                 </li>
             </ul>
         </section>
+
+
+
     </div>
 </template>
 <script>
@@ -55,18 +52,21 @@
 import EventBus from "~/utils/event-bus";
 
 export default {
-  name: 'scene',
-  data () {
-    return {
-        current: this.$nuxt.$route.name,
-        mouseX: null,
-        mouseY: null,
-        panX: null,
-        panY: null,
-        velocity: null,
-        object: null,
-        wheeled: null,
-        wheelSpeed: null
+    name: 'scene',
+    asyncData ({ env }) {
+        return { users: env.users }
+    },
+    data () {
+        return {
+            current: this.$nuxt.$route.name,
+            mouseX: null,
+            mouseY: null,
+            panX: null,
+            panY: null,
+            velocity: null,
+            object: null,
+            wheeled: null,
+            wheelSpeed: null
     }
   },
 

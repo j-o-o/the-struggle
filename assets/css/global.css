@@ -1,9 +1,11 @@
-
+@font-face{
+    font-family: 'font';
+    src: url('gc16 Mono.otf')
+}
 *{
-    margin: 0;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }
 html, body{
     margin: 0;
-    overflow: hidden;
-
 }
