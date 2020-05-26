@@ -13,6 +13,7 @@ export default {
   name: 'scene',
   data () {
     return {
+      images: [],
     }
   },
   mounted () {
@@ -21,6 +22,13 @@ export default {
     });
     EventBus.$emit("TRANSITION", this.$route.name);
 
+    this.importAll(require.context('../../assets/images/', true, /\.jpg$/));
+
+  },
+  methods: {
+    importAll(r) {
+      r.keys().forEach(key => (this.images.push({ pathLong: r(key), pathShort: key })));
+    },
   },
   watch: {
     "$route.name": function(_new, _old){

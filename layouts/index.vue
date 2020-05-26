@@ -1,16 +1,19 @@
 <template>
-  <div class="container">
-    <nuxt-link to="contact">Contact</nuxt-link>
+  <div>
+    <nuxt />
   </div>
 </template>
 
 <script>
+
 export default {
-  layout: 'index',
   components: {
   }
 }
 </script>
 
 <style>
+html, body{
+  overflow: hidden
+}
 </style>
