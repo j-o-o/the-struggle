@@ -17,16 +17,11 @@ class Wheel{
         this.wheelSpeed = 0;
         this.stopWheelTimer;
     }
+
     init(){
         const hammertime = new Hammer(Common.renderer.domElement);
-
         document.addEventListener("wheel", this.onWheel.bind(this));
-
-        hammertime.on('pan', this.panMove.bind(this) );
-    }
-
-    panMove(e){
-
+        hammertime.on('pan', this.panMove.bind(this));
     }
 
     onStopWheel(){
@@ -45,6 +40,10 @@ class Wheel{
         this.stopWheelTimer = setTimeout(() => this.onStopWheel(), 200);
         EventBus.$emit("WHEELED", this.wheeled);
         
+    }
+
+    panMove(e){
+        console.log(e)
     }
 
     loop(){

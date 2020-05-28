@@ -1,6 +1,9 @@
 @font-face{
-    font-family: 'font';
+    font-family: 'font1';
     src: url('gc16 Mono.otf')
+}@font-face{
+    font-family: 'font2';
+    src: url('glossydisplaycondensedlight.otf')
 }
 *{
     -webkit-font-smoothing: antialiased;

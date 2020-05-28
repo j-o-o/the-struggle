@@ -3,6 +3,33 @@
 
 
     <div id="intro">
+
+    <div id="intro-container">
+      <div id="title">
+        The struggle is part of the story
+      </div>
+      <div id="info">
+        <ul>
+          <li>
+            Digitale Ausstellung
+          </li>
+          <li>
+            Klasse Julia Albrecht
+          </li>
+          <li>
+            Fotografisches Storytelling
+          </li>
+          <li>
+            Bauhaus-University Weimar
+          </li>
+          <li>
+            SS 2020
+          </li>
+        </ul>
+      </div>
+      
+    </div>
+
       <p>
       Geschichten werden durch viele verschiedene Ausdrucksformen erzählt 
       und dabei haben sich viele Möglichkeiten etabliert, mit denen man reale 
@@ -22,12 +49,11 @@
       Es ist Geduld gefragt und die sorgfältige Beobachtung der eigenen Umwelt. 
       Man muss lernen, die Geschichte im Alltag zu erkennen, oder man plant diese 
       und setzt Sie im entsprechendem Setting in Szene.</p>
-      <div id="enter">
-        <nuxt-link to="exhibition">
-          …Enter Exhibition…
-        </nuxt-link>
-      </div>
-
+        <div id="enter">
+          <nuxt-link to="exhibition">
+            …Enter Exhibition…
+          </nuxt-link>
+        </div>
     </div>
   </main>
 </template>
@@ -47,23 +73,16 @@ export default {
     }
   },
   methods: {
-    init() {
-    },
-
     onWheeled(e){
     },
   },
   mounted() {
-    this.init();
-    // EventBus.$on("WHEELED", this.onWheeled);
   },
 }
 </script>
 
 <style scoped>
-
 #intro{
-  padding: 36px;
   font-family: 'font';
   position: fixed;
   top: 0;
@@ -72,19 +91,61 @@ export default {
   z-index: 2;
   overflow: scroll;
   height: 100%;
-  font-size: 36px;
-  text-indent: 52px;
   color: #585858;
 }
+#intro-container{
+  font-weight: inherit;
+  height: 100vh;
+  width: 100vw;
+  margin: 0;
+  padding: 0;
+}
+#title{
+
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%);
+    width: 90vw;
+    text-align: center;
+  font-family: 'font2';
+  font-size: 18vw;
+}
+
+#info{
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  margin: 12px;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: inherit;
+}
+#info ul{
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+p {
+  padding: 36px;
+  font-size: 36px;
+  text-indent: 52px;
+} 
+
+
+
 #enter{
   text-align: center;
   margin: 46px 0; 
   font-weight: 100;
   font-size: 46px;
 }
+
 #enter a{
   color: #6d6dff;
   text-decoration: none;
 }
+
+
 
 </style>

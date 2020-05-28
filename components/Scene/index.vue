@@ -20,21 +20,26 @@ export default {
     if(!this.scene) this.scene = new Scene({
       $canvas: this.$refs.canvas,
     });
-    EventBus.$emit("TRANSITION", this.$route.name);
-
     this.importAll(require.context('../../assets/images/', true, /\.jpg$/));
+    console.log(this.images)
+    EventBus.$emit("IMAGES", this.images);
+    
+    EventBus.$emit("TRANSITION", this.$route.params.id);
 
   },
+
   methods: {
     importAll(r) {
       r.keys().forEach(key => (this.images.push({ pathLong: r(key), pathShort: key })));
     },
   },
+
   watch: {
-    "$route.name": function(_new, _old){
+    "$route.params.id": function(_new, _old){
       EventBus.$emit("TRANSITION", _new);
     }
   },
+
 };
 </script>
 <style>

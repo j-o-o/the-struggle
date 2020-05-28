@@ -1,6 +1,6 @@
 import * as THREE from 'three'
 import Common from "./Common"
-import Shape from "./elements/Shape"
+// import Shape from "./elements/Shape"
 
 import Image from "./elements/Image"
 
@@ -16,29 +16,69 @@ export default class Scene{
 
     constructor(props){
         this.props = props;
+        this.wheeled = 0;
+        this.camPos = new THREE.Vector3();
+        this.camLookAt = new THREE.Vector3();
+        this.mouse = new THREE.Vector2();
+        
         this.init();
     }
 
     init(){
-
-        this.camPos = {
-            x: 0,
-            y: 0,
-            z: 0
-        }
-
+        EventBus.$on("MOUSEMOVE", this.mouseMove.bind(this));
+        EventBus.$on("WHEELSPEED", this.onWheel.bind(this));
         EventBus.$on("TRANSITION", this.onTransition.bind(this));
-
-        Common.init(this.props.$canvas);
-        this.shape = new Shape();
-
         window.addEventListener("resize", this.resize.bind(this));
 
+
+        Common.init(this.props.$canvas);
+        // this.shape = new Shape();
+        this.image = new Image()
+        // Image.init()
         Pointer.init();
-        console.log(Pointer)
         Wheel.init();
+
         this.loop();
 
+    }
+
+    loadImages(e){
+        console.log(e)
+    }
+
+    mouseMove(e){
+
+        this.mouse.x = ( e.clientX / window.innerWidth ) * 2 - 1;
+        this.mouse.y = - ( e.clientY / window.innerHeight ) * 2 + 1;
+
+    }
+    onWheel(e){
+        this.camPos.x += e/200;
+    }
+
+    loop(){
+
+        this.render();
+        requestAnimationFrame(this.loop.bind(this));
+        // const easing = Math.min(1.0, 3.5 * Common.time.delta)
+
+        Common.camera.position.x = lerp(Common.camera.position.x, this.camPos.x + this.mouse.x, 0.08);
+        Common.camera.position.y = lerp(Common.camera.position.y, this.mouse.y, 0.08);
+
+        this.camLookAt.x = lerp(this.camLookAt.x, this.camPos.x + this.mouse.x * 1.8, 0.4);
+        this.camLookAt.y = lerp(this.camLookAt.y, this.mouse.y * 1.8, 0.4);
+
+        Common.camera.rotateY = this.mouse.x
+
+        Common.camera.lookAt(this.camLookAt.x, this.camLookAt.y, 0)
+
+    }
+
+    render(){
+        Common.render();
+        // this.shape.loop()
+        Wheel.loop();
+        this.image.update();
     }
 
     resize(){
@@ -47,35 +87,16 @@ export default class Scene{
 
     onTransition(path){
         switch(path){
-            case "index": 
-                this.camPos.x = 0;
+            case "1": 
+                this.camPos.x = 10;
             break;
-            case "about":
-                this.camPos.x = 1;
+            case "2":
+                this.camPos.x = 20;
             break;
-            case "contact":
-                this.camPos.x = 2;
+            case "3":
+                this.camPos.x = 30;
             break;
         }
     }
 
-    loop(){
-        this.render();
-        requestAnimationFrame(this.loop.bind(this));
-        this.camPos.x += Wheel.wheelSpeed/200;
-        const easing = Math.min(1.0, 3.5 * Common.time.delta)
-
-
-
-    //   this.camPos.x = this.mousePosition.x
-    //   this.camPos.y = this.mousePosition.y
-
-        Common.camera.position.x = lerp(Common.camera.position.x, this.camPos.x, easing);
-    }
-
-    render(){
-        Common.render();
-        this.shape.loop()
-        Wheel.loop();
-    }
 }

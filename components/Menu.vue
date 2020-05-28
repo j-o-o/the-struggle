@@ -58,7 +58,7 @@ export default {
     },
     data () {
         return {
-            current: this.$nuxt.$route.name,
+            current: this.$nuxt.$route.params.id,
             mouseX: null,
             mouseY: null,
             panX: null,
@@ -67,47 +67,46 @@ export default {
             object: null,
             wheeled: null,
             wheelSpeed: null
+        }
+    },
+
+
+    mounted () {
+        EventBus.$on("MOUSEMOVE", this.mouseMove);
+
+        EventBus.$on("PANMOVE", this.panMove);
+
+        EventBus.$on("WHEELED", this.onWheeled);
+        EventBus.$on("WHEELSPEED", this.onWheelSpeed);
+
+        EventBus.$on("RAYCASTER", this.intersectedObject);
+    },
+
+    watch: {
+        "$route.params.id": function(_new, _old){
+            this.current = _new
+        }
+    },
+    methods: {
+        mouseMove(e){
+            this.mouseX = e.clientX;
+            this.mouseY = e.clientY;
+        },
+        panMove(e){
+            this.panX = e.center.x;
+            this.panY = e.center.y;
+            this.velocity = e.velocity;
+        },
+        onWheeled(e){
+            this.wheeled = e;
+        },
+        onWheelSpeed(e){
+            this.wheelSpeed = e;
+        },
+        intersectedObject(e){
+            this.object = e;
+        }
     }
-  },
-
-
-  mounted () {
-    EventBus.$on("MOUSEMOVE", this.mouseMove);
-
-    EventBus.$on("PANMOVE", this.panMove);
-
-    EventBus.$on("WHEELED", this.onWheeled);
-    EventBus.$on("WHEELSPEED", this.onWheelSpeed);
-
-    EventBus.$on("RAYCASTER", this.intersectedObject);
-  },
-
-  watch: {
-    "$route.name": function(_new, _old){
-        this.current = _new
-    }
-  },
-  methods: {
-     mouseMove(e){
-        this.mouseX = e.clientX;
-        this.mouseY = e.clientY;
-     },
-     panMove(e){
-        this.panX = e.center.x;
-        this.panY = e.center.y;
-        this.velocity = e.velocity;
-     },
-     onWheeled(e){
-        this.wheeled = e;
-     },
-     onWheelSpeed(e){
-        this.wheelSpeed = e;
-     },
-     intersectedObject(e){
-        this.object = e;
-     }
-
-  }
 };
 </script>
 <style lang="scss">

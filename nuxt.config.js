@@ -13,6 +13,7 @@ export default {
   css: [
     '@/assets/css/global.css'
   ],
+  loading: '~/components/loading.vue',
   build: {
     vendor: ['hammerjs'],
     transpile: ['ImprovedNoise', 'SimplexNoise', 'ImprovedNoise'],

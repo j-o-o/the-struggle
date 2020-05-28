@@ -11,6 +11,7 @@ import RayCast from "./raycaster"
 class Pointer{
 
     constructor(){
+        this.mouse = new THREE.Vector2(0,0);
     }
     init(){
         this.pointer = new Pointer();
@@ -22,10 +23,13 @@ class Pointer{
     }
     mouseMove(e){
         EventBus.$emit("MOUSEMOVE", e);
+
+        this.mouse.x = e.clientX
+        this.mouse.y = e.clientY
+
         this.RayCast.mouseMove(e);
     }
     panMove(e){
-        console.log(e)
         EventBus.$emit("PANMOVE", e);
     }
 
