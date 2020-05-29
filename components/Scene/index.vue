@@ -24,7 +24,7 @@ export default {
     console.log(this.images)
     EventBus.$emit("IMAGES", this.images);
     
-    EventBus.$emit("TRANSITION", this.$route.params.id);
+    EventBus.$emit("TRANSITION", this.$route);
 
   },
 
@@ -35,7 +35,7 @@ export default {
   },
 
   watch: {
-    "$route.params.id": function(_new, _old){
+    "$route": function(_new, _old){
       EventBus.$emit("TRANSITION", _new);
     }
   },

@@ -19,7 +19,22 @@ export default {
     transpile: ['ImprovedNoise', 'SimplexNoise', 'ImprovedNoise'],
     extend (config, ctx) {
       if (!!config.module) {
-        config.module.rules.push({ test: /\.(vert|frag)$/i, use: ["raw-loader"] });
+        config.module.rules.push(
+          { 
+            test: /\.(vert|frag)$/i, 
+            use: ["raw-loader"] },
+            {
+              test: /\.(png|jpe?g|gif|svg)$/i,
+              use: [
+                {
+                  loader: 'file-loader',
+                  options: {
+                    esModule: false,
+                  },
+                },
+              ],
+            }
+          );
       }
     }
   },

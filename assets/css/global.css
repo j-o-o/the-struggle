@@ -1,6 +1,6 @@
 @font-face{
     font-family: 'font1';
-    src: url('gc16 Mono.otf')
+    src: url('BB Studio Pro Text.otf');
 }@font-face{
     font-family: 'font2';
     src: url('glossydisplaycondensedlight.otf')
@@ -11,4 +11,8 @@
 }
 html, body{
     margin: 0;
+}
+
+.letter{
+    display: inline-block;
 }

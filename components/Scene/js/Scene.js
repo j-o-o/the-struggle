@@ -20,11 +20,14 @@ export default class Scene{
         this.camPos = new THREE.Vector3();
         this.camLookAt = new THREE.Vector3();
         this.mouse = new THREE.Vector2();
+
+        this.scrollEnabled = false
         
         this.init();
     }
 
     init(){
+
         EventBus.$on("MOUSEMOVE", this.mouseMove.bind(this));
         EventBus.$on("WHEELSPEED", this.onWheel.bind(this));
         EventBus.$on("TRANSITION", this.onTransition.bind(this));
@@ -53,7 +56,9 @@ export default class Scene{
 
     }
     onWheel(e){
-        this.camPos.x += e/200;
+        if(this.scrollEnabled == true){
+            this.camPos.x += e/200;
+        }
     }
 
     loop(){
@@ -62,11 +67,18 @@ export default class Scene{
         requestAnimationFrame(this.loop.bind(this));
         // const easing = Math.min(1.0, 3.5 * Common.time.delta)
 
-        Common.camera.position.x = lerp(Common.camera.position.x, this.camPos.x + this.mouse.x, 0.08);
-        Common.camera.position.y = lerp(Common.camera.position.y, this.mouse.y, 0.08);
+        if(this.scrollEnabled == true){
+            Common.camera.position.x = lerp(Common.camera.position.x, this.camPos.x + this.mouse.x / 2, 0.08);
+            Common.camera.position.y = lerp(Common.camera.position.y, this.mouse.y / 2, 0.08);
+            this.camLookAt.x = lerp(this.camLookAt.x, this.camPos.x + this.mouse.x * 1.8, 0.3);
+        } else {
+            this.camPos.x += 0.01;
+            Common.camera.position.x = lerp(Common.camera.position.x,this.camPos.x + this.mouse.x / 2, 0.08);
+            this.camLookAt.x = lerp(this.camLookAt.x, this.camPos.x + this.mouse.x * 1.8, 0.3);
+        }
 
-        this.camLookAt.x = lerp(this.camLookAt.x, this.camPos.x + this.mouse.x * 1.8, 0.4);
-        this.camLookAt.y = lerp(this.camLookAt.y, this.mouse.y * 1.8, 0.4);
+        Common.camera.position.z = lerp(Common.camera.position.z, this.camPos.z / 2, 0.08);
+        this.camLookAt.y = lerp(this.camLookAt.y, this.mouse.y * 1.8, 0.3);
 
         Common.camera.rotateY = this.mouse.x
 
@@ -85,16 +97,33 @@ export default class Scene{
         Common.resize();
     }
 
+
+    
+
     onTransition(path){
-        switch(path){
+        switch(path.name){
+            case "index":
+                this.scrollEnabled = false
+                this.camPos.z = 40
+            break;
+            case "exhibition":
+                this.scrollEnabled = true
+                this.camPos.z = 20
+            break;
+            case "exhibition-id":
+                this.scrollEnabled = true
+                this.camPos.z = 20
+            break;
+        }
+        switch(path.params.id){
             case "1": 
-                this.camPos.x = 10;
+                this.camPos.x = 10
             break;
             case "2":
-                this.camPos.x = 20;
+                this.camPos.x = 20
             break;
             case "3":
-                this.camPos.x = 30;
+                this.camPos.x = 30
             break;
         }
     }

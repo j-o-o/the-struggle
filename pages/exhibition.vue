@@ -1,6 +1,7 @@
 <template>
   <main>
     <Menu />
+    <logo />
     <div id="pages">
 
       <div id="title">
@@ -25,11 +26,13 @@
 
 <script>
 
-import Menu from "~/components/Menu";
+import Menu from "~/components/Menu"
+import Logo from '~/components/Logo.vue'
 
 export default {
   components: {
-    Menu
+    Menu,
+    Logo
   },  
   name: 'deprecated',
   asyncData ({ env }) {

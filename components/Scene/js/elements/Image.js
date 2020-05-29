@@ -40,7 +40,11 @@ export default class Image{
 
     loadImages(e){
         console.log(e)
-        e.forEach(element => console.log(element));
+
+        e.forEach(function(element){ 
+            var jsonsd = JSON.parse(JSON.stringify(element))
+            console.log(jsonsd)
+        });
     }
 
     update(){
