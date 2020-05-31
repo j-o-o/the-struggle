@@ -3,6 +3,7 @@ import Common from "./Common"
 // import Shape from "./elements/Shape"
 
 import Image from "./elements/Image"
+import Wall from "./elements/Wall"
 
 import Pointer from "./events/pointer"
 import Wheel from "./events/wheel"
@@ -37,6 +38,7 @@ export default class Scene{
         Common.init(this.props.$canvas);
         // this.shape = new Shape();
         this.image = new Image()
+        this.wall = new Wall();
         // Image.init()
         Pointer.init();
         Wheel.init();
@@ -88,8 +90,9 @@ export default class Scene{
 
     render(){
         Common.render();
-        // this.shape.loop()
         Wheel.loop();
+        this.wall.loop();
+        Pointer.loop();
         this.image.update();
     }
 

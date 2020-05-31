@@ -12,8 +12,6 @@ export default class RayCast{
         this.mouse = new THREE.Vector2();
         this.raycaster = new THREE.Raycaster();
         this.camera = Common.camera;
-        console.log(this.camera)
-        
     }
 
     mouseMove(e){
@@ -24,13 +22,32 @@ export default class RayCast{
         this.raycaster.setFromCamera( this.mouse, this.camera );
 
         // calculate objects intersecting the picking ray
-        this.intersects = this.raycaster.intersectObjects( Common.scene.children );
+        var wall = Common.scene.getObjectByName( "wall" );
+        this.intersect = this.raycaster.intersectObject( wall );
     
-        if ( this.intersects.length > 0 ) {
-            EventBus.$emit("RAYCASTER", this.intersects[0].object.type);
+        if ( this.intersect.length > 0 ) {
+            EventBus.$emit("RAYCASTERWALL", this.intersect[0]);
     
         } else {
-            EventBus.$emit("RAYCASTER", null);
+            EventBus.$emit("RAYCASTERWALL", null);
         }
+
+        function Car(make) {
+            this.make = make;
+        }
+
+        let images = Common.scene.children.filter( child => child.isInstancedMesh === true );
+
+        
+        // const result = objects.filter(object => object);
+        // console.log(passed)
+        // this.intersects = this.raycaster.intersectObjects( Common.scene.children );
+        // if ( this.intersects.length > 0 ) {
+        //     EventBus.$emit("RAYCASTERIMAGE", this.intersects[0]);
+    
+        // } else {
+        //     EventBus.$emit("RAYCASTERIMAGE", null);
+        // }
     }
+
 }

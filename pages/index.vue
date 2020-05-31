@@ -35,34 +35,38 @@
       </div>
       
     </div>
-<hr>
+
+
+
+
+
     <div id="intro-text-grid">
       <p>
       Geschichten werden durch viele verschiedene Ausdrucksformen erzählt 
       und dabei haben sich viele Möglichkeiten etabliert, mit denen man reale 
       oder abstrakte Ereignisse erzählen kann. Wenn man diesen Aspekt rein in 
       der Fotografie betrachtet, finden sich auch hier die Möglichkeiten, sich 
-      selbst die nüchternsten Sachinformationen in das Gedächtnis zu prägen. 
-      Dabei erzählt sich eine Geschichte am einfachsten in einer Bildserie, 
-      gleich ob stringent oder abstrakt. The concept sells the story. 
+      selbst die nüchternsten Sachinformationen in das&nbsp;Gedächtnis&nbsp;zu&nbsp;prägen. <br>
+      Dabei&nbsp;erzählt&nbsp;sich eine Geschichte am einfachsten in einer Bildserie, 
+      gleich ob stringent oder abstrakt. The&nbsp;concept&nbsp;sells&nbsp;the&nbsp;story. 
       In manchen Fällen reicht sogar nur eine Fotografie aus, um eine ganze 
       Geschichte zu erzählen. Je mehr Bilder hinzugefügt werden, umso umfangreicher kann diese werden.</p>
       <p>
       Oftmals brennt in uns eine ganz eigene Geschichte, die uns fesselt 
-      und wir gerne befreien möchten. Eine Passion, die uns hilft, 
-      oftmals die besten fotografischen Geschichten zu erzählen. 
+      und wir gerne befreien möchten. Eine&nbsp;Passion,&nbsp;die&nbsp;uns hilft, 
+      oftmals die besten fotografischen Geschichten zu erzählen. <br>
       Doch wie erkenne ich den richtigen Augenblick für meine Geschichte? 
-      Es erfordert manchmal eine gewisse Ausdauer und Ambition für die Thematik. 
+      Es&nbsp;erfordert&nbsp;manchmal&nbsp;eine gewisse Ausdauer und Ambition für die Thematik. 
       Es ist Geduld gefragt und die sorgfältige Beobachtung der eigenen Umwelt. 
       Man muss lernen, die Geschichte im Alltag zu erkennen, oder man plant diese 
-      und setzt Sie im entsprechendem Setting in Szene.</p>
+      und setzt Sie im entsprechendem Setting&nbsp;in&nbsp;Szene.</p>
       </div>
       <hr>
       <div class="intro-container">
         <div id="enter">
           <nuxt-link to="exhibition">
-            <div id="letter_1">Enter</div>
-            <div id="letter_2">Exhibition</div>
+            <div class="letter_1">Enter</div>
+            <div class="letter_2">Exhibition</div>
           </nuxt-link>
         </div>
       </div>
@@ -75,6 +79,7 @@ import EventBus from "~/utils/event-bus";
 
 import Logo from '~/components/Logo.vue'
 import anime from 'animejs/lib/anime.es.js';
+import { lerp } from 'math-toolbox'
 
 
 export default {
@@ -85,39 +90,85 @@ export default {
   },
   data () {
     return {
-      wheeled: null,
+      mouse: {x: null, y: null},
+      posX: null
     }
   },
   methods: {
-    init(){
-
-    }
+    mouseMove(e){
+      this.mouse.x = lerp(this.mouse.x, ( e.x / window.innerWidth ) * 2 - 1, 0.1);
+      this.mouse.y = lerp(this.mouse.y, -( e.y / window.innerHeight ) * 2 + 1, 0.1);
+      let scale_1 = -this.mouse.y + 1.2
+      let scale_2 = this.mouse.y + 1.2
+      this.t_1.style.transform = "translate(" + this.mouse.x * 40 + 'px, ' + this.mouse.y * 40 + 'px) scaleY(' + scale_1 + ')'
+      this.t_2.style.transform = "translate(" + this.mouse.x * 40 + 'px, ' + this.mouse.y * 40 + 'px) scaleY(' + scale_2 + ')'
+      // this.t_1.style.transform = 'scaleY(' + scale_1 + ')'
+      // this.t_2.style.transform = 'scaleY(' + scale_2 + ')'
+    },
   },
   mounted() {
-      let t_1 = document.querySelector('.title_1');
-      t_1.style.display = 'block'
-      t_1.innerHTML = t_1.textContent.replace(/\S/g, "<span class='letter'>$&</span>");
-      anime.timeline({loop: false})
-        .add({  
-          targets: '.title_1 .letter',
-          scale: [0.2,1],
-          opacity: [0,1],
-          rotate: ['-10deg', '0deg'],
-          easing: "easeOutCirc",
-          duration: 950,
-          delay: (el, i) => 70*i
-        }).add({
-          targets: '.ml2',
-          opacity: 0,
-          duration: 1000,
-          easing: "easeOutCirc",
-          delay: 1000
-        });
+
+    EventBus.$on("MOUSEMOVELOOP", this.mouseMove);
+    this.intro = document.querySelector('.intro-container')
+
+    this.t_1 = document.querySelector('.title_1');
+    this.t_1.style.display = 'block'
+    this.t_1.innerHTML = this.t_1.textContent.replace(/\S/g, "<span class='letter'>$&</span>");
+
+    this.t_2 = document.querySelector('.title_2');
+    this.t_2.style.display = 'block'
+    this.t_2.innerHTML = this.t_2.textContent.replace(/\S/g, "<span class='letter'>$&</span>");
 
 
-      let t_2 = document.querySelector('.title_2');
-      t_2.style.display = 'block'
-      t_2.innerHTML = t_2.textContent.replace(/\S/g, "<span class='letter'>$&</span>");
+
+    let t_3 = document.querySelector('.letter_1');
+    t_3.style.display = 'block'
+    t_3.innerHTML = t_3.textContent.replace(/\S/g, "<span class='letter'>$&</span>");
+
+    let t_4 = document.querySelector('.letter_2');
+    t_4.style.display = 'block'
+    t_4.innerHTML = t_4.textContent.replace(/\S/g, "<span class='letter'>$&</span>");
+
+    anime.timeline({loop: false})
+      .add({
+        targets: '.title_1 .letter',
+        scale: [0.2, 1],
+        scaleX: [1, 0.9],
+        opacity: [0, 1],
+        rotate: ['10deg', '0deg'],
+        easing: "easeOutCirc",
+        duration: 950,
+        delay: (el, i) => 70*i,
+        complete: function(anim) {
+          anime.timeline({loop: true})
+          .add({
+            delay: 800
+          })
+          .add({
+            targets: '.title_1 .letter',
+            scale: 1,
+            scaleX: [0.9, 1.2],
+            easing: "easeInOutQuad",
+            duration: 2000,
+            delay: (el, i) => 70*i + 70
+          })
+          .add({
+            delay: 800
+          })
+          .add({
+            targets: '.title_1 .letter',
+            scaleX: [1.2, 0.9],
+            easing: "easeInOutQuad",
+            duration: 2000,
+            delay: (el, i) => 70*i + 70
+          })
+        }
+      })
+
+
+      
+
+
       anime.timeline({loop: false})
         .add({
             delay: 900
@@ -126,75 +177,47 @@ export default {
           targets: '.title_2 .letter',
           scale: [0.2,1],
           opacity: [0,1],
-          rotate: ['-10deg', '0deg'],
+          scaleX: [1.2, 0.9],
+          rotate: ['10deg', '0deg'],
           easing: "easeOutCirc",
           duration: 950,
           delay: (el, i) => 70*i,
-        }).add({
-          targets: '.ml2',
-          opacity: 0,
-          duration: 1000,
-          easing: "easeOutCirc",
-          delay: 1000
-        });
 
 
+          complete: function(anim) {
+            anime.timeline({loop: true})
+            .add({
+              delay: 800
+            })
+            .add({
+              targets: '.title_2 .letter',
+              scale: 1,
+              scaleX: [0.9, 1.2],
+              easing: "easeInOutQuad",
+              duration: 2000,
+              delay: (el, i) => 70*i
+            })
+            .add({
+              delay: 800
+            })
+            .add({
+              targets: '.title_2 .letter',
+              scaleX: [1.2, 0.9],
+              easing: "easeInOutQuad",
+              duration: 2000,
+              delay: (el, i) => 70*i
+            })
+          }
+
+        })
 
 
-      let t_3 = document.querySelector('#letter_1');
-      t_3.style.display = 'block'
-      t_3.innerHTML = t_3.textContent.replace(/\S/g, "<span class='letter'>$&</span>");
-
-
-      let t_4 = document.querySelector('#letter_2');
-      t_4.style.display = 'block'
-      t_4.innerHTML = t_4.textContent.replace(/\S/g, "<span class='letter'>$&</span>");
-      anime.timeline({loop: true})
-
-        .add({  
-            targets: '#letter_1 .letter',
-            translateY: [1000,0],
-            translateZ: 0,
-            opacity: [0,1],
-            easing: "easeOutExpo",
-            duration: 1400,
-            delay: anime.stagger(50, {start: 250}),
-          })
-
-        .add({  
-            targets: '#letter_1 .letter',
-            translateY: [0,-1000],
-            opacity: [1,0],
-            easing: "easeInExpo",
-            duration: 1200,
-            delay: anime.stagger(50, {start: 250}),
-          })
-
-        anime.timeline({loop: true})
-        .add({  
-            targets: '#letter_2 .letter',
-            translateY: [1000,0],
-            translateZ: 0,
-            opacity: [0,1],
-            easing: "easeOutExpo",
-            duration: 1400,
-            delay: anime.stagger(50),
-          })
-        .add({  
-            targets: '#letter_2 .letter',
-            translateY: [0,-1000],
-            opacity: [1,0],
-            easing: "easeInExpo",
-            duration: 1200,
-            delay: anime.stagger(50),
-          })
   },
 }
 </script>
 
 <style scoped>
 #intro{
-  font-family: 'font';
   position: fixed;
   top: 0;
   left: 0;
@@ -202,7 +225,6 @@ export default {
   z-index: 2;
   overflow: scroll;
   height: 100%;
-  color: #585858;
 }
 .intro-container{
   font-weight: inherit;
@@ -231,34 +253,44 @@ export default {
 }.title_2{
   display: none;
 }
+
+
 #info{
   position: absolute;
   bottom: 0;
   left: 0;
   margin: 24px;
-  font-family: Helvetica, Arial, sans-serif;
   font-size: inherit;
+  width: calc(100% - 48px);
+  text-transform: uppercase;
 }
 #info ul{
   padding: 0;
   margin: 0;
   list-style: none;
+  justify-content: space-between;
+  display: flex;
+  text-align: center;
+}
+#info li{
+  /* display: inline-block; */
 }
 
+
+/* */
 #intro-text-grid{
   display: grid;
   grid-template-columns: 50% 50%;
   padding: 24px;
   grid-gap: 12px;
+  background: white;
 }
 hr{
   border: none;
-  border-top: 1px solid #585858;
   margin: 0 0;
 }
 p {
-  text-indent: 52px;
-  font-family: Helvetica, Arial, sans-serif;
+  /* text-indent: 52px; */
 } 
 
 
@@ -291,7 +323,6 @@ p {
   transform: translate(-50%, -50%);
   width: 80vw;
 }
-
 
 
 </style>

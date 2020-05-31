@@ -33,6 +33,11 @@ class Pointer{
         EventBus.$emit("PANMOVE", e);
     }
 
+    loop(){
+        let e = this.mouse
+        EventBus.$emit("MOUSEMOVELOOP", e);
+    }
+
 
 }
 

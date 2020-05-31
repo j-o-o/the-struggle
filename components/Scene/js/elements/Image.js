@@ -1,28 +1,50 @@
 import * as THREE from "three";
 import Common from "../Common";
 import EventBus from "~/utils/event-bus"
+import loadImage from 'image-promise';
 
 
 export default class Image{
     constructor(){
         this.mesh = null;
         this.dummy = new THREE.Object3D();
-        this.sectionWidth = 2;
+        this.sectionWidth = 20;
         this.loopSectionPosition;
         this.init();
+
+        this.textureKeys = ['map', 'normalMap']; 
 
     }
 
     init(){
-        EventBus.$on("IMAGES", this.loadImages.bind(this));
+        // this.loadImages()
         this.addInstancedMesh()
     }
 
     addInstancedMesh() {
-        // An InstancedMesh of 4 cubes
-        this.mesh = new THREE.InstancedMesh(new THREE.BoxBufferGeometry(1,1,1), new THREE.MeshNormalMaterial(), 4);
-        Common.scene.add(this.mesh);
-        this.setInstancedMeshPositions(this.mesh);
+        this.loadTexture('../images/img7.jpg').then(texture => {
+            console.log(texture)
+            let width = texture.image.naturalWidth
+            let height = texture.image.naturalHeight
+            let aspect = width/height
+            this.mesh_1 = new THREE.InstancedMesh(new THREE.PlaneBufferGeometry(3,aspect*3), new THREE.MeshBasicMaterial({ map: texture }), 4);
+            Common.scene.add(this.mesh_1);
+
+            this.setInstancedMeshPositions(this.mesh_1);
+        })
+        this.loadTexture('../images/img8.jpg').then(texture => {
+            console.log(texture)
+            let width = texture.image.naturalWidth
+            let height = texture.image.naturalHeight
+            let aspect = width/height
+            this.mesh_2 = new THREE.InstancedMesh(new THREE.PlaneBufferGeometry(3,aspect*3), new THREE.MeshBasicMaterial({ map: texture }), 4);
+            this.mesh_2.position.x = 10;
+            Common.scene.add(this.mesh_2);
+
+            this.setInstancedMeshPositions(this.mesh_2);
+        })
+
+        
     }
       
     setInstancedMeshPositions(mesh, section) {
@@ -37,22 +59,25 @@ export default class Image{
         mesh.instanceMatrix.needsUpdate = true;
     }
 
-
-    loadImages(e){
-        console.log(e)
-
-        e.forEach(function(element){ 
-            var jsonsd = JSON.parse(JSON.stringify(element))
-            console.log(jsonsd)
-        });
+    loadTexture(url) {
+        return new Promise(resolve => {
+            new THREE.TextureLoader().load(url, resolve)
+        })
     }
-
+    
     update(){
         var distance = Math.round(Common.camera.position.x / this.sectionWidth)
         if (distance !== this.loopSectionPosition) {
-            this.mesh.instanceMatrix.needsUpdate = true;
-            this.loopSectionPosition = distance
-            this.setInstancedMeshPositions(this.mesh, this.loopSectionPosition)
+            if(this.mesh_1){
+                this.mesh_1.instanceMatrix.needsUpdate = true;
+                this.loopSectionPosition = distance
+                this.setInstancedMeshPositions(this.mesh_1, this.loopSectionPosition)
+            }
+            if(this.mesh_2){
+                this.mesh_2.instanceMatrix.needsUpdate = true;
+                this.loopSectionPosition = distance
+                this.setInstancedMeshPositions(this.mesh_2, this.loopSectionPosition)
+            }
         }
     }
 

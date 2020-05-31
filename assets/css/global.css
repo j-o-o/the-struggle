@@ -1,6 +1,6 @@
 @font-face{
     font-family: 'font1';
-    src: url('BB Studio Pro Text.otf');
+    src: url('UCity-Regular.ttf');
 }@font-face{
     font-family: 'font2';
     src: url('glossydisplaycondensedlight.otf')
@@ -11,6 +11,9 @@
 }
 html, body{
     margin: 0;
+    font-family: 'font1', Helvetica, Arial, sans-serif;
+    color: #585858;
+    letter-spacing: 0.01em;
 }
 
 .letter{
