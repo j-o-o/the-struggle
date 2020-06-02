@@ -1,16 +1,7 @@
-attribute vec3 aShape1;
-attribute vec3 aShape2;
-attribute vec3 aShape3;
-attribute vec3 aShape4;
-
-uniform vec4 uProgress;
-
-varying vec3 vPos;
-
-void main(){
-    vec3 pos = aShape1 * uProgress.x + aShape2 * uProgress.y + aShape3 * uProgress.z + aShape4 * uProgress.w;
-    vec4 worldPosition = modelMatrix * vec4(pos, 1.0);
-    vPos = worldPosition.xyz;
-
-    gl_Position = projectionMatrix * viewMatrix * worldPosition;
+precision highp float;
+attribute vec2 position;
+void main() {
+  // Look ma! no projection matrix multiplication,
+  // because we pass the values directly in clip space coordinates.
+  gl_Position = vec4(position, 1.0, 1.0);
 }

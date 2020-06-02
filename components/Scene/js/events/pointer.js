@@ -35,7 +35,7 @@ class Pointer{
 
     loop(){
         let e = this.mouse
-        EventBus.$emit("MOUSEMOVELOOP", e);
+        // EventBus.$emit("MOUSEMOVELOOP", e);
     }
 
 

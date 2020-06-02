@@ -93,7 +93,6 @@ export default class Scene{
         Wheel.loop();
         this.wall.loop();
         Pointer.loop();
-        this.image.update();
     }
 
     resize(){

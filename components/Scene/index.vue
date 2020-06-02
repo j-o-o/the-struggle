@@ -22,7 +22,6 @@ export default {
     });
     // this.importAll(require.context('../../assets/images/', true, /\.jpg$/));
     // console.log(this.images)
-    EventBus.$emit("IMAGES", this.images);
     
     EventBus.$emit("TRANSITION", this.$route);
 

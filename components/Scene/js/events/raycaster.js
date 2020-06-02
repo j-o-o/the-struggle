@@ -32,22 +32,20 @@ export default class RayCast{
             EventBus.$emit("RAYCASTERWALL", null);
         }
 
-        function Car(make) {
-            this.make = make;
+        // let images = Common.scene.children.filter( function(child){
+        //     return child.isInstancedMesh === true 
+        // })
+        let images = []
+        Common.scene.traverse(function(image){
+            if (image.name == 'image') images.push(image);
+         })
+         
+        this.intersects = this.raycaster.intersectObjects( images );
+        if ( this.intersects.length > 0 ) {
+            EventBus.$emit("RAYCASTERIMAGE", this.intersects[0]);
+        } else {
+            EventBus.$emit("RAYCASTERIMAGE", false);
         }
-
-        let images = Common.scene.children.filter( child => child.isInstancedMesh === true );
-
-        
-        // const result = objects.filter(object => object);
-        // console.log(passed)
-        // this.intersects = this.raycaster.intersectObjects( Common.scene.children );
-        // if ( this.intersects.length > 0 ) {
-        //     EventBus.$emit("RAYCASTERIMAGE", this.intersects[0]);
-    
-        // } else {
-        //     EventBus.$emit("RAYCASTERIMAGE", null);
-        // }
     }
 
 }

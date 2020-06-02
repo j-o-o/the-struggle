@@ -24,15 +24,15 @@ export default {
             test: /\.(vert|frag)$/i, 
             use: ["raw-loader"] },
             {
-              test: /\.(png|jpe?g|gif|svg)$/i,
-              use: [
-                {
-                  loader: 'file-loader',
-                  options: {
-                    esModule: false,
-                  },
+            test: /\.(png|jpe?g|gif|svg)$/i,
+            use: [
+              {
+                loader: 'file-loader',
+                options: {
+                  esModule: false,
                 },
-              ],
+              },
+            ],
             }
           );
       }

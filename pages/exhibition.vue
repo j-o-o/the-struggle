@@ -30,6 +30,7 @@ import Menu from "~/components/Menu"
 import Logo from '~/components/Logo.vue'
 
 export default {
+  transition: 'fade',
   components: {
     Menu,
     Logo

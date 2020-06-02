@@ -15,7 +15,33 @@ html, body{
     color: #585858;
     letter-spacing: 0.01em;
 }
-
 .letter{
     display: inline-block;
+}
+
+#pages{
+    transition: all .5s cubic-bezier(.55,0,.1,1);
+}
+.page-enter-active, .page-leave-active {
+    transition: opacity .5s;
+}
+.page-enter, .page-leave-active {
+    opacity: 0; 
+}
+.fade-leave-active .enter_svg{
+    transform: scale(2)
+}
+.fade-enter-active {
+    animation: fade-in .8s;
+}
+.fade-leave-active {
+    animation: fade-out .5s;
+}
+@keyframes fade-in {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+}
+@keyframes fade-out {
+    0% { opacity: 1; }
+    100% { opacity: 0; }
 }

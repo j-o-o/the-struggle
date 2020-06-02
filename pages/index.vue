@@ -36,35 +36,67 @@
       
     </div>
 
-
+<hr>
 
 
 
     <div id="intro-text-grid">
+      <div class="left">
       <p>
       Geschichten werden durch viele verschiedene Ausdrucksformen erzählt 
       und dabei haben sich viele Möglichkeiten etabliert, mit denen man reale 
       oder abstrakte Ereignisse erzählen kann. Wenn man diesen Aspekt rein in 
       der Fotografie betrachtet, finden sich auch hier die Möglichkeiten, sich 
-      selbst die nüchternsten Sachinformationen in das&nbsp;Gedächtnis&nbsp;zu&nbsp;prägen. <br>
+      selbst die nüchternsten Sachinformationen in das&nbsp;Gedächtnis&nbsp;zu&nbsp;prägen. </p><p>
       Dabei&nbsp;erzählt&nbsp;sich eine Geschichte am einfachsten in einer Bildserie, 
       gleich ob stringent oder abstrakt. The&nbsp;concept&nbsp;sells&nbsp;the&nbsp;story. 
       In manchen Fällen reicht sogar nur eine Fotografie aus, um eine ganze 
       Geschichte zu erzählen. Je mehr Bilder hinzugefügt werden, umso umfangreicher kann diese werden.</p>
+      </div>
+      <div class="right">
       <p>
       Oftmals brennt in uns eine ganz eigene Geschichte, die uns fesselt 
       und wir gerne befreien möchten. Eine&nbsp;Passion,&nbsp;die&nbsp;uns hilft, 
-      oftmals die besten fotografischen Geschichten zu erzählen. <br>
+      oftmals die besten fotografischen Geschichten zu erzählen. </p><p>
       Doch wie erkenne ich den richtigen Augenblick für meine Geschichte? 
       Es&nbsp;erfordert&nbsp;manchmal&nbsp;eine gewisse Ausdauer und Ambition für die Thematik. 
       Es ist Geduld gefragt und die sorgfältige Beobachtung der eigenen Umwelt. 
       Man muss lernen, die Geschichte im Alltag zu erkennen, oder man plant diese 
       und setzt Sie im entsprechendem Setting&nbsp;in&nbsp;Szene.</p>
       </div>
+      </div>
       <hr>
       <div class="intro-container">
+        
+        <svg version="1.1" id="svg1" class="enter_svg" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+          viewBox="0 0 595.28 595.28" style="enable-background:new 0 0 595.28 595.28;" xml:space="preserve">
+        <style type="text/css">
+          .st5{fill:none;stroke:#313131;stroke-width:70;stroke-miterlimit:10;stroke-dasharray:1,12;}
+        </style>
+        <g>
+          <circle class="st5" cx="297.64" cy="297.64" r="209.83"/>
+        </g>
+        </svg>
+        <svg version="1.1" id="svg2" class="enter_svg" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+          viewBox="0 0 595.28 595.28" style="enable-background:new 0 0 595.28 595.28;" xml:space="preserve">
+        <style type="text/css">
+          .st6{fill:none;stroke:#000000;stroke-width:20;stroke-miterlimit:10;stroke-dasharray:1.0089,30.2676;}
+        </style>
+        <circle class="st6" cx="297.64" cy="297.64" r="129.42"/>
+        </svg>
+
+
         <div id="enter">
+
+        
+
+
           <nuxt-link to="exhibition">
+            
+
+
+
+
             <div class="letter_1">Enter</div>
             <div class="letter_2">Exhibition</div>
           </nuxt-link>
@@ -106,10 +138,15 @@ export default {
       // this.t_2.style.transform = 'scaleY(' + scale_2 + ')'
     },
   },
+  beforeLeave: function(el) {
+    console.log(el)
+    console.log("beforeLeave");
+  },
   mounted() {
 
     EventBus.$on("MOUSEMOVELOOP", this.mouseMove);
     this.intro = document.querySelector('.intro-container')
+
 
     this.t_1 = document.querySelector('.title_1');
     this.t_1.style.display = 'block'
@@ -212,6 +249,52 @@ export default {
         })
 
 
+
+        anime.timeline({loop: true})
+          .add({
+            delay: 800
+          })
+          .add({
+            targets: '.letter_1 .letter',
+            translateY: [-40, 40],
+            easing: "easeInOutQuad",
+            duration: 2050,
+            delay: anime.stagger(100)
+          })
+          .add({
+            delay: 800
+          })
+          .add({
+            targets: '.letter_1 .letter',
+            translateY: [40, -40],
+            easing: "easeInOutQuad",
+            duration: 2050,
+            delay: anime.stagger(100)
+          })
+
+
+
+        anime.timeline({loop: true})
+          .add({
+            delay: 400
+          })
+          .add({
+            targets: '.letter_2 .letter',
+            translateY: [-40, 40],
+            easing: "easeInOutQuad",
+            duration: 2000,
+            delay:anime.stagger(50)
+          })
+          .add({
+            delay: 400
+          })
+          .add({
+            targets: '.letter_2 .letter',
+            translateY: [40, -40],
+            easing: "easeInOutQuad",
+            duration: 2000,
+            delay: anime.stagger(50)
+          })
   },
 }
 </script>
@@ -279,15 +362,37 @@ export default {
 
 /* */
 #intro-text-grid{
-  display: grid;
-  grid-template-columns: 50% 50%;
+  /* display: grid;
+  grid-template-columns: 50% 50%; */
   padding: 24px;
-  grid-gap: 12px;
-  background: white;
+  display: inline-block;
+  /* grid-gap: 12px; */
+}
+#intro-text-grid p{
+  margin: 0;
+  text-indent: 48px;
+  /* float: left; */
+}
+.left{
+  padding-right: 12px;
+  border-right: 1px solid #585858;
+  width: calc(50% - 15px);
+  display: inline-block;   
+  vertical-align: top;
+}
+.right{
+  padding-left: 12px;
+  width: calc(50% - 15px);
+  display: inline-block;   
+  vertical-align: top;
 }
 hr{
+
   border: none;
-  margin: 0 0;
+  display: block;
+  width: calc(100% - 48px);
+  margin: auto;
+  border-top: 1px solid #585858;
 }
 p {
   /* text-indent: 52px; */
@@ -323,6 +428,29 @@ p {
   transform: translate(-50%, -50%);
   width: 80vw;
 }
-
-
+.enter_svg{
+  position: absolute;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  display: inline-block;
+  margin: auto;
+}
+#svg1{
+  animation: spin1 160s linear infinite;
+}
+#svg2{
+  animation: spin2 130s linear infinite;
+}
+@keyframes spin1{
+  from{transform: rotate(0deg)}
+  to{transform:rotate(360deg)}
+}
+@keyframes spin2{
+  from{transform: rotate(0deg)}
+  to{transform:rotate(-360deg)}
+}
+#enter:hover .st5{
+  stroke-width: 120;
+}
 </style>
