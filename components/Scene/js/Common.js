@@ -20,6 +20,7 @@ class Common{
     }
 
     init($canvas){
+
         this.setSize();
         
         this.scene = new THREE.Scene();
@@ -43,6 +44,7 @@ class Common{
 
         this.clock = new THREE.Clock();
         this.clock.start();
+        
     }
 
     setSize(){

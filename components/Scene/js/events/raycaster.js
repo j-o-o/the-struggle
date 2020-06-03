@@ -35,12 +35,12 @@ export default class RayCast{
         // let images = Common.scene.children.filter( function(child){
         //     return child.isInstancedMesh === true 
         // })
-        let images = []
-        Common.scene.traverse(function(image){
-            if (image.name == 'image') images.push(image);
+        let thumbs = []
+        Common.scene.traverse(function(thumb){
+            if (thumb.name == 'thumb') thumbs.push(thumb);
          })
          
-        this.intersects = this.raycaster.intersectObjects( images );
+        this.intersects = this.raycaster.intersectObjects( thumbs );
         if ( this.intersects.length > 0 ) {
             EventBus.$emit("RAYCASTERIMAGE", this.intersects[0]);
         } else {

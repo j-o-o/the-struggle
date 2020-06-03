@@ -92,6 +92,7 @@ export default class Scene{
         Common.render();
         Wheel.loop();
         this.wall.loop();
+        // this.image.update();
         Pointer.loop();
     }
 

@@ -1,7 +1,7 @@
 <template>
   <main>
 
-    <logo />
+    <!-- <logo /> -->
 
     <div id="intro">
 
@@ -109,16 +109,20 @@
 <script>
 import EventBus from "~/utils/event-bus";
 
-import Logo from '~/components/Logo.vue'
 import anime from 'animejs/lib/anime.es.js';
 import { lerp } from 'math-toolbox'
 
 
 export default {
   name: 'index',
-
+  asyncData () {
+    return new Promise((resolve) => {
+      setTimeout(function () {
+        resolve({})
+      }, 1000)
+    })
+  },
   components: {
-    Logo
   },
   data () {
     return {
@@ -256,45 +260,50 @@ export default {
           })
           .add({
             targets: '.letter_1 .letter',
-            translateY: [-40, 40],
+                rotate: [-40, 40],
             easing: "easeInOutQuad",
-            duration: 2050,
-            delay: anime.stagger(100)
+            duration: 2150,
+            delay: anime.stagger(300)
           })
           .add({
             delay: 800
           })
           .add({
             targets: '.letter_1 .letter',
-            translateY: [40, -40],
+                rotate: [40, -40],
             easing: "easeInOutQuad",
-            duration: 2050,
-            delay: anime.stagger(100)
+            duration: 2150,
+            delay: anime.stagger(300)
           })
 
 
-
-        anime.timeline({loop: true})
+      anime.timeline({loop: false})
           .add({
-            delay: 400
-          })
-          .add({
-            targets: '.letter_2 .letter',
-            translateY: [-40, 40],
-            easing: "easeInOutQuad",
-            duration: 2000,
-            delay:anime.stagger(50)
-          })
-          .add({
-            delay: 400
-          })
-          .add({
-            targets: '.letter_2 .letter',
-            translateY: [40, -40],
-            easing: "easeInOutQuad",
-            duration: 2000,
-            delay: anime.stagger(50)
-          })
+          delay: 400,
+          complete: function(anim) {
+            anime.timeline({loop: true})
+              .add({
+                delay: 400
+              })
+              .add({
+                targets: '.letter_2 .letter',
+                rotate: [-40, 40],
+                easing: "easeInOutQuad",
+                duration: 2000,
+                delay:anime.stagger(150)
+              })
+              .add({
+                delay: 400
+              })
+              .add({
+                targets: '.letter_2 .letter',
+                rotate: [40, -40],
+                easing: "easeInOutQuad",
+                duration: 2000,
+                delay: anime.stagger(150)
+              })
+          }
+        })
   },
 }
 </script>

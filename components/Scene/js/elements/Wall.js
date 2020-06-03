@@ -17,7 +17,6 @@ export default class Wall{
         this.init();
     }
 
-
     init(){
         EventBus.$on("RAYCASTERWALL", this.onRayCastWall.bind(this));
         EventBus.$on("RAYCASTERIMAGE", this.onRayCastImage.bind(this));
@@ -28,14 +27,15 @@ export default class Wall{
 
         this.pointer = new THREE.Mesh(new THREE.SphereBufferGeometry(0.1, 3, 2, this.thetaStart, 6.3, 0),new THREE.MeshNormalMaterial())
         this.pointer.position.z = 0.5;
-        
-        Common.scene.add(this.pointer)
 
+        Common.scene.add(this.pointer)
     }
 
     onRayCastWall(e){
-        this.rayWall.x = e.point.x
-        this.rayWall.y = e.point.y
+        if(this.isOnImg == false){
+            this.rayWall.x = e.point.x
+            this.rayWall.y = e.point.y
+        }
     }
     onRayCastImage(e){
         if(e == false){
@@ -58,7 +58,6 @@ export default class Wall{
         } else {
             this.pr += 0.05
             this.pointer.rotation.y = this.pr
-            console.log(this.pointer.geometry.parameters.thetaStart)
             this.pointer.position.x = lerp(this.pointer.position.x, this.hoveredImg.position.x, 0.1)
             this.pointer.position.y = lerp(this.pointer.position.y, this.hoveredImg.geometry.parameters.height/2 + 0.2, 0.1)
             // this.pointer.position = this.hoveredImg
