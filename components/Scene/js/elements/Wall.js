@@ -20,13 +20,13 @@ export default class Wall{
     init(){
         EventBus.$on("RAYCASTERWALL", this.onRayCastWall.bind(this));
         EventBus.$on("RAYCASTERIMAGE", this.onRayCastImage.bind(this));
-        this.wall = new THREE.Mesh(new THREE.PlaneBufferGeometry(50,50), new THREE.MeshNormalMaterial({wireframe:true}))
-        this.wall.position.z = 0.5;
+        this.wall = new THREE.Mesh(new THREE.PlaneBufferGeometry(50,50), new THREE.MeshBasicMaterial({color: 0xffffff}))
+        this.wall.position.z = -0.1;
         this.wall.name = 'wall'
         Common.scene.add(this.wall)
 
         this.pointer = new THREE.Mesh(new THREE.SphereBufferGeometry(0.1, 3, 2, this.thetaStart, 6.3, 0),new THREE.MeshNormalMaterial())
-        this.pointer.position.z = 0.5;
+        // this.pointer.position.z = -0.1;
 
         Common.scene.add(this.pointer)
     }
@@ -40,11 +40,11 @@ export default class Wall{
     onRayCastImage(e){
         if(e == false){
             this.isOnImg = false
+            EventBus.$emit("ISONIMG", this.isOnImg);
         } else {
-
             this.hoveredImg = e.object
             this.isOnImg = true
-
+            EventBus.$emit("ISONIMG", this.isOnImg);
         }
         // this.rayImage.x = e.point.x
         // this.rayImage.y = e.point.y
@@ -60,8 +60,6 @@ export default class Wall{
             this.pointer.rotation.y = this.pr
             this.pointer.position.x = lerp(this.pointer.position.x, this.hoveredImg.position.x, 0.1)
             this.pointer.position.y = lerp(this.pointer.position.y, this.hoveredImg.geometry.parameters.height/2 + 0.2, 0.1)
-            // this.pointer.position = this.hoveredImg
-
         }
     }
 }

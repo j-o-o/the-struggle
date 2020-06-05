@@ -33,6 +33,7 @@ export default class Scene{
         EventBus.$on("WHEELSPEED", this.onWheel.bind(this));
         EventBus.$on("TRANSITION", this.onTransition.bind(this));
         window.addEventListener("resize", this.resize.bind(this));
+        EventBus.$on("ISONIMG", this.isOnImg.bind(this));
 
 
         Common.init(this.props.$canvas);
@@ -63,6 +64,10 @@ export default class Scene{
         }
     }
 
+    isOnImg(e){
+        console.log(e)
+    }
+
     loop(){
 
         this.render();
@@ -86,6 +91,8 @@ export default class Scene{
 
         Common.camera.lookAt(this.camLookAt.x, this.camLookAt.y, 0)
 
+        // Common.camera.lookAt = lerp(Common.camera.lookAt, this.pointer.position.x,this.pointer.position.y,this.pointer.position.z, 0.1)
+
     }
 
     render(){
@@ -93,6 +100,7 @@ export default class Scene{
         Wheel.loop();
         this.wall.loop();
         // this.image.update();
+        
         Pointer.loop();
     }
 
@@ -120,13 +128,34 @@ export default class Scene{
         }
         switch(path.params.id){
             case "1": 
-                this.camPos.x = 10
+                this.camPos.x = 0
             break;
             case "2":
-                this.camPos.x = 20
+                this.camPos.x = 10
             break;
             case "3":
+                this.camPos.x = 20
+            break;
+            case "4":
                 this.camPos.x = 30
+            break;
+            case "5":
+                this.camPos.x = 40
+            break;
+            case "6":
+                this.camPos.x = 50
+            break;
+            case "7":
+                this.camPos.x = 60
+            break;
+            case "8":
+                this.camPos.x = 70
+            break;
+            case "9":
+                this.camPos.x = 80
+            break;
+            case "10":
+                this.camPos.x = 90
             break;
         }
     }

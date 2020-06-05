@@ -14,8 +14,12 @@ export default class RayCast{
         this.camera = Common.camera;
     }
 
-    mouseMove(e){
 
+
+
+    mouseMove(e){
+        this.then = this.now - (this.elapsed % this.fpsInterval);
+        //
         this.mouse.x = ( e.clientX / window.innerWidth ) * 2 - 1;
         this.mouse.y = - ( e.clientY / window.innerHeight ) * 2 + 1;
 
@@ -38,14 +42,16 @@ export default class RayCast{
         let thumbs = []
         Common.scene.traverse(function(thumb){
             if (thumb.name == 'thumb') thumbs.push(thumb);
-         })
-         
+        })
+        
         this.intersects = this.raycaster.intersectObjects( thumbs );
         if ( this.intersects.length > 0 ) {
             EventBus.$emit("RAYCASTERIMAGE", this.intersects[0]);
         } else {
             EventBus.$emit("RAYCASTERIMAGE", false);
         }
+
+        
     }
 
 }

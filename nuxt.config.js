@@ -40,22 +40,21 @@ export default {
   },
   env: {
     users: [
-      { id: 1, name: 'Intro'},
-      { id: 2, name: 'Böbst Henry'},
-      { id: 3, name: 'Anika Annette Enke'},
-      { id: 4, name: 'Suriñe Gracia-Pozuelo Iglesias'},
-      { id: 5, name: 'Emilia Haar'},
-      { id: 6, name: 'Camille Magnin'},
-      { id: 7, name: 'Garo Seferian'},
-      { id: 8, name: 'Luisa Behrendt'},
-      { id: 9, name: 'Artur Maier'},
-      { id: 10, name: 'Maria Alejandra Arevalo Martinez'},
-      { id: 11, name: 'Iva Mago Maria'},
-      { id: 12, name: 'Zita Felizitas Frohloff'},
-      { id: 13, name: 'Angle Genkov'},
-      { id: 14, name: 'Jana Köhler'},
-      { id: 15, name: 'Kaya Peters'},
-      { id: 16, name: 'Hanna Lene Wellpott'},
+      { id: 1, name: 'Böbst Henry'},
+      { id: 2, name: 'Anika Annette Enke'},
+      { id: 3, name: 'Suriñe Gracia-Pozuelo Iglesias'},
+      { id: 4, name: 'Emilia Haar'},
+      { id: 5, name: 'Camille Magnin'},
+      { id: 6, name: 'Garo Seferian'},
+      { id: 7, name: 'Luisa Behrendt'},
+      { id: 8, name: 'Artur Maier'},
+      { id: 9, name: 'Maria Alejandra Arevalo Martinez'},
+      { id: 10, name: 'Iva Mago Maria'},
+      { id: 11, name: 'Zita Felizitas Frohloff'},
+      { id: 12, name: 'Angle Genkov'},
+      { id: 13, name: 'Jana Köhler'},
+      { id: 14, name: 'Kaya Peters'},
+      { id: 15, name: 'Hanna Lene Wellpott'},
     ]
   },
   generate: {
@@ -65,7 +64,12 @@ export default {
       '/3',
       '/4',
       '/5',
-      '/6'
+      '/6',
+      '/7',
+      '/8',
+      '/9',
+      '/10',
+      '/11',
     ]
   }
 }

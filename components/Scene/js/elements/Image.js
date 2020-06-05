@@ -3,27 +3,17 @@ import Common from "../Common";
 import EventBus from "~/utils/event-bus"
 import loadImage from 'image-promise';
 
-if (process.browser) {
-    window.onNuxtReady((app) => {
-        console.log('Nuxt ready!')
-    })
-}
 
 export default class Image{
     constructor(){
         this.sectionWidth = 0
-
         this.init();
-
-        this.textureKeys = ['map', 'normalMap']; 
-
     }
 
     init(){
         // this.loadImages()
         this.addInstancedMesh()
-        this.startAnimating(5);
-
+        this.startAnimating(10);
     }
 
     addInstancedMesh() {
@@ -55,21 +45,14 @@ export default class Image{
                 this.mesh_[i] = new THREE.Mesh(new THREE.PlaneBufferGeometry(aspect*5,5), new THREE.MeshBasicMaterial({ map: texture }));
                 this.mesh_[i].name = 'thumb'
                 Common.scene.add(this.mesh_[i]);
-                // this.update(mesh_[i])
-                // let width = texture.image.naturalWidth
-                // let height = texture.image.naturalHeight
-                // let aspect = width/height
-
             })
         }
     }
-
     loadTexture(url) {
         return new Promise(resolve => {
             new THREE.TextureLoader().load(url, resolve)
         })
     }
-
     startAnimating(fps) {
         this.fpsInterval = 1000 / fps;
         this.then = Date.now();
@@ -83,7 +66,6 @@ export default class Image{
         requestAnimationFrame(this.update.bind(this));
         this.now = Date.now();
         this.elapsed = this.now - this.then;
-        // requestAnimationFrame(this.update.bind(this));
 
         if (this.elapsed > this.fpsInterval) {
             this.then = this.now - (this.elapsed % this.fpsInterval);
@@ -100,9 +82,5 @@ export default class Image{
 
             }, this)
         }
-
-
-
-
     }
 }
