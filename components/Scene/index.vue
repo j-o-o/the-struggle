@@ -1,5 +1,6 @@
 <template>
   <section class="scene">
+    <div id="stats"></div>
     <canvas class="scene__canvas" ref="canvas"></canvas>
   </section>
 </template>
@@ -42,6 +43,12 @@ export default {
 };
 </script>
 <style>
+#stats{
+  position: fixed;
+  z-index: 3;
+  top:0;
+  left: 0;
+}
   .scene{
     position: fixed;
     top: 0;

@@ -11,7 +11,7 @@ import { lerp } from 'math-toolbox'
 // import Raycaster from './events/raycaster'
 import EventBus from "~/utils/event-bus"
 
-
+import Stats from 'stats.js'
 
 export default class Scene{
 
@@ -30,11 +30,14 @@ export default class Scene{
     init(){
 
         EventBus.$on("MOUSEMOVE", this.mouseMove.bind(this));
-        // EventBus.$on("WHEELSPEED", this.onWheel.bind(this));
+        EventBus.$on("WHEELSPEED", this.onWheel.bind(this));
         EventBus.$on("TRANSITION", this.onTransition.bind(this));
         window.addEventListener("resize", this.resize.bind(this));
         // EventBus.$on("ISONIMG", this.isOnImg.bind(this));
 
+        this.stats = new Stats();
+        var element = document.getElementById('stats')
+        element.appendChild( this.stats.dom )
 
         Common.init(this.props.$canvas);
         // this.shape = new Shape();
@@ -70,8 +73,9 @@ export default class Scene{
 
     loop(){
 
+	    this.stats.begin();
+        
         this.render();
-        requestAnimationFrame(this.loop.bind(this));
         // const easing = Math.min(1.0, 3.5 * Common.time.delta)
 
         if(this.scrollEnabled == true){
@@ -87,12 +91,12 @@ export default class Scene{
         Common.camera.position.z = lerp(Common.camera.position.z, this.camPos.z / 2, 0.08);
         this.camLookAt.y = lerp(this.camLookAt.y, this.mouse.y * 1.8, 0.3);
 
-        Common.camera.rotateY = this.mouse.x
-
         Common.camera.lookAt(this.camLookAt.x, this.camLookAt.y, 0)
 
         // Common.camera.lookAt = lerp(Common.camera.lookAt, this.pointer.position.x,this.pointer.position.y,this.pointer.position.z, 0.1)
 
+	    this.stats.end();
+        requestAnimationFrame(this.loop.bind(this));
     }
 
     render(){

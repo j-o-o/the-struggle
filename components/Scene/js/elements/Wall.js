@@ -44,8 +44,6 @@ export default class Wall{
 
         this.imgScale = lerp(this.imgScale, 1.2, 0.07);
         // e.object.scale.x = this.imgScale
-        console.log(e)
-
 
         if(e == false){
             this.isOnImg = false

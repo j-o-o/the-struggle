@@ -44,7 +44,7 @@ export default class Image{
                 let aspect = width/height
 
                 this.mesh_[i] = new THREE.Mesh(new THREE.PlaneBufferGeometry(aspect*5,5), new THREE.MeshBasicMaterial({ map: texture }));
-                this.mesh_[i].name = 'thumb'
+                this.mesh_[i].name = 'thumb_' + i;
                 Common.scene.add(this.mesh_[i]);
 
             })

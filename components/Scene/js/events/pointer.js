@@ -11,7 +11,7 @@ import RayCast from "./raycaster"
 class Pointer{
 
     constructor(){
-        this.mouse = new THREE.Vector2(0,0);
+        this.mouse = new THREE.Vector2( 0, 0 );
     }
     init(){
         this.pointer = new Pointer();
