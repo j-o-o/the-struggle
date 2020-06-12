@@ -20,6 +20,24 @@ html, body{
 }
 
 #pages{
+    position: fixed;
+    z-index: 2;
+    top: 0;
+    margin: 12px;
+}
+
+.players{
+
+}
+ul.players{
+    list-style: none;
+    padding: 0;
+}
+.players a{
+    color: #585858;
+    text-decoration: none;
+}
+#pages{
     transition: all .5s cubic-bezier(.55,0,.1,1);
 }
 .page-enter-active, .page-leave-active {

@@ -13,6 +13,8 @@ export default class Wall{
         this.isOnImg = false
         this.hoveredImg = null
         this.pr = 0
+
+        this.imgScale = 1
         
         this.init();
     }
@@ -38,6 +40,13 @@ export default class Wall{
         }
     }
     onRayCastImage(e){
+
+
+        this.imgScale = lerp(this.imgScale, 1.2, 0.07);
+        // e.object.scale.x = this.imgScale
+        console.log(e)
+
+
         if(e == false){
             this.isOnImg = false
             EventBus.$emit("ISONIMG", this.isOnImg);
@@ -46,6 +55,10 @@ export default class Wall{
             this.isOnImg = true
             EventBus.$emit("ISONIMG", this.isOnImg);
         }
+
+
+
+
         // this.rayImage.x = e.point.x
         // this.rayImage.y = e.point.y
     }

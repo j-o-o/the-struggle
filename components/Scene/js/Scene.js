@@ -30,10 +30,10 @@ export default class Scene{
     init(){
 
         EventBus.$on("MOUSEMOVE", this.mouseMove.bind(this));
-        EventBus.$on("WHEELSPEED", this.onWheel.bind(this));
+        // EventBus.$on("WHEELSPEED", this.onWheel.bind(this));
         EventBus.$on("TRANSITION", this.onTransition.bind(this));
         window.addEventListener("resize", this.resize.bind(this));
-        EventBus.$on("ISONIMG", this.isOnImg.bind(this));
+        // EventBus.$on("ISONIMG", this.isOnImg.bind(this));
 
 
         Common.init(this.props.$canvas);
@@ -64,9 +64,9 @@ export default class Scene{
         }
     }
 
-    isOnImg(e){
-        console.log(e)
-    }
+    // isOnImg(e){
+    //     console.log(e)
+    // }
 
     loop(){
 
@@ -97,10 +97,9 @@ export default class Scene{
 
     render(){
         Common.render();
-        Wheel.loop();
+        // Wheel.loop();
         this.wall.loop();
         // this.image.update();
-        
         Pointer.loop();
     }
 

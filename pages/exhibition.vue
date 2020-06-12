@@ -45,10 +45,4 @@ export default {
 html, body{
   overflow: hidden
 }
-#pages{
-  position: fixed;
-  z-index: 2;
-  top: 0;
-  left: 50%;
-}
 </style>

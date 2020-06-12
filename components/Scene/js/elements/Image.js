@@ -6,12 +6,13 @@ import loadImage from 'image-promise';
 
 export default class Image{
     constructor(){
+
         this.sectionWidth = 0
         this.init();
+
     }
 
     init(){
-        // this.loadImages()
         this.addInstancedMesh()
         this.startAnimating(10);
     }
@@ -19,12 +20,12 @@ export default class Image{
     addInstancedMesh() {
 
         let images = [
-            '../images/img1.jpg',
-            '../images/img2.jpg',
+            // '../images/img1.jpg',
+            // '../images/img2.jpg',
             '../images/img3.jpg',
             '../images/img4.jpg',
             '../images/img5.jpg',
-            // '../images/img6.jpg',
+            '../images/img6.jpg',
             // '../images/img7.jpg',
             // '../images/img8.jpg',
             // '../images/img9.jpg',
@@ -33,10 +34,10 @@ export default class Image{
         ];
 
         this.mesh_ = [];
+
         for (let i=0; i<images.length; i++) {
             this.sectionWidth += 10;
             this.loadTexture(images[i]).then(texture => {
-                console.log(i)
                 
                 let width = texture.image.naturalWidth
                 let height = texture.image.naturalHeight
@@ -45,19 +46,22 @@ export default class Image{
                 this.mesh_[i] = new THREE.Mesh(new THREE.PlaneBufferGeometry(aspect*5,5), new THREE.MeshBasicMaterial({ map: texture }));
                 this.mesh_[i].name = 'thumb'
                 Common.scene.add(this.mesh_[i]);
+
             })
         }
+
     }
+
     loadTexture(url) {
         return new Promise(resolve => {
             new THREE.TextureLoader().load(url, resolve)
         })
     }
+    
     startAnimating(fps) {
         this.fpsInterval = 1000 / fps;
         this.then = Date.now();
         this.startTime = this.then;
-        console.log(this.startTime);
         this.update();
     }
 
@@ -75,9 +79,11 @@ export default class Image{
                 let distance_ = Math.round((Common.camera.position.x - (i * 10)) / this.sectionWidth)
                 let lsp = i+i
                 if (distance_ !== lsp) {
-                    lsp = distance_
+                    lsp = distance_;
                     var x = this.sectionWidth * lsp;
-                    item.position.set(x + (i * 10), 0, 0)
+                    var ran_x = Math.floor(Math.random()*2) + 1;
+                    ran_x *= Math.floor(Math.random()*2) == 1 ? 1 : -1;
+                    item.position.set(x + (i * 10), 0, 0);
                 }
 
             }, this)

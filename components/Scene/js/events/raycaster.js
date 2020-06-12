@@ -1,6 +1,7 @@
 import * as THREE from 'three'
 import Common from '../Common'
 import Pointer from "./pointer"
+import { lerp } from 'math-toolbox'
 
 import EventBus from "~/utils/event-bus"
 
@@ -12,14 +13,13 @@ export default class RayCast{
         this.mouse = new THREE.Vector2();
         this.raycaster = new THREE.Raycaster();
         this.camera = Common.camera;
+
     }
 
-
-
-
     mouseMove(e){
+
         this.then = this.now - (this.elapsed % this.fpsInterval);
-        //
+        
         this.mouse.x = ( e.clientX / window.innerWidth ) * 2 - 1;
         this.mouse.y = - ( e.clientY / window.innerHeight ) * 2 + 1;
 
@@ -33,7 +33,7 @@ export default class RayCast{
             EventBus.$emit("RAYCASTERWALL", this.intersect[0]);
     
         } else {
-            EventBus.$emit("RAYCASTERWALL", null);
+            // EventBus.$emit("RAYCASTERWALL", null);
         }
 
         // let images = Common.scene.children.filter( function(child){
@@ -49,9 +49,6 @@ export default class RayCast{
             EventBus.$emit("RAYCASTERIMAGE", this.intersects[0]);
         } else {
             EventBus.$emit("RAYCASTERIMAGE", false);
-        }
-
-        
+        }   
     }
-
 }

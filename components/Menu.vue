@@ -59,7 +59,7 @@ export default {
 div.dom{
     position: fixed;
     top: 0;
-    left: 0;
+    left: 50%;
     padding: 20px 30px;
 
     h1{

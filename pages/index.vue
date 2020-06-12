@@ -134,12 +134,14 @@ export default {
     mouseMove(e){
       this.mouse.x = lerp(this.mouse.x, ( e.x / window.innerWidth ) * 2 - 1, 0.1);
       this.mouse.y = lerp(this.mouse.y, -( e.y / window.innerHeight ) * 2 + 1, 0.1);
-      let scale_1 = -this.mouse.y + 1.2
-      let scale_2 = this.mouse.y + 1.2
-      this.t_1.style.transform = "translate(" + this.mouse.x * 40 + 'px, ' + this.mouse.y * 40 + 'px) scaleY(' + scale_1 + ')'
-      this.t_2.style.transform = "translate(" + this.mouse.x * 40 + 'px, ' + this.mouse.y * 40 + 'px) scaleY(' + scale_2 + ')'
+      let scale_1 = -this.mouse.y/1.2 + 1.4
+      let scale_2 = this.mouse.y/1.2 + 1.4
+      // this.t_1.style.transform = "translate(" + this.mouse.x * 40 + 'px, ' + this.mouse.y * 40 + 'px) scaleY(' + scale_1 + ')'
+      // this.t_2.style.transform = "translate(" + this.mouse.x * 40 + 'px, ' + this.mouse.y * 40 + 'px) scaleY(' + scale_2 + ')'
       // this.t_1.style.transform = 'scaleY(' + scale_1 + ')'
       // this.t_2.style.transform = 'scaleY(' + scale_2 + ')'
+      this.t_1.style.transform = "translate(" + this.mouse.x * 40 + 'px, ' + ( - this.mouse.y * 40) + 'px) scaleY(' + scale_1 + ')'
+      this.t_2.style.transform = "translate(" + this.mouse.x * 40 + 'px, ' + ( - this.mouse.y * 40) + 'px) scaleY(' + scale_2 + ')' 
     },
   },
   beforeLeave: function(el) {
