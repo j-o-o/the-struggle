@@ -17,11 +17,13 @@ export default class Camera{
     constructor(){
     
         this.wheeled = 0;
+        this.slant = -3;
         this.camPos = new THREE.Vector3();
         this.camLookAt = new THREE.Vector3();
         this.mouse = new THREE.Vector2();
 
         this.init();
+
     }
 
 
@@ -33,20 +35,17 @@ export default class Camera{
 
     }
 
-    isScrollEnabled(e){
-
-        this.scrollEnabled = e
-    }
-
+    isScrollEnabled(e){this.scrollEnabled=e}
 
     onWheel(e){
 
-
         if(Common.isInGallery == true){
+            this.slant = 0;
             if(this.scrollEnabled == true){
-                this.camPos.y += e/200;
+                this.camPos.y -= e/200;
             }
         } else {
+            this.slant = -3;
             if(this.scrollEnabled == true){
                 this.camPos.x += e/200;
             }
@@ -67,31 +66,57 @@ export default class Camera{
 
 
         if(this.scrollEnabled == true){
+
+
+
             this.camPos.z = 20
+
+            if(this.camPos.y >= 0){
+                EventBus.$emit("ISINGALLERY", false);
+
+            }
              
             if(Common.isInGallery == false){
-                Common.camera.position.x = lerp(Common.camera.position.x, this.camPos.x + this.mouse.x / 2, 0.08);
+                Common.camera.position.x = lerp(Common.camera.position.x, this.camPos.x + this.mouse.x / 2 + this.slant, 0.08);
                 Common.camera.position.y = lerp(Common.camera.position.y, this.mouse.y / 2 + breathing, 0.08);
                 this.camLookAt.x = lerp(this.camLookAt.x, this.camPos.x + this.mouse.x * 1.8, 0.3);
             } else {
-                Common.camera.position.x = lerp(Common.camera.position.x, this.mouse.x / 2, 0.08);
+                
+                Common.camera.position.x = lerp(Common.camera.position.x, this.camPos.x + this.mouse.x / 2 + this.slant, 0.08);
                 Common.camera.position.y = lerp(Common.camera.position.y, this.camPos.y + this.mouse.y / 2 + breathing, 0.08);
-                this.camLookAt.x = lerp(this.camLookAt.x, this.camPos.x + this.mouse.x * 1.8, 0.3);
+                // this.camLookAt.x = lerp(this.camLookAt.x, this.camPos.x + this.mouse.x * 1.8, 0.3);
             }
          
-        } else {
+        } 
+        
+        
+        
+        
+        
+        
+        
+        
+        else {
             this.camPos.z = 40
             this.camPos.x += 0.01;
+
             Common.camera.position.x = lerp(Common.camera.position.x,this.camPos.x + this.mouse.x / 2, 0.08);
-            this.camLookAt.x = lerp(this.camLookAt.x, this.camPos.x + this.mouse.x * 1.8, 0.3);
+
+            if(Common.isInGallery == false){
+                this.camLookAt.x = lerp(this.camLookAt.x, this.camPos.x + this.mouse.x * 1.8, 0.3);
+            }
+
         }
  
         Common.camera.position.z = lerp(Common.camera.position.z, this.camPos.z / 2, 0.08);
-        this.camLookAt.y = lerp(this.camLookAt.y, this.mouse.y * 1.8 + breathing, 0.3);
 
-        Common.camera.lookAt(this.camLookAt.x+3, this.camLookAt.y, 0)
+        if(Common.isInGallery == false){
+            this.camLookAt.y = lerp(this.camLookAt.y, this.mouse.y * 1.8 + breathing, 0.3);
+        } else {
+            this.camLookAt.y = lerp(this.camLookAt.y, this.camPos.y, 0.3);
+        }
 
-        // Common.camera.lookAt = lerp(Common.camera.lookAt, this.pointer.position.x,this.pointer.position.y,this.pointer.position.z, 0.1)
+        Common.camera.lookAt(this.camLookAt.x, this.camLookAt.y, 0)
  
     }
 }

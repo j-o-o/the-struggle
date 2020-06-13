@@ -33,6 +33,7 @@ export default class RayCast{
         this.intersect = this.raycaster.intersectObject( wall );
     
         if ( this.intersect.length > 0 ) {
+
             EventBus.$emit("RAYCASTERWALL", this.intersect[0]);
     
         } else {
@@ -54,8 +55,6 @@ export default class RayCast{
         this.intersects = this.raycaster.intersectObjects( this.image.thumbs );
         if ( this.intersects.length > 0 ) {
             EventBus.$emit("RAYCASTERIMAGECLICK", this.intersects[0]);
-            console.log
-
         } else {
             // EventBus.$emit("RAYCASTERIMAGECLICK", false);
         }   

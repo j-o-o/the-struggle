@@ -1,4 +1,5 @@
 import * as THREE from "three";
+import EventBus from "~/utils/event-bus"
 
 class Common{
     constructor(){
@@ -46,6 +47,8 @@ class Common{
 
         this.clock = new THREE.Clock();
         this.clock.start();
+
+        EventBus.$on("ISINGALLERY", this.isItInGallery.bind(this));
         
     }
 
@@ -54,6 +57,11 @@ class Common{
             windowW: window.innerWidth,
             windowH: window.innerHeight
         }
+    }
+
+    isItInGallery(e){
+
+        this.isInGallery = e;
     }
 
 

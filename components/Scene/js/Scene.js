@@ -3,6 +3,7 @@ import Common from "./Common"
 // import Shape from "./elements/Shape"
 
 import Image from "./elements/Image"
+import Gallery from "./elements/Gallery"
 import Wall from "./elements/Wall"
 // import Ground from "./elements/Ground"
 import Camera from "./Camera"
@@ -18,11 +19,10 @@ import Stats from 'stats.js'
 export default class Scene{
 
     constructor(props){
-        this.props = props;
 
-        this.scrollEnabled = false
-        
+        this.props = props;
         this.init();
+
     }
 
     init(){
@@ -40,7 +40,6 @@ export default class Scene{
         var element = document.getElementById('stats')
         element.appendChild( this.stats.dom )
 
-
         this.camera = new Camera();
         
         // this.shape = new Shape();
@@ -53,7 +52,6 @@ export default class Scene{
 
         this.loop();
 
-
     }
 
     onClickImage(e){
@@ -61,15 +59,16 @@ export default class Scene{
         console.log(e.object.id)
 
         Common.isInGallery = true;
+        this.camera.camPos.y -= 6
 
-        // if(e.object.id === '15'){
-        //     EventBus.$emit("LOADPROJECT15", '15');
-        // }
         this.onLoadProject(e.object.id);
+
     }
 
     onLoadProject(e){
         console.log(e)
+        this.gallery = new Gallery();
+        this.gallery.init()
     }
 
 
@@ -91,6 +90,7 @@ export default class Scene{
 
 	    this.stats.end();
         requestAnimationFrame(this.loop.bind(this));
+
     }
 
     render(){
@@ -104,19 +104,22 @@ export default class Scene{
 
     
 
+
+
+
+
+
+
     onTransition(path){
         switch(path.name){
             case "index":
-                this.scrollEnabled = false
-                EventBus.$emit("SCROLLENABLED", this.scrollEnabled);
+                EventBus.$emit("SCROLLENABLED", false);
             break;
             case "exhibition":
-                this.scrollEnabled = true
-                EventBus.$emit("SCROLLENABLED", this.scrollEnabled);
+                EventBus.$emit("SCROLLENABLED", true);
             break;
             case "exhibition-id":
-                this.scrollEnabled = true
-                EventBus.$emit("SCROLLENABLED", this.scrollEnabled);
+                EventBus.$emit("SCROLLENABLED", true);
             break;
         }
         switch(path.params.id){
