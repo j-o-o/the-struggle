@@ -32,7 +32,10 @@ export default class Scene{
         // this.scene = new Scene()
 
         EventBus.$on("TRANSITION", this.onTransition.bind(this));
-        EventBus.$on("RAYCASTERIMAGECLICK", this.onClickImage.bind(this));
+
+        EventBus.$on("SCROLLENABLED", this.isScrollEnabled.bind(this));
+
+
         window.addEventListener("resize", this.resize.bind(this));
         // EventBus.$on("ISONIMG", this.isOnImg.bind(this));
 
@@ -52,6 +55,17 @@ export default class Scene{
 
         this.loop();
 
+
+
+
+
+
+    }
+
+    isScrollEnabled(e){this.scrollEnabled=e;console.log(this.scrollEnabled);        
+        if (this.scrollEnabled == true){
+            EventBus.$on("RAYCASTERIMAGECLICK", this.onClickImage.bind(this));
+        }
     }
 
     onClickImage(e){
@@ -104,7 +118,11 @@ export default class Scene{
 
     
 
+    onTransitionEnd( event ) {
 
+	    event.target.remove();
+	
+    }
 
 
 

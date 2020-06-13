@@ -10,6 +10,7 @@ export default class Image{
         this.sectionWidth = 0
         this.init();
 
+
     }
 
     init(){
@@ -30,9 +31,9 @@ export default class Image{
             '../images/img3.jpg',
             '../images/img4.jpg',
             '../images/img5.jpg',
-            // '../images/img6.jpg',
-            // '../images/img7.jpg',
-            // '../images/img8.jpg',
+            '../images/img6.jpg',
+            '../images/img7.jpg',
+            '../images/img8.jpg',
             // '../images/img9.jpg',
             // '../images/img10.jpg',
             // '../images/img11.jpg'
@@ -40,14 +41,34 @@ export default class Image{
 
         this.mesh_ = [];
 
+
+        //
+        this.manager = new THREE.LoadingManager( () => {
+	
+            const loadingScreen = document.getElementById( 'loading-screen' );
+            loadingScreen.classList.add( 'fade-out' );
+            
+            // optional: remove loader from DOM via event listener
+            loadingScreen.addEventListener( 'transitionend', onTransitionEnd );
+            
+        } 
+        );
+        this.manager.onStart = function ( url, itemsLoaded, itemsTotal ) {
+            console.log( 'Started loading file: ' + url + '.\nLoaded ' + itemsLoaded + ' of ' + itemsTotal + ' files.' );
+        };
+        this.manager.onLoad = function ( ) {
+            console.log( 'Loading complete!');
+        };
+        //
+
         for (let i = 0; i < images.length; i++) {
             this.sectionWidth += 10;
+
             this.loadTexture(images[i]).then(texture => {
                 
                 let width = texture.image.naturalWidth
                 let height = texture.image.naturalHeight
                 let aspect = width/height
-                console.log(texture)
 
                 this.mesh_[i] = new THREE.Mesh(new THREE.PlaneBufferGeometry(aspect*5,5), new THREE.MeshBasicMaterial({ map: texture }));
                 this.mesh_[i].name = 'thumb';
@@ -60,8 +81,10 @@ export default class Image{
     }
 
     loadTexture(url) {
+        
         return new Promise(resolve => {
-            new THREE.TextureLoader().load(url, resolve)
+            
+            new THREE.TextureLoader(this.manager).load(url, resolve)
         })
     }
     
