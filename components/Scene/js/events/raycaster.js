@@ -1,6 +1,7 @@
 import * as THREE from 'three'
 import Common from '../Common'
 import Pointer from "./pointer"
+import Image from "../elements/Image"
 import { lerp } from 'math-toolbox'
 
 import EventBus from "~/utils/event-bus"
@@ -14,11 +15,13 @@ export default class RayCast{
         this.raycaster = new THREE.Raycaster();
         this.camera = Common.camera;
 
+        this.image = new Image();
+
+        window.addEventListener("click", this.onClick.bind(this));
+
     }
 
     mouseMove(e){
-
-        this.then = this.now - (this.elapsed % this.fpsInterval);
         
         this.mouse.x = ( e.clientX / window.innerWidth ) * 2 - 1;
         this.mouse.y = - ( e.clientY / window.innerHeight ) * 2 + 1;
@@ -36,19 +39,25 @@ export default class RayCast{
             // EventBus.$emit("RAYCASTERWALL", null);
         }
 
-        // let images = Common.scene.children.filter( function(child){
-        //     return child.isInstancedMesh === true 
-        // })
-        let thumbs = []
-        Common.scene.traverse(function(thumb){
-            if (thumb.name == 'thumb') thumbs.push(thumb);
-        })
+
         
-        this.intersects = this.raycaster.intersectObjects( thumbs );
+        this.intersects = this.raycaster.intersectObjects( this.image.thumbs );
         if ( this.intersects.length > 0 ) {
             EventBus.$emit("RAYCASTERIMAGE", this.intersects[0]);
+
         } else {
             EventBus.$emit("RAYCASTERIMAGE", false);
+        }   
+    }
+
+    onClick(e){
+        this.intersects = this.raycaster.intersectObjects( this.image.thumbs );
+        if ( this.intersects.length > 0 ) {
+            EventBus.$emit("RAYCASTERIMAGECLICK", this.intersects[0]);
+            console.log
+
+        } else {
+            // EventBus.$emit("RAYCASTERIMAGECLICK", false);
         }   
     }
 }

@@ -4,6 +4,8 @@ import Common from "./Common"
 
 import Image from "./elements/Image"
 import Wall from "./elements/Wall"
+// import Ground from "./elements/Ground"
+import Camera from "./Camera"
 
 import Pointer from "./events/pointer"
 import Wheel from "./events/wheel"
@@ -17,10 +19,6 @@ export default class Scene{
 
     constructor(props){
         this.props = props;
-        this.wheeled = 0;
-        this.camPos = new THREE.Vector3();
-        this.camLookAt = new THREE.Vector3();
-        this.mouse = new THREE.Vector2();
 
         this.scrollEnabled = false
         
@@ -29,9 +27,12 @@ export default class Scene{
 
     init(){
 
-        EventBus.$on("MOUSEMOVE", this.mouseMove.bind(this));
-        EventBus.$on("WHEELSPEED", this.onWheel.bind(this));
+        Common.init(this.props.$canvas);
+
+        // this.scene = new Scene()
+
         EventBus.$on("TRANSITION", this.onTransition.bind(this));
+        EventBus.$on("RAYCASTERIMAGECLICK", this.onClickImage.bind(this));
         window.addEventListener("resize", this.resize.bind(this));
         // EventBus.$on("ISONIMG", this.isOnImg.bind(this));
 
@@ -39,33 +40,40 @@ export default class Scene{
         var element = document.getElementById('stats')
         element.appendChild( this.stats.dom )
 
-        Common.init(this.props.$canvas);
+
+        this.camera = new Camera();
+        
         // this.shape = new Shape();
-        this.image = new Image()
+        this.image = new Image();
         this.wall = new Wall();
+        // this.ground = new Ground();
         // Image.init()
         Pointer.init();
         Wheel.init();
 
         this.loop();
 
+
     }
 
-    loadImages(e){
+    onClickImage(e){
+        console.log(e)
+        console.log(e.object.id)
+
+        Common.isInGallery = true;
+
+        // if(e.object.id === '15'){
+        //     EventBus.$emit("LOADPROJECT15", '15');
+        // }
+        this.onLoadProject(e.object.id);
+    }
+
+    onLoadProject(e){
         console.log(e)
     }
 
-    mouseMove(e){
 
-        this.mouse.x = ( e.clientX / window.innerWidth ) * 2 - 1;
-        this.mouse.y = - ( e.clientY / window.innerHeight ) * 2 + 1;
 
-    }
-    onWheel(e){
-        if(this.scrollEnabled == true){
-            this.camPos.x += e/200;
-        }
-    }
 
     // isOnImg(e){
     //     console.log(e)
@@ -76,24 +84,10 @@ export default class Scene{
 	    this.stats.begin();
         
         this.render();
-        // const easing = Math.min(1.0, 3.5 * Common.time.delta)
 
-        if(this.scrollEnabled == true){
-            Common.camera.position.x = lerp(Common.camera.position.x, this.camPos.x + this.mouse.x / 2, 0.08);
-            Common.camera.position.y = lerp(Common.camera.position.y, this.mouse.y / 2, 0.08);
-            this.camLookAt.x = lerp(this.camLookAt.x, this.camPos.x + this.mouse.x * 1.8, 0.3);
-        } else {
-            this.camPos.x += 0.01;
-            Common.camera.position.x = lerp(Common.camera.position.x,this.camPos.x + this.mouse.x / 2, 0.08);
-            this.camLookAt.x = lerp(this.camLookAt.x, this.camPos.x + this.mouse.x * 1.8, 0.3);
-        }
-
-        Common.camera.position.z = lerp(Common.camera.position.z, this.camPos.z / 2, 0.08);
-        this.camLookAt.y = lerp(this.camLookAt.y, this.mouse.y * 1.8, 0.3);
-
-        Common.camera.lookAt(this.camLookAt.x, this.camLookAt.y, 0)
-
-        // Common.camera.lookAt = lerp(Common.camera.lookAt, this.pointer.position.x,this.pointer.position.y,this.pointer.position.z, 0.1)
+        this.wall.loop();
+        Pointer.loop();
+        this.camera.loop();
 
 	    this.stats.end();
         requestAnimationFrame(this.loop.bind(this));
@@ -101,10 +95,6 @@ export default class Scene{
 
     render(){
         Common.render();
-        // Wheel.loop();
-        this.wall.loop();
-        // this.image.update();
-        Pointer.loop();
     }
 
     resize(){
@@ -118,15 +108,15 @@ export default class Scene{
         switch(path.name){
             case "index":
                 this.scrollEnabled = false
-                this.camPos.z = 40
+                EventBus.$emit("SCROLLENABLED", this.scrollEnabled);
             break;
             case "exhibition":
                 this.scrollEnabled = true
-                this.camPos.z = 20
+                EventBus.$emit("SCROLLENABLED", this.scrollEnabled);
             break;
             case "exhibition-id":
                 this.scrollEnabled = true
-                this.camPos.z = 20
+                EventBus.$emit("SCROLLENABLED", this.scrollEnabled);
             break;
         }
         switch(path.params.id){

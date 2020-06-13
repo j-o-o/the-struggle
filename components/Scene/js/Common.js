@@ -5,6 +5,8 @@ class Common{
         this.scene = null;
         this.camera = null;
         this.renderer = null;
+        
+        this.isInGallery = false;
 
         this.size = {
             windowW: null,
@@ -53,6 +55,8 @@ class Common{
             windowH: window.innerHeight
         }
     }
+
+
 
     resize(){
         this.setSize();
