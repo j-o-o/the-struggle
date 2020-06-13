@@ -1,24 +1,27 @@
-<template lang="html">
-  <div class="loading-page" v-if="loading">
-    <section id="loading-screen">
+<template>
+    <section id="loading-screen" v-bind:class="{ fadeout:moving }">
 
       <div id="loader"></div>
 
     </section>
-  </div>
 </template>
 
 <script>
+import EventBus from "~/utils/event-bus";
 export default {
-  data: () => ({
-    loading: false
-  }),
+  data () {
+    return {
+       moving: false
+    }
+  },
+  mounted(){
+     // イベント登録
+     EventBus.$on("IMAGESLOADED", this.onLoaded);
+  },
   methods: {
-    start () {
-      this.loading = true
-    },
-    finish () {
-      this.loading = false
+    onLoaded(e){
+      this.moving = e;
+      console.log(e)
     }
   }
 }
@@ -45,12 +48,12 @@ export default {
 	left: 0;
 	width: 100%;
 	height: 100%;
-	background-color: #000000;
+	background-color: white;
 	opacity: 1;
  	transition: 1s opacity;
 }
 
-#loading-screen.fade-out {
+#loading-screen.fadeout {
     opacity: 0;
 }
 

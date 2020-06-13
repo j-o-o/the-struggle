@@ -1,5 +1,6 @@
 <template>
   <div>
+    <Loading />
     <Scene />
     <nuxt />
   </div>
@@ -8,10 +9,12 @@
 <script>
 
 import Scene from "~/components/Scene";
+import Loading from "~/components/loading";
 export default {
   
   components: {
       Scene,
+      Loading,
   }
 }
 </script>

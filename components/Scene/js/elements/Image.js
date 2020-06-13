@@ -34,9 +34,9 @@ export default class Image{
             '../images/img6.jpg',
             '../images/img7.jpg',
             '../images/img8.jpg',
-            // '../images/img9.jpg',
-            // '../images/img10.jpg',
-            // '../images/img11.jpg'
+            '../images/img9.jpg',
+            '../images/img10.jpg',
+            '../images/img11.jpg'
         ];
 
         this.mesh_ = [];
@@ -45,21 +45,18 @@ export default class Image{
         //
         this.manager = new THREE.LoadingManager( () => {
 	
-            const loadingScreen = document.getElementById( 'loading-screen' );
-            loadingScreen.classList.add( 'fade-out' );
-            
-            // optional: remove loader from DOM via event listener
-            loadingScreen.addEventListener( 'transitionend', onTransitionEnd );
+            this.loadingScreen = document.getElementById( 'loading-screen' );
+            this.loadingScreen.addEventListener( 'transitionend', EventBus.$emit("IMAGESLOADED", true) );
             
         } 
         );
-        this.manager.onStart = function ( url, itemsLoaded, itemsTotal ) {
-            console.log( 'Started loading file: ' + url + '.\nLoaded ' + itemsLoaded + ' of ' + itemsTotal + ' files.' );
-        };
-        this.manager.onLoad = function ( ) {
-            console.log( 'Loading complete!');
-        };
-        //
+        // this.manager.onLoad = function ( ) {
+
+        //     console.log( 'Loading complete!');
+
+        //     EventBus.$emit("IMAGESLOADED", true);
+        
+        // };
 
         for (let i = 0; i < images.length; i++) {
             this.sectionWidth += 10;
@@ -79,6 +76,7 @@ export default class Image{
         }
 
     }
+
 
     loadTexture(url) {
         
@@ -117,4 +115,6 @@ export default class Image{
             }, this)
         }
     }
+
+
 }

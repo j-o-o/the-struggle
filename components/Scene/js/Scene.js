@@ -62,7 +62,7 @@ export default class Scene{
 
     }
 
-    isScrollEnabled(e){this.scrollEnabled=e;console.log(this.scrollEnabled);        
+    isScrollEnabled(e){this.scrollEnabled=e;        
         if (this.scrollEnabled == true){
             EventBus.$on("RAYCASTERIMAGECLICK", this.onClickImage.bind(this));
         }
