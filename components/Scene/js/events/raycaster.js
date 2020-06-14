@@ -23,8 +23,8 @@ export default class RayCast{
 
     mouseMove(e){
         
-        this.mouse.x = ( e.clientX / window.innerWidth ) * 2 - 1;
-        this.mouse.y = - ( e.clientY / window.innerHeight ) * 2 + 1;
+        this.mouse.x = ( e.x / window.innerWidth ) * 2 - 1;
+        this.mouse.y = - ( e.y / window.innerHeight ) * 2 + 1;
 
         this.raycaster.setFromCamera( this.mouse, this.camera );
 

@@ -66,8 +66,13 @@ export default class Image{
                 let width = texture.image.naturalWidth
                 let height = texture.image.naturalHeight
                 let aspect = width/height
+                console.log(aspect)
+                if(aspect >= 1){
+                    this.mesh_[i] = new THREE.Mesh(new THREE.PlaneBufferGeometry(aspect*5,5), new THREE.MeshBasicMaterial({ map: texture }));
+                } else {
+                    this.mesh_[i] = new THREE.Mesh(new THREE.PlaneBufferGeometry(aspect*7,7), new THREE.MeshBasicMaterial({ map: texture }));
+                }
 
-                this.mesh_[i] = new THREE.Mesh(new THREE.PlaneBufferGeometry(aspect*5,5), new THREE.MeshBasicMaterial({ map: texture }));
                 this.mesh_[i].name = 'thumb';
                 Common.scene.add(this.mesh_[i]);
                 this.thumbs.push(this.mesh_[i])
@@ -110,6 +115,7 @@ export default class Image{
 
                 lsp = distance_;
                 let x = this.sectionWidth * lsp;
+                
                 item.position.set((i * 10) + x, 0, 0);
 
             }, this)

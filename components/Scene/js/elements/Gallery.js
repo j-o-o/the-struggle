@@ -14,7 +14,9 @@ export default class Gallery{
 
     }
 
-    init(){
+    init(e){
+        console.log(e)
+        this.e = e
         let images = [
             // '../images/img1.jpg',
             // '../images/img2.jpg',
@@ -42,7 +44,8 @@ export default class Gallery{
                 this.mesh_[i] = new THREE.Mesh(new THREE.PlaneBufferGeometry(aspect*5,5), new THREE.MeshBasicMaterial({ map: texture }));
                 this.mesh_[i].name = 'thumb';
                 this.mesh_[i].position.y = -10 + -i*10;
-                this.mesh_[i].position.x = Common.camera.position.x
+                // this.mesh_[i].position.x = Common.camera.position.x
+                this.mesh_[i].position.x = this.e.object.position.x;
                 Common.scene.add(this.mesh_[i]);
                 this.thumbs.push(this.mesh_[i])
 

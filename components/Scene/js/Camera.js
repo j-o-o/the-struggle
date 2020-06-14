@@ -26,7 +26,6 @@ export default class Camera{
 
     }
 
-
     init(){
 
         EventBus.$on("WHEELSPEED", this.onWheel.bind(this));
@@ -50,7 +49,6 @@ export default class Camera{
                 this.camPos.x += e/200;
             }
         }
-
     }
     mouseMove(e){
 
@@ -67,13 +65,10 @@ export default class Camera{
 
         if(this.scrollEnabled == true){
 
-
-
             this.camPos.z = 20
 
             if(this.camPos.y >= 0){
                 EventBus.$emit("ISINGALLERY", false);
-
             }
              
             if(Common.isInGallery == false){
@@ -81,7 +76,6 @@ export default class Camera{
                 Common.camera.position.y = lerp(Common.camera.position.y, this.mouse.y / 2 + breathing, 0.08);
                 this.camLookAt.x = lerp(this.camLookAt.x, this.camPos.x + this.mouse.x * 1.8, 0.3);
             } else {
-                
                 Common.camera.position.x = lerp(Common.camera.position.x, this.camPos.x + this.mouse.x / 2 + this.slant, 0.08);
                 Common.camera.position.y = lerp(Common.camera.position.y, this.camPos.y + this.mouse.y / 2 + breathing, 0.08);
                 // this.camLookAt.x = lerp(this.camLookAt.x, this.camPos.x + this.mouse.x * 1.8, 0.3);

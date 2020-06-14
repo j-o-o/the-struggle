@@ -75,14 +75,14 @@ export default class Scene{
         Common.isInGallery = true;
         this.camera.camPos.y -= 6
 
-        this.onLoadProject(e.object.id);
+        // this.onLoadProject(e.object.id);
+        this.gallery = new Gallery();
+        this.gallery.init(e)
 
     }
 
     onLoadProject(e){
         console.log(e)
-        this.gallery = new Gallery();
-        this.gallery.init()
     }
 
 

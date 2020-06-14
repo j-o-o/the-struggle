@@ -27,14 +27,14 @@ class Pointer{
         this.mouse.x = e.clientX
         this.mouse.y = e.clientY
 
-        this.RayCast.mouseMove(e);
     }
     panMove(e){
         EventBus.$emit("PANMOVE", e);
     }
 
     loop(){
-        let e = this.mouse
+        let e = this.mouse;
+        this.RayCast.mouseMove(e);
         EventBus.$emit("MOUSEMOVELOOP", e);
     }
 

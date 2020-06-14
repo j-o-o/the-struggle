@@ -11,17 +11,15 @@ import EventBus from "~/utils/event-bus";
 export default {
   data () {
     return {
-       moving: false
+      moving: false
     }
   },
   mounted(){
-     // イベント登録
-     EventBus.$on("IMAGESLOADED", this.onLoaded);
+    EventBus.$on("IMAGESLOADED", this.onLoaded);
   },
   methods: {
     onLoaded(e){
       this.moving = e;
-      console.log(e)
     }
   }
 }
@@ -55,6 +53,7 @@ export default {
 
 #loading-screen.fadeout {
     opacity: 0;
+    pointer-events: none;
 }
 
 #loader {
