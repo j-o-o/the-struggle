@@ -14,13 +14,13 @@ export default class Image{
     }
 
     init(){
-        this.bgMesh = null;
-        this.bgDummy = new THREE.Object3D();
-        this.addInstancedMesh();
+        this.addInstancedMesh()
         this.startAnimating(10);
 
-        // used for the raycast
-        this.thumbs = [];
+        this.thumbs = []
+        // Common.scene.traverse(function(thumb){
+        //     if (thumb.name == 'thumb') thumbs.push(thumb);
+        // })
     }
 
     addInstancedMesh() {
@@ -34,18 +34,29 @@ export default class Image{
             '../images/img6.jpg',
             '../images/img7.jpg',
             '../images/img8.jpg',
-            // '../images/img9.jpg',
-            // '../images/img10.jpg',
-            // '../images/img11.jpg'
+            '../images/img9.jpg',
+            '../images/img10.jpg',
+            '../images/img11.jpg'
         ];
-        
-        // used for the each loop
+
         this.mesh_ = [];
 
+
+        //
         this.manager = new THREE.LoadingManager( () => {
+	
             this.loadingScreen = document.getElementById( 'loading-screen' );
-            this.loadingScreen.addEventListener( 'transitionend', EventBus.$emit("IMAGESLOADED", true) );    
-        });
+            this.loadingScreen.addEventListener( 'transitionend', EventBus.$emit("IMAGESLOADED", true) );
+            
+        } 
+        );
+        // this.manager.onLoad = function ( ) {
+
+        //     console.log( 'Loading complete!');
+
+        //     EventBus.$emit("IMAGESLOADED", true);
+        
+        // };
 
         for (let i = 0; i < images.length; i++) {
             this.sectionWidth += 10;
@@ -55,6 +66,12 @@ export default class Image{
                 let width = texture.image.naturalWidth
                 let height = texture.image.naturalHeight
                 let aspect = width/height
+                
+                // var frameGeometry = new THREE.BoxBufferGeometry( 1, 1, 1 );
+                // var frameMaterial = new THREE.MeshBasicMaterial({color:0x00ff00})
+                // var frame = new THREE.Mesh(frameGeometry, frameMaterial)
+
+                // this.group = new THREE.Group();
 
                 if(aspect >= 1){
                     this.mesh_[i] = new THREE.Mesh(new THREE.PlaneBufferGeometry(aspect*5,5), new THREE.MeshBasicMaterial({ map: texture }));
@@ -64,32 +81,18 @@ export default class Image{
 
                 this.mesh_[i].name = 'thumb';
                 Common.scene.add(this.mesh_[i]);
-                this.thumbs.push(this.mesh_[i]);
+                this.thumbs.push(this.mesh_[i])
 
             })
         }
 
-
-        this.bgMesh = new THREE.InstancedMesh(new THREE.BoxBufferGeometry(9, 9, 1, 2, 2, 1), new THREE.MeshBasicMaterial({color: 0xdbdbdb,wireframe:true}), 10);
-        Common.scene.add(this.bgMesh);
-        this.setInstancedMeshPositions(this.bgMesh);
-
     }
-    setInstancedMeshPositions(mesh, loopSectionPosition) {
-        for ( var i = 0; i < mesh.count; i ++ ) {
-            var xStaticPosition = -10 * (i - 4);
-            var xSectionPosition = 10 * loopSectionPosition;
-            var x = xStaticPosition + xSectionPosition;
-            this.bgDummy.position.set(x, 0, -0);
-            this.bgDummy.updateMatrix();
-            this.bgMesh.setMatrixAt( i, this.bgDummy.matrix );
-        }
-        this.bgMesh.instanceMatrix.needsUpdate = true;
-      }
 
 
     loadTexture(url) {
+        
         return new Promise(resolve => {
+            
             new THREE.TextureLoader(this.manager).load(url, resolve)
         })
     }
@@ -113,20 +116,15 @@ export default class Image{
             this.mesh_.forEach(function(item, i){
                 
                 let distance_ = Math.round((Common.camera.position.x - (i * 10)) / this.sectionWidth)
-                // let lsp = i * 10
-                // lsp = distance_;
-                let x = this.sectionWidth * distance_;
+
+                let lsp = i * 10
+
+                lsp = distance_;
+                let x = this.sectionWidth * lsp;
                 
                 item.position.set((i * 10) + x, 0, 0);
 
             }, this)
-
-            var bgDistance = Math.round(Common.camera.position.x / 10)
-            if (bgDistance !== this.loopSectionPosition) {
-                this.loopSectionPosition = bgDistance
-                this.setInstancedMeshPositions(this.bgMesh, this.loopSectionPosition)
-            }
-
         }
     }
 

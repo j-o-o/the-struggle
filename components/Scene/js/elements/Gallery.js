@@ -44,6 +44,7 @@ export default class Gallery{
                 this.mesh_[i] = new THREE.Mesh(new THREE.PlaneBufferGeometry(aspect*5,5), new THREE.MeshBasicMaterial({ map: texture }));
                 this.mesh_[i].name = 'thumb';
                 this.mesh_[i].position.y = -10 + -i*10;
+                
                 // this.mesh_[i].position.x = Common.camera.position.x
                 this.mesh_[i].position.x = this.e.object.position.x;
                 Common.scene.add(this.mesh_[i]);
@@ -52,7 +53,7 @@ export default class Gallery{
             })
         }
 
-        Common.camera.position.y += 5
+        // Common.camera.position.y -= 5
 
     }
     loadTexture(url) {

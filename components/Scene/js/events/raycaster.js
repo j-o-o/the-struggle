@@ -16,6 +16,8 @@ export default class RayCast{
         this.camera = Common.camera;
 
         this.image = new Image();
+        console.log(this.image.thumbs)
+
 
         window.addEventListener("click", this.onClick.bind(this));
 

@@ -29,12 +29,9 @@ export default class Scene{
 
         Common.init(this.props.$canvas);
 
-        // this.scene = new Scene()
-
         EventBus.$on("TRANSITION", this.onTransition.bind(this));
 
         EventBus.$on("SCROLLENABLED", this.isScrollEnabled.bind(this));
-
 
         window.addEventListener("resize", this.resize.bind(this));
         // EventBus.$on("ISONIMG", this.isOnImg.bind(this));
@@ -55,11 +52,6 @@ export default class Scene{
 
         this.loop();
 
-
-
-
-
-
     }
 
     isScrollEnabled(e){this.scrollEnabled=e;        
@@ -69,11 +61,12 @@ export default class Scene{
     }
 
     onClickImage(e){
-        console.log(e)
-        console.log(e.object.id)
 
         Common.isInGallery = true;
-        this.camera.camPos.y -= 6
+        this.camera.camPos.y -= 10
+        this.camera.camPos.x = e.object.position.x;
+        this.camera.camLookAt.x = e.object.position.x;
+        this.camera.slant = 0;
 
         // this.onLoadProject(e.object.id);
         this.gallery = new Gallery();
@@ -85,12 +78,6 @@ export default class Scene{
         console.log(e)
     }
 
-
-
-
-    // isOnImg(e){
-    //     console.log(e)
-    // }
 
     loop(){
 
@@ -125,9 +112,6 @@ export default class Scene{
     }
 
 
-
-
-
     onTransition(path){
         switch(path.name){
             case "index":
@@ -142,34 +126,34 @@ export default class Scene{
         }
         switch(path.params.id){
             case "1": 
-                this.camPos.x = 0
+                this.camera.camPos.x = 0
             break;
             case "2":
-                this.camPos.x = 10
+                this.camera.camPos.x = 10
             break;
             case "3":
-                this.camPos.x = 20
+                this.camera.camPos.x = 20
             break;
             case "4":
-                this.camPos.x = 30
+                this.camera.camPos.x = 30
             break;
             case "5":
-                this.camPos.x = 40
+                this.camera.camPos.x = 40
             break;
             case "6":
-                this.camPos.x = 50
+                this.camera.camPos.x = 50
             break;
             case "7":
-                this.camPos.x = 60
+                this.camera.camPos.x = 60
             break;
             case "8":
-                this.camPos.x = 70
+                this.camera.camPos.x = 70
             break;
             case "9":
-                this.camPos.x = 80
+                this.camera.camPos.x = 80
             break;
             case "10":
-                this.camPos.x = 90
+                this.camera.camPos.x = 90
             break;
         }
     }

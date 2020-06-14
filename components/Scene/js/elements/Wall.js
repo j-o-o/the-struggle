@@ -23,6 +23,7 @@ export default class Wall{
         EventBus.$on("RAYCASTERWALL", this.onRayCastWall.bind(this));
         EventBus.$on("RAYCASTERIMAGE", this.onRayCastImage.bind(this));
         this.wall = new THREE.Mesh(new THREE.PlaneBufferGeometry(50,50), new THREE.MeshBasicMaterial({color: 0xffffff}))
+        this.wall.visible = false;
         this.wall.position.z = -0.1;
         this.wall.name = 'wall'
         Common.scene.add(this.wall)
@@ -50,6 +51,7 @@ export default class Wall{
             EventBus.$emit("ISONIMG", this.isOnImg);
         } else {
             this.hoveredImg = e.object
+            
             this.isOnImg = true
             EventBus.$emit("ISONIMG", this.isOnImg);
         }
