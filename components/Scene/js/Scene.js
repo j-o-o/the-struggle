@@ -1,21 +1,17 @@
 import * as THREE from 'three'
 import Common from "./Common"
-// import Shape from "./elements/Shape"
 
 import Image from "./elements/Image"
 import Gallery from "./elements/Gallery"
 import Wall from "./elements/Wall"
-// import Ground from "./elements/Ground"
 import Camera from "./Camera"
 
 import Pointer from "./events/pointer"
 import Wheel from "./events/wheel"
 import { lerp } from 'math-toolbox'
-// import Raycaster from './events/raycaster'
 import EventBus from "~/utils/event-bus"
 
 import Stats from 'stats.js'
-import loadImages from 'image-promise'
 
 export default class Scene{
 
@@ -31,18 +27,16 @@ export default class Scene{
         Common.init(this.props.$canvas);
 
         EventBus.$on("TRANSITION", this.onTransition.bind(this));
-
         EventBus.$on("SCROLLENABLED", this.isScrollEnabled.bind(this));
         EventBus.$on("ISINGALLERY", this.isItInGallery.bind(this));
 
         window.addEventListener("resize", this.resize.bind(this));
-        // EventBus.$on("ISONIMG", this.isOnImg.bind(this));
 
         this.stats = new Stats();
         let element = document.getElementById('stats')
         element.appendChild( this.stats.dom )
 
-        this.camera = new Camera();
+        // Camera = new Camera();
         
         this.image = new Image();
         this.wall = new Wall();
@@ -62,30 +56,23 @@ export default class Scene{
     }
 
     onClickImage(e){
-        // Common.scene.traverse(function(child) {
-        //     if (child.name === "gallery") {
-        //       child.geometry.dispose()
-        //       child.material.dispose()
-        //       Common.scene.remove( child );
-        //     }
-        // });
         Common.isInGallery = true;
 
-        this.gallery = new Gallery();
-        this.gallery.init(e)
+        Gallery.init(e)
+        console.log(Gallery.sectionWidth)
     }
 
 
     isItInGallery(e){
-        console.log(e)
         if(e == false){
-            Common.scene.traverse(function(child) {
-                if (child.name === "gallery") {
-                  child.geometry.dispose()
-                  child.material.dispose()
-                  Common.scene.remove( child );
+            for( var i = Common.scene.children.length - 1; i >= 0; i--) { 
+                var obj = Common.scene.children[i];
+                if (obj.name == "gallery") {
+                    obj.geometry.dispose()
+                    obj.material.dispose()
+                    Common.scene.remove(obj)
                 }
-            });
+            }
         }
     }
 
@@ -94,13 +81,16 @@ export default class Scene{
 
     loop(){
 
-	    this.stats.begin();
+
+        this.stats.begin();
+    
+
         
         this.render();
 
         this.wall.loop();
         Pointer.loop();
-        this.camera.loop();
+        Camera.loop();
 
 	    this.stats.end();
         requestAnimationFrame(this.loop.bind(this));
@@ -143,34 +133,34 @@ export default class Scene{
         }
         switch(path.params.id){
             case "1": 
-                this.camera.camPos.x = 0
+                Camera.camPos.x = 0
             break;
             case "2":
-                this.camera.camPos.x = 10
+                Camera.camPos.x = 10
             break;
             case "3":
-                this.camera.camPos.x = 20
+                Camera.camPos.x = 20
             break;
             case "4":
-                this.camera.camPos.x = 30
+                Camera.camPos.x = 30
             break;
             case "5":
-                this.camera.camPos.x = 40
+                Camera.camPos.x = 40
             break;
             case "6":
-                this.camera.camPos.x = 50
+                Camera.camPos.x = 50
             break;
             case "7":
-                this.camera.camPos.x = 60
+                Camera.camPos.x = 60
             break;
             case "8":
-                this.camera.camPos.x = 70
+                Camera.camPos.x = 70
             break;
             case "9":
-                this.camera.camPos.x = 80
+                Camera.camPos.x = 80
             break;
             case "10":
-                this.camera.camPos.x = 90
+                Camera.camPos.x = 90
             break;
         }
     }

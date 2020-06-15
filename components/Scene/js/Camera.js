@@ -1,18 +1,16 @@
 import * as THREE from 'three'
 import Common from "./Common"
-// import Shape from "./elements/Shape"
 
 import Image from "./elements/Image"
 import Wall from "./elements/Wall"
-// import Ground from "./elements/Ground"
 
 import Pointer from "./events/pointer"
 import Wheel from "./events/wheel"
 import { lerp } from 'math-toolbox'
-// import Raycaster from './events/raycaster'
+
 import EventBus from "~/utils/event-bus"
 
-export default class Camera{
+class Camera{
 
     constructor(){
     
@@ -120,7 +118,6 @@ export default class Camera{
                 if(this.transition == false){
                     Common.camera.position.y = lerp(Common.camera.position.y, this.camPos.y + this.mouse.y / 2 + breathing, 0.08);
                 } else {
-
                     Common.camera.position.x = lerp(Common.camera.position.x, this.camPos.x + this.slant, 0.08);
                 }
                 
@@ -156,12 +153,10 @@ export default class Camera{
             if (this.transition) {
                 setTimeout(() => { this.transition = false }, 1000);
             }
+
         }
  
         Common.camera.position.z = lerp(Common.camera.position.z, this.camPos.z / 2, 0.08);
-
-
-
 
 
         if (Common.isInGallery == false){
@@ -176,3 +171,7 @@ export default class Camera{
  
     }
 }
+
+
+
+export default new Camera();

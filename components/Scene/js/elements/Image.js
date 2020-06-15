@@ -2,12 +2,17 @@ import * as THREE from "three";
 import Common from "../Common";
 import EventBus from "~/utils/event-bus"
 import loadImage from 'image-promise';
+import Camera from "../Camera"
+import Scene from "../Scene"
+import Gallery from "./Gallery"
 
 
 export default class Image{
     constructor(){
 
         this.sectionWidth = 0
+        this.positionY = 0
+        this.shouldBeTop = true
         this.init();
 
 
@@ -18,6 +23,9 @@ export default class Image{
         this.bgDummy = new THREE.Object3D();
         this.addInstancedMesh();
         this.startAnimating(10);
+
+        // this.camera = new Camera();
+        // this.gallery = new Gallery();
 
         // used for the raycast
         this.thumbs = [];
@@ -81,7 +89,7 @@ export default class Image{
             var xStaticPosition = -10 * (i - 4);
             var xSectionPosition = 10 * loopSectionPosition;
             var x = xStaticPosition + xSectionPosition;
-            this.bgDummy.position.set(x, 0, -0);
+            this.bgDummy.position.set(x, this.positionY, 0);
             this.bgDummy.updateMatrix();
             this.bgMesh.setMatrixAt( i, this.bgDummy.matrix );
         }
@@ -118,7 +126,7 @@ export default class Image{
                 // lsp = distance_;
                 let x = this.sectionWidth * distance_;
                 
-                item.position.set((i * 10) + x, 0, 0);
+                item.position.set((i * 10) + x, this.positionY, 0);
 
             }, this)
 
@@ -129,6 +137,24 @@ export default class Image{
             }
 
         }
+
+
+
+        if(Common.isInGallery == true){
+            
+            if(Camera.camPos.y <= - Gallery.sectionWidth/2){
+                console.log('should be bottom')
+                this.shouldBeTop = false
+                this.positionY = - Gallery.sectionWidth - 10
+            } else if(Camera.camPos.y >= - Gallery.sectionWidth/2) {
+                console.log('should be top')
+                this.shouldBeTop = true
+                this.positionY = 0
+            }
+        }
+
+
+
     }
 
 

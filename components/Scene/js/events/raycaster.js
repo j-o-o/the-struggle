@@ -13,10 +13,9 @@ export default class RayCast{
     init(){
         this.mouse = new THREE.Vector2();
         this.raycaster = new THREE.Raycaster();
-        this.camera = Common.camera;
+        // this.camera = Common.camera;
 
         this.image = new Image();
-        console.log(this.image.thumbs)
 
 
         window.addEventListener("click", this.onClick.bind(this));
@@ -28,7 +27,7 @@ export default class RayCast{
         this.mouse.x = ( e.x / window.innerWidth ) * 2 - 1;
         this.mouse.y = - ( e.y / window.innerHeight ) * 2 + 1;
 
-        this.raycaster.setFromCamera( this.mouse, this.camera );
+        this.raycaster.setFromCamera( this.mouse, Common.camera );
 
         // calculate objects intersecting the picking ray
         var wall = Common.scene.getObjectByName( "wall" );

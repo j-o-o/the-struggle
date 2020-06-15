@@ -378,6 +378,7 @@ export default {
   grid-template-columns: 50% 50%; */
   padding: 24px;
   display: inline-block;
+  /* background: white; */
   /* grid-gap: 12px; */
 }
 #intro-text-grid p{
@@ -397,6 +398,7 @@ export default {
   width: calc(50% - 15px);
   display: inline-block;   
   vertical-align: top;
+  float: right;
 }
 hr{
 

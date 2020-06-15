@@ -4,14 +4,13 @@ import EventBus from "~/utils/event-bus"
 import loadImage from 'image-promise';
 
 
-
-export default class Gallery{
+class Gallery{
     constructor(){
 
         this.sectionWidth = 0
         this.gallery = []
-        this.init();
-
+        // this.init(); 
+        
     }
 
     init(e){
@@ -21,14 +20,14 @@ export default class Gallery{
             // '../images/img1.jpg',
             // '../images/img2.jpg',
             // '../images/img3.jpg',
-            // '../images/img4.jpg',
-            // '../images/img5.jpg',
-            // '../images/img6.jpg',
+            '../images/img4.jpg',
+            '../images/img5.jpg',
+            '../images/img6.jpg',
             '../images/img7.jpg',
             '../images/img8.jpg',
             '../images/img9.jpg',
-            // '../images/img10.jpg',
-            // '../images/img11.jpg'
+            '../images/img10.jpg',
+            '../images/img11.jpg'
         ];
         this.mesh_ = [];
 
@@ -39,7 +38,6 @@ export default class Gallery{
                 let width = texture.image.naturalWidth
                 let height = texture.image.naturalHeight
                 let aspect = width/height
-                console.log(texture)
 
                 this.mesh_[i] = new THREE.Mesh(new THREE.PlaneBufferGeometry(aspect*5,5), new THREE.MeshBasicMaterial({ map: texture }));
                 this.mesh_[i].name = 'gallery';
@@ -50,8 +48,11 @@ export default class Gallery{
                 Common.scene.add(this.mesh_[i]);
                 this.gallery.push(this.mesh_[i])
 
+
+
             })
         }
+        console.log(this.sectionWidth)
 
         // Common.camera.position.y -= 5
 
@@ -63,3 +64,6 @@ export default class Gallery{
     }
 
 }
+
+
+export default new Gallery();
