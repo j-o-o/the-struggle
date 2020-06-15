@@ -15,6 +15,7 @@ export default {
 
   mounted(){
     EventBus.$on("RAYCASTERIMAGE", this.onImg);
+    console.info('%c%s', 'color: green; font-size: 18px', '𝒲𝑒𝒷𝓈𝒾𝓉𝑒 𝒷𝓎 𝐸𝓇𝒾𝓀 𝒮𝒶𝒸𝒽𝓈𝑒')
   },
   methods: {
     onImg(e){

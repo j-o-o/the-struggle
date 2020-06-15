@@ -8,19 +8,16 @@ export default class Image{
     constructor(){
 
         this.sectionWidth = 0
-        this.init();
+        this.init()
 
 
     }
 
     init(){
         this.addInstancedMesh()
-        this.startAnimating(10);
+        this.startAnimating(10)
 
         this.thumbs = []
-        // Common.scene.traverse(function(thumb){
-        //     if (thumb.name == 'thumb') thumbs.push(thumb);
-        // })
     }
 
     addInstancedMesh() {
@@ -44,9 +41,9 @@ export default class Image{
 
         //
         this.manager = new THREE.LoadingManager( () => {
-	
-            this.loadingScreen = document.getElementById( 'loading-screen' );
-            this.loadingScreen.addEventListener( 'transitionend', EventBus.$emit("IMAGESLOADED", true) );
+
+            this.loadingScreen = document.getElementById( 'loading-screen' )
+            this.loadingScreen.addEventListener( 'transitionend', EventBus.$emit("IMAGESLOADED", true) )
             
         } 
         );
@@ -59,28 +56,22 @@ export default class Image{
         // };
 
         for (let i = 0; i < images.length; i++) {
-            this.sectionWidth += 10;
+            this.sectionWidth += 10
 
             this.loadTexture(images[i]).then(texture => {
                 
                 let width = texture.image.naturalWidth
                 let height = texture.image.naturalHeight
                 let aspect = width/height
-                
-                // var frameGeometry = new THREE.BoxBufferGeometry( 1, 1, 1 );
-                // var frameMaterial = new THREE.MeshBasicMaterial({color:0x00ff00})
-                // var frame = new THREE.Mesh(frameGeometry, frameMaterial)
-
-                // this.group = new THREE.Group();
 
                 if(aspect >= 1){
-                    this.mesh_[i] = new THREE.Mesh(new THREE.PlaneBufferGeometry(aspect*5,5), new THREE.MeshBasicMaterial({ map: texture }));
+                    this.mesh_[i] = new THREE.Mesh(new THREE.PlaneBufferGeometry(aspect*5,5), new THREE.MeshBasicMaterial({ map: texture }))
                 } else {
-                    this.mesh_[i] = new THREE.Mesh(new THREE.PlaneBufferGeometry(aspect*7,7), new THREE.MeshBasicMaterial({ map: texture }));
+                    this.mesh_[i] = new THREE.Mesh(new THREE.PlaneBufferGeometry(aspect*7,7), new THREE.MeshBasicMaterial({ map: texture }))
                 }
 
-                this.mesh_[i].name = 'thumb';
-                Common.scene.add(this.mesh_[i]);
+                this.mesh_[i].name = 'thumb'
+                Common.scene.add(this.mesh_[i])
                 this.thumbs.push(this.mesh_[i])
 
             })
@@ -98,20 +89,20 @@ export default class Image{
     }
     
     startAnimating(fps) {
-        this.fpsInterval = 1000 / fps;
-        this.then = Date.now();
-        this.startTime = this.then;
-        this.update();
+        this.fpsInterval = 1000 / fps
+        this.then = Date.now()
+        this.startTime = this.then
+        this.update()
     }
 
     update(){
 
-        requestAnimationFrame(this.update.bind(this));
-        this.now = Date.now();
-        this.elapsed = this.now - this.then;
+        requestAnimationFrame(this.update.bind(this))
+        this.now = Date.now()
+        this.elapsed = this.now - this.then
 
         if (this.elapsed > this.fpsInterval) {
-            this.then = this.now - (this.elapsed % this.fpsInterval);
+            this.then = this.now - (this.elapsed % this.fpsInterval)
 
             this.mesh_.forEach(function(item, i){
                 
@@ -119,10 +110,10 @@ export default class Image{
 
                 let lsp = i * 10
 
-                lsp = distance_;
-                let x = this.sectionWidth * lsp;
+                lsp = distance_
+                let x = this.sectionWidth * lsp
                 
-                item.position.set((i * 10) + x, 0, 0);
+                item.position.set((i * 10) + x, 0, 0)
 
             }, this)
         }

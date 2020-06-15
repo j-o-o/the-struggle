@@ -32,6 +32,14 @@ export default class Wall{
         // this.pointer.position.z = -0.1;
 
         Common.scene.add(this.pointer)
+
+
+        EventBus.$on("WHEELSPEED", this.wheeled.bind(this));
+    }
+
+    wheeled(e){
+        this.pr += e/100
+        
     }
 
     onRayCastWall(e){
@@ -65,14 +73,15 @@ export default class Wall{
 
     loop(){
         this.wall.position.x = Common.camera.position.x
+        this.wall.position.y = Common.camera.position.y
+        this.pointer.rotation.y = this.pr
         if(this.isOnImg == false){
-            this.breathing = 0;
+            this.breathing = 0
             this.pointer.position.x = lerp(this.pointer.position.x, this.rayWall.x, 0.1)
             this.pointer.position.y = lerp(this.pointer.position.y, this.rayWall.y + this.breathing, 0.1)
         } else {
-            this.breathing = Math.sin(Date.now() * 0.003) * Math.PI * 0.02;
+            this.breathing = Math.sin(Date.now() * 0.003) * Math.PI * 0.02
             this.pr += 0.05
-            this.pointer.rotation.y = this.pr
             this.pointer.position.x = lerp(this.pointer.position.x, this.hoveredImg.position.x, 0.1)
             this.pointer.position.y = lerp(this.pointer.position.y, this.hoveredImg.geometry.parameters.height/2 + this.breathing + 0.2, 0.1)
         }

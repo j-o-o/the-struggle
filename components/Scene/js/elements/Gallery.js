@@ -9,7 +9,7 @@ export default class Gallery{
     constructor(){
 
         this.sectionWidth = 0
-        this.thumbs = []
+        this.gallery = []
         this.init();
 
     }
@@ -42,13 +42,13 @@ export default class Gallery{
                 console.log(texture)
 
                 this.mesh_[i] = new THREE.Mesh(new THREE.PlaneBufferGeometry(aspect*5,5), new THREE.MeshBasicMaterial({ map: texture }));
-                this.mesh_[i].name = 'thumb';
+                this.mesh_[i].name = 'gallery';
                 this.mesh_[i].position.y = -10 + -i*10;
                 
                 // this.mesh_[i].position.x = Common.camera.position.x
                 this.mesh_[i].position.x = this.e.object.position.x;
                 Common.scene.add(this.mesh_[i]);
-                this.thumbs.push(this.mesh_[i])
+                this.gallery.push(this.mesh_[i])
 
             })
         }

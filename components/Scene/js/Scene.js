@@ -15,6 +15,7 @@ import { lerp } from 'math-toolbox'
 import EventBus from "~/utils/event-bus"
 
 import Stats from 'stats.js'
+import loadImages from 'image-promise'
 
 export default class Scene{
 
@@ -32,21 +33,20 @@ export default class Scene{
         EventBus.$on("TRANSITION", this.onTransition.bind(this));
 
         EventBus.$on("SCROLLENABLED", this.isScrollEnabled.bind(this));
+        EventBus.$on("ISINGALLERY", this.isItInGallery.bind(this));
 
         window.addEventListener("resize", this.resize.bind(this));
         // EventBus.$on("ISONIMG", this.isOnImg.bind(this));
 
         this.stats = new Stats();
-        var element = document.getElementById('stats')
+        let element = document.getElementById('stats')
         element.appendChild( this.stats.dom )
 
         this.camera = new Camera();
         
-        // this.shape = new Shape();
         this.image = new Image();
         this.wall = new Wall();
-        // this.ground = new Ground();
-        // Image.init()
+        
         Pointer.init();
         Wheel.init();
 
@@ -54,29 +54,42 @@ export default class Scene{
 
     }
 
-    isScrollEnabled(e){this.scrollEnabled=e;        
+    isScrollEnabled(e){
+        this.scrollEnabled=e;    
         if (this.scrollEnabled == true){
             EventBus.$on("RAYCASTERIMAGECLICK", this.onClickImage.bind(this));
         }
     }
 
     onClickImage(e){
-
+        // Common.scene.traverse(function(child) {
+        //     if (child.name === "gallery") {
+        //       child.geometry.dispose()
+        //       child.material.dispose()
+        //       Common.scene.remove( child );
+        //     }
+        // });
         Common.isInGallery = true;
-        this.camera.camPos.y -= 10
-        this.camera.camPos.x = e.object.position.x;
-        this.camera.camLookAt.x = e.object.position.x;
-        this.camera.slant = 0;
 
-        // this.onLoadProject(e.object.id);
         this.gallery = new Gallery();
         this.gallery.init(e)
-
     }
 
-    onLoadProject(e){
+
+    isItInGallery(e){
         console.log(e)
+        if(e == false){
+            Common.scene.traverse(function(child) {
+                if (child.name === "gallery") {
+                  child.geometry.dispose()
+                  child.material.dispose()
+                  Common.scene.remove( child );
+                }
+            });
+        }
     }
+
+
 
 
     loop(){
@@ -118,10 +131,14 @@ export default class Scene{
                 EventBus.$emit("SCROLLENABLED", false);
             break;
             case "exhibition":
-                EventBus.$emit("SCROLLENABLED", true);
+                setTimeout(function(){
+                    EventBus.$emit("SCROLLENABLED", true);
+                }, 1000)
             break;
             case "exhibition-id":
-                EventBus.$emit("SCROLLENABLED", true);
+                setTimeout(function(){
+                    EventBus.$emit("SCROLLENABLED", true);
+                }, 1000)
             break;
         }
         switch(path.params.id){

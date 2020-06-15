@@ -63,6 +63,7 @@ export default class Image{
                 }
 
                 this.mesh_[i].name = 'thumb';
+                this.mesh_[i].uuid = i;
                 Common.scene.add(this.mesh_[i]);
                 this.thumbs.push(this.mesh_[i]);
 

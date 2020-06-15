@@ -150,6 +150,7 @@ export default {
   },
   mounted() {
 
+
     EventBus.$on("MOUSEMOVELOOP", this.mouseMove);
     this.intro = document.querySelector('.intro-container')
 

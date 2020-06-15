@@ -6,7 +6,7 @@ class Common{
         this.scene = null;
         this.camera = null;
         this.renderer = null;
-        
+
         this.isInGallery = false;
 
         this.size = {
@@ -26,9 +26,11 @@ class Common{
 
         this.setSize();
         
+        this.fov = 55;
+        
         this.scene = new THREE.Scene();
         this.camera = new THREE.PerspectiveCamera(
-            55, 
+            this.fov, 
             this.size.windowW / this.size.windowH,
             0.01, 
             10000
@@ -60,7 +62,6 @@ class Common{
     }
 
     isItInGallery(e){
-
         this.isInGallery = e;
     }
 
