@@ -34,14 +34,14 @@ export default class Image{
     addInstancedMesh() {
 
         let images = [
-            // '../images/img1.jpg',
-            // '../images/img2.jpg',
+            '../images/img1.jpg',
+            '../images/img2.jpg',
             '../images/img3.jpg',
             '../images/img4.jpg',
             '../images/img5.jpg',
             '../images/img6.jpg',
-            '../images/img7.jpg',
-            '../images/img8.jpg',
+            // '../images/img7.jpg',
+            // '../images/img8.jpg',
             // '../images/img9.jpg',
             // '../images/img10.jpg',
             // '../images/img11.jpg'
@@ -142,12 +142,13 @@ export default class Image{
 
         if(Common.isInGallery == true){
             
+            // are the thumbs top or bottom?
             if(Camera.camPos.y <= - Gallery.sectionWidth/2){
-                console.log('should be bottom')
+                // console.log('should be bottom')
                 this.shouldBeTop = false
                 this.positionY = - Gallery.sectionWidth - 10
             } else if(Camera.camPos.y >= - Gallery.sectionWidth/2) {
-                console.log('should be top')
+                // console.log('should be top')
                 this.shouldBeTop = true
                 this.positionY = 0
             }

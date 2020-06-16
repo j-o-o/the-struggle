@@ -18,6 +18,7 @@ export default class Scene{
     constructor(props){
 
         this.props = props;
+        this.shouldBeTop = true
         this.init();
 
     }
