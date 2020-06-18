@@ -12,8 +12,9 @@ export default class Image{
 
         this.sectionWidth = 0
         this.positionY = 0
-        this.shouldBeTop = true
+        
         this.init();
+
 
 
     }
@@ -24,6 +25,9 @@ export default class Image{
         this.addInstancedMesh();
         this.startAnimating(10);
 
+
+
+
         // this.camera = new Camera();
         // this.gallery = new Gallery();
 
@@ -33,14 +37,16 @@ export default class Image{
 
     addInstancedMesh() {
 
+
+
         let images = [
-            '../images/img1.jpg',
-            '../images/img2.jpg',
+            // '../images/img1.jpg',
+            // '../images/img2.jpg',
             '../images/img3.jpg',
             '../images/img4.jpg',
             '../images/img5.jpg',
             '../images/img6.jpg',
-            // '../images/img7.jpg',
+            '../images/img7.jpg',
             // '../images/img8.jpg',
             // '../images/img9.jpg',
             // '../images/img10.jpg',
@@ -55,19 +61,28 @@ export default class Image{
             this.loadingScreen.addEventListener( 'transitionend', EventBus.$emit("IMAGESLOADED", true) );    
         });
 
+        // display all thumbnails
         for (let i = 0; i < images.length; i++) {
             this.sectionWidth += 10;
 
             this.loadTexture(images[i]).then(texture => {
                 
-                let width = texture.image.naturalWidth
-                let height = texture.image.naturalHeight
+                // let width = texture.image.naturalWidth
+                // let height = texture.image.naturalHeight
+                // let aspect = width/height
+                // texture.minFilter = THREE.LinearFilter;
+                var Ctexture = new THREE.CanvasTexture( texture );
+                Ctexture.minFilter = THREE.LinearFilter;
+                var material = new THREE.MeshBasicMaterial( { map: Ctexture } );
+
+                let width = Ctexture.image.width
+                let height = Ctexture.image.height
                 let aspect = width/height
 
                 if(aspect >= 1){
-                    this.mesh_[i] = new THREE.Mesh(new THREE.PlaneBufferGeometry(aspect*5,5), new THREE.MeshBasicMaterial({ map: texture }));
+                    this.mesh_[i] = new THREE.Mesh(new THREE.PlaneBufferGeometry(aspect*5,5), material);
                 } else {
-                    this.mesh_[i] = new THREE.Mesh(new THREE.PlaneBufferGeometry(aspect*7,7), new THREE.MeshBasicMaterial({ map: texture }));
+                    this.mesh_[i] = new THREE.Mesh(new THREE.PlaneBufferGeometry(aspect*7,7), material);
                 }
 
                 this.mesh_[i].name = 'thumb';
@@ -78,12 +93,29 @@ export default class Image{
             })
         }
 
-
-        this.bgMesh = new THREE.InstancedMesh(new THREE.BoxBufferGeometry(9, 9, 1, 2, 2, 1), new THREE.MeshBasicMaterial({color: 0xdbdbdb,wireframe:true}), 10);
+        // add boxes
+        this.bgMesh = new THREE.InstancedMesh(new THREE.BoxBufferGeometry(9, 9, 1, 2, 2, 1), new THREE.MeshBasicMaterial({color: 0xdbdbdb, wireframe: true}), 10);
         Common.scene.add(this.bgMesh);
         this.setInstancedMeshPositions(this.bgMesh);
 
     }
+
+    // loadTexture(url) {
+    //     var loader = new THREE.TextureLoader(this.manager)
+    //     return new Promise(resolve => {
+    //         loader.load(url, resolve)
+    //     })
+    // }
+
+
+
+    loadTexture(url) {
+        var loader = new THREE.ImageBitmapLoader(this.manager)
+        loader.setOptions({ imageOrientation: 'flipY' })
+        return new Promise(resolve => { loader.load(url, resolve) })
+    }
+
+    // positioning the boxes
     setInstancedMeshPositions(mesh, loopSectionPosition) {
         for ( var i = 0; i < mesh.count; i ++ ) {
             var xStaticPosition = -10 * (i - 4);
@@ -94,14 +126,8 @@ export default class Image{
             this.bgMesh.setMatrixAt( i, this.bgDummy.matrix );
         }
         this.bgMesh.instanceMatrix.needsUpdate = true;
-      }
-
-
-    loadTexture(url) {
-        return new Promise(resolve => {
-            new THREE.TextureLoader(this.manager).load(url, resolve)
-        })
     }
+
     
     startAnimating(fps) {
         this.fpsInterval = 1000 / fps;
@@ -125,13 +151,18 @@ export default class Image{
                 // let lsp = i * 10
                 // lsp = distance_;
                 let x = this.sectionWidth * distance_;
-                
                 item.position.set((i * 10) + x, this.positionY, 0);
-
             }, this)
 
+            // set the boxes X
             var bgDistance = Math.round(Common.camera.position.x / 10)
             if (bgDistance !== this.loopSectionPosition) {
+                this.loopSectionPosition = bgDistance
+                this.setInstancedMeshPositions(this.bgMesh, this.loopSectionPosition)
+            }
+            // set the boxes Y
+            var bgDistanceY = Math.round(Common.camera.position.y / 10)
+            if (bgDistanceY !== this.loopSectionPosition) {
                 this.loopSectionPosition = bgDistance
                 this.setInstancedMeshPositions(this.bgMesh, this.loopSectionPosition)
             }
@@ -140,20 +171,29 @@ export default class Image{
 
 
 
-        if(Common.isInGallery == true){
-            
-            // are the thumbs top or bottom?
-            if(Camera.camPos.y <= - Gallery.sectionWidth/2){
-                // console.log('should be bottom')
-                this.shouldBeTop = false
-                this.positionY = - Gallery.sectionWidth - 10
-            } else if(Camera.camPos.y >= - Gallery.sectionWidth/2) {
-                // console.log('should be top')
-                this.shouldBeTop = true
-                this.positionY = 0
-            }
-        }
 
+
+
+
+        // are the thumbs top or bottom?
+        if(Common.isInGallery == true){
+
+            // console.log('\x1b[35m%s\x1b[0m', 'global height ', - Gallery.globalHeight)
+            // console.log('\x1b[31m%s\x1b[0m', 'section height ', - Gallery.sectionHeight)
+            // console.log('\x1b[32m%s\x1b[0m', 'cam pos ', Camera.camPos.y);
+
+            if (Camera.camPos.y >= - Gallery.globalHeight + Gallery.sectionHeight/2 - Gallery.clicks) {
+                // top
+                Gallery.shouldBeTop = true
+                this.positionY = - Gallery.globalHeight + Gallery.sectionHeight - Gallery.imageClicks;
+
+            } else if(Camera.camPos.y <= - Gallery.globalHeight + Gallery.sectionHeight/2 - Gallery.clicks){
+                // bottom
+                Gallery.shouldBeTop = false
+                this.positionY = - Gallery.globalHeight - Gallery.clicks
+            }
+            // console.log('\x1b[36m%s\x1b[0m', 'tumbs pos ', this.positionY)
+        }
 
 
     }

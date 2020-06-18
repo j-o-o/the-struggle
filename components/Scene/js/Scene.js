@@ -18,7 +18,6 @@ export default class Scene{
     constructor(props){
 
         this.props = props;
-        this.shouldBeTop = true
         this.init();
 
     }
@@ -30,6 +29,7 @@ export default class Scene{
         EventBus.$on("TRANSITION", this.onTransition.bind(this));
         EventBus.$on("SCROLLENABLED", this.isScrollEnabled.bind(this));
         EventBus.$on("ISINGALLERY", this.isItInGallery.bind(this));
+        EventBus.$on("RAYCASTERIMAGECLICK", this.onClickImage.bind(this));
 
         window.addEventListener("resize", this.resize.bind(this));
 
@@ -37,9 +37,6 @@ export default class Scene{
         let element = document.getElementById('stats')
         element.appendChild( this.stats.dom )
 
-        // Camera = new Camera();
-        
-        this.image = new Image();
         this.wall = new Wall();
         
         Pointer.init();
@@ -47,24 +44,30 @@ export default class Scene{
 
         this.loop();
 
+        // if (this.scrollEnabled == true){
+        // }
+
     }
 
     isScrollEnabled(e){
-        this.scrollEnabled=e;    
-        if (this.scrollEnabled == true){
-            EventBus.$on("RAYCASTERIMAGECLICK", this.onClickImage.bind(this));
-        }
+        this.scrollEnabled=e;
     }
 
     onClickImage(e){
-        Common.isInGallery = true;
+        // console.log('scene js')
+        if (this.scrollEnabled == true){
 
-        Gallery.init(e)
-        console.log(Gallery.sectionWidth)
+            EventBus.$emit("ISINGALLERY", false);
+            
+            Common.isInGallery = true;
+            Gallery.load(e)
+        }
     }
 
 
     isItInGallery(e){
+
+        // destroy gallery if back in thumbnails
         if(e == false){
             for( var i = Common.scene.children.length - 1; i >= 0; i--) { 
                 var obj = Common.scene.children[i];
@@ -82,16 +85,15 @@ export default class Scene{
 
     loop(){
 
-
         this.stats.begin();
     
-
-        
         this.render();
 
         this.wall.loop();
         Pointer.loop();
         Camera.loop();
+
+        // console.log('Camera position: ', Common.camera.position.y, 'Global Height: ', Gallery.globalHeight, 'Section Height: ', Gallery.sectionHeight)
 
 	    this.stats.end();
         requestAnimationFrame(this.loop.bind(this));

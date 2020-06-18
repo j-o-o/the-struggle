@@ -1,11 +1,9 @@
 import * as THREE from 'three'
 import Common from '../Common'
-
 if (process.browser) {
     Hammer = require('hammerjs');
 } 
 import EventBus from "~/utils/event-bus"
-
 import RayCast from "./raycaster"
 
 class Pointer{
@@ -13,6 +11,7 @@ class Pointer{
     constructor(){
         this.mouse = new THREE.Vector2( 0, 0 );
     }
+
     init(){
         this.pointer = new Pointer();
         this.RayCast = new RayCast();
@@ -21,6 +20,7 @@ class Pointer{
         const hammertime = new Hammer(Common.renderer.domElement);
         hammertime.on('pan', this.panMove.bind(this) );
     }
+    
     mouseMove(e){
         EventBus.$emit("MOUSEMOVE", e);
 

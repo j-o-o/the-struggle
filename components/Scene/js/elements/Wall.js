@@ -20,8 +20,11 @@ export default class Wall{
     }
 
     init(){
+        
         EventBus.$on("RAYCASTERWALL", this.onRayCastWall.bind(this));
         EventBus.$on("RAYCASTERIMAGE", this.onRayCastImage.bind(this));
+        EventBus.$on("WHEELSPEED", this.wheeled.bind(this));
+
         this.wall = new THREE.Mesh(new THREE.PlaneBufferGeometry(50,50), new THREE.MeshBasicMaterial({color: 0xffffff}))
         this.wall.visible = false;
         this.wall.position.z = -0.1;
@@ -34,7 +37,6 @@ export default class Wall{
         Common.scene.add(this.pointer)
 
 
-        EventBus.$on("WHEELSPEED", this.wheeled.bind(this));
     }
 
     wheeled(e){
@@ -50,7 +52,6 @@ export default class Wall{
     }
     onRayCastImage(e){
 
-
         this.imgScale = lerp(this.imgScale, 1.2, 0.07);
         // e.object.scale.x = this.imgScale
 
@@ -63,10 +64,6 @@ export default class Wall{
             this.isOnImg = true
             EventBus.$emit("ISONIMG", this.isOnImg);
         }
-
-
-
-
         // this.rayImage.x = e.point.x
         // this.rayImage.y = e.point.y
     }
@@ -83,7 +80,7 @@ export default class Wall{
             this.breathing = Math.sin(Date.now() * 0.003) * Math.PI * 0.02
             this.pr += 0.05
             this.pointer.position.x = lerp(this.pointer.position.x, this.hoveredImg.position.x, 0.1)
-            this.pointer.position.y = lerp(this.pointer.position.y, this.hoveredImg.geometry.parameters.height/2 + this.breathing + 0.2, 0.1)
+            this.pointer.position.y = lerp(this.pointer.position.y, this.hoveredImg.position.y + this.hoveredImg.geometry.parameters.height/2 + this.breathing + 0.2, 0.1)
         }
     }
 }

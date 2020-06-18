@@ -15,15 +15,21 @@ export default {
 
   mounted(){
     EventBus.$on("RAYCASTERIMAGE", this.onImg);
+    EventBus.$on("SCROLLENABLED", this.isScroll);
     console.info('%c%s', 'color: green; font-size: 18px; font-family: sans-serif; font-style: cursive', 'Website by Erik Sachse')
   },
   methods: {
     onImg(e){
-      if(e != false){
-        document.getElementsByTagName("body")[0].style.cursor = "pointer";
-      } else {
-        document.getElementsByTagName("body")[0].style.cursor = "inherit";
+      if(this.isScroll == true){
+        if(e != false){
+          document.getElementsByTagName("body")[0].style.cursor = "pointer";
+        } else {
+          document.getElementsByTagName("body")[0].style.cursor = "inherit";
+        }
       }
+    },
+    isScroll(e){
+      this.isScroll = e
     }
   },
   components: {

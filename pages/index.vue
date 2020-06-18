@@ -151,6 +151,7 @@ export default {
   mounted() {
 
 
+    EventBus.$emit("SCROLLENABLED", false);
     EventBus.$on("MOUSEMOVELOOP", this.mouseMove);
     this.intro = document.querySelector('.intro-container')
 

@@ -2,11 +2,6 @@ import * as THREE from 'three'
 import Common from "./Common"
 import Gallery from "./elements/Gallery"
 
-import Image from "./elements/Image"
-import Wall from "./elements/Wall"
-
-import Pointer from "./events/pointer"
-import Wheel from "./events/wheel"
 import { lerp } from 'math-toolbox'
 
 import EventBus from "~/utils/event-bus"
@@ -22,6 +17,7 @@ class Camera{
         this.camLookAt = new THREE.Vector3();
         this.mouse = new THREE.Vector2();
         this.transition = false
+        this.direction = 'top'
 
         this.init();
 
@@ -34,22 +30,21 @@ class Camera{
         EventBus.$on("SCROLLENABLED", this.isScrollEnabled.bind(this));
         EventBus.$on("RAYCASTERIMAGE", this.isOnImg.bind(this));
         EventBus.$on("RAYCASTERIMAGECLICK", this.onClickImage.bind(this));
+    
 
     }
 
     isOnImg(e){
 
-        if(Common.isInGallery == false){
-            if (e == false){
-                this.slant = -3;
-            } else {
-                if(this.camPos.x >= e.object.position.x-3){
-                    this.slant = -1;
+            if(Common.isInGallery == false){
+                if (e == false){
+                    this.slant = -3;
+                } else {
+                    if(this.camPos.x >= e.object.position.x-3){
+                        this.slant = -1;
+                    }
                 }
             }
-        }
-
-
 
     }
 
@@ -57,13 +52,18 @@ class Camera{
 
 
     onClickImage(e){
+        // if(this.scrollEnabled == true){
 
-            
-        this.transition = true
+            this.transition = true
+            // if(this.clicks != 20){
+            //     this.clicks += 10
+            // }
 
-        this.camPos.x = e.object.position.x
-        // this.camLookAt.x = e.object.position.x
-        this.slant = 0
+            this.camPos.x = e.object.position.x
+            // this.camLookAt.x = e.object.position.x
+            this.slant = 0
+
+        // }
     
 
     }
@@ -85,14 +85,42 @@ class Camera{
         }
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+        // console.log(this.camPos.y, Gallery.globalHeight, Gallery.sectionHeight, this.clicks)
         // this is to check if the camera has entered the thumbnails
-        if(this.camPos.y >= 0){
-            console.log('top switch')
+        if(this.camPos.y >= - Gallery.globalHeight + Gallery.sectionHeight - Gallery.imageClicks){
+            // console.log('top switch')
             EventBus.$emit("ISINGALLERY", false);
-        } else if (this.camPos.y <= - Gallery.sectionWidth - 10){
-            console.log('bottom switch')
+            Gallery.clicks = Gallery.clicks -10
+            Gallery.imageClicks = Gallery.imageClicks -10
+            
+            Gallery.globalHeight = Gallery.globalHeight - Gallery.sectionHeight
+            // console.log(Gallery.globalHeight, Gallery.sectionHeight, Gallery.imageClicks)
+        } else if (this.camPos.y <= - Gallery.globalHeight - Gallery.clicks){
+            // console.log('bottom switch')
             EventBus.$emit("ISINGALLERY", false);
         }
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -113,15 +141,10 @@ class Camera{
     loop(){
         
         let breathing = Math.sin(Date.now() * 0.0012) * Math.PI * 0.02;
-        console.log(this.camPos.y, Common.camera.position.y)
-
-
+        // console.log(this.camPos.y, Common.camera.position.y)
 
         if(this.scrollEnabled == true){
-
             this.camPos.z = 20
-
-             
             if(Common.isInGallery == false){
                 if(this.transition == false){
                     Common.camera.position.x = lerp(Common.camera.position.x, this.camPos.x + this.mouse.x / 2 + this.slant, 0.08);
@@ -129,23 +152,13 @@ class Camera{
                     this.camLookAt.x = lerp(this.camLookAt.x, this.camPos.x + this.mouse.x * 1.8, 0.3);
                 }
             } else {
-
                 if(this.transition == false){
                     Common.camera.position.y = lerp(Common.camera.position.y, this.camPos.y + this.mouse.y / 2 + breathing, 0.08);
                 } else {
                     Common.camera.position.x = lerp(Common.camera.position.x, this.camPos.x + this.slant, 0.08);
-                }
-                
+                }   
             }
-         
         } 
-
-        
-        
-        
-        
-        
-        
         // this is for the intro page
         else {
             this.camPos.z = 40
@@ -158,21 +171,39 @@ class Camera{
             }
         }
 
+
+
+
+
+
+
+
+
+
+
         // slow the transition between thumbnails and gallery
+        // position the camera on thumb click
         if(this.transition == true){
-            this.camPos.y = -10
+            // console.log('%c oh my transition happendingngsndf,mn', 'color: magenta')
+            this.camPos.y = - Gallery.globalHeight + Gallery.sectionHeight - Gallery.clicks
             Common.camera.position.y = lerp(Common.camera.position.y, this.camPos.y, 0.07);
             this.camLookAt.y = lerp(this.camLookAt.y, this.camPos.y, 0.1);
             this.camLookAt.x = lerp(this.camLookAt.x, this.camPos.x, 0.1);
-
             if (this.transition) {
                 setTimeout(() => { this.transition = false }, 1000);
             }
-
         }
+
+
+
+
+
+
+
+
+
  
         Common.camera.position.z = lerp(Common.camera.position.z, this.camPos.z / 2, 0.08);
-
 
         if (Common.isInGallery == false){
             this.camLookAt.y = lerp(this.camLookAt.y, this.mouse.y * 1.8 + breathing + this.camPos.y, 0.3);
@@ -181,7 +212,7 @@ class Camera{
                 this.camLookAt.y = lerp(this.camLookAt.y, this.camPos.y, 0.3);
             }
         }
-
+        
         Common.camera.lookAt(this.camLookAt.x, this.camLookAt.y, 0)
  
     }

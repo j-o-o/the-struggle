@@ -16,6 +16,7 @@ export default {
   loading: '~/components/loading.vue',
   build: {
     vendor: ['hammerjs'],
+    analyze: true,
     transpile: ['ImprovedNoise', 'SimplexNoise', 'image-promise'],
     extend (config, ctx) {
       if (!!config.module) {

@@ -28,6 +28,7 @@
 
 import Menu from "~/components/Menu"
 import Logo from '~/components/Logo.vue'
+import EventBus from "~/utils/event-bus"
 
 export default {
   transition: 'fade',
@@ -39,6 +40,10 @@ export default {
   asyncData ({ env }) {
     return { users: env.users }
   },
+  mounted() {
+
+    EventBus.$emit("SCROLLENABLED", true);
+  }
 }
 </script>
 <style>

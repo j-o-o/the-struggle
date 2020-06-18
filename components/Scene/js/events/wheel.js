@@ -46,7 +46,7 @@ class Wheel{
     }
 
     panMove(e){
-        console.log(e)
+        // console.log(e)
     }
 
     // loop(){

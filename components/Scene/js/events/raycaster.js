@@ -55,6 +55,7 @@ export default class RayCast{
     onClick(e){
         this.intersects = this.raycaster.intersectObjects( this.image.thumbs );
         if ( this.intersects.length > 0 ) {
+            // console.log(this.intersects[0])
             EventBus.$emit("RAYCASTERIMAGECLICK", this.intersects[0]);
         } else {
             // EventBus.$emit("RAYCASTERIMAGECLICK", false);
