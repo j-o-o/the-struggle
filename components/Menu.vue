@@ -14,6 +14,9 @@
                 </li>
             </ul>
         </section>
+        <section class="artist">
+            {{ artist }}
+        </section>
         
 
     </div>
@@ -30,20 +33,13 @@ export default {
     data () {
         return {
             current: this.$nuxt.$route.params.id,
-            mouseX: null,
-            mouseY: null,
-            panX: null,
-            panY: null,
-            velocity: null,
-            object: null,
-            wheeled: null,
-            wheelSpeed: null
+            artist: null
         }
     },
 
 
     mounted () {
-
+        // EventBus.$on("RAYCASTERIMAGE", this.onImgHover);
     },
 
     watch: {
@@ -52,6 +48,12 @@ export default {
         }
     },
     methods: {
+        onImgHover(e){
+            if(e != false){
+                console.log(e.object.uuid)
+            }
+        }
+
     }
 };
 </script>

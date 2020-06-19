@@ -30,26 +30,29 @@ export default class RayCast{
         this.raycaster.setFromCamera( this.mouse, Common.camera );
 
         // calculate objects intersecting the picking ray
-        var wall = Common.scene.getObjectByName( "wall" );
+        let wall = Common.scene.getObjectByName( "wall" );
         this.intersect = this.raycaster.intersectObject( wall );
+        this.intersects = this.raycaster.intersectObjects( this.image.thumbs, true );
     
         if ( this.intersect.length > 0 ) {
-
             EventBus.$emit("RAYCASTERWALL", this.intersect[0]);
-    
-        } else {
-            // EventBus.$emit("RAYCASTERWALL", null);
+            EventBus.$emit("RAYCASTERIMAGE", false);
+        }  
+        
+        if ( this.intersects.length > 0 ) {
+            EventBus.$emit("RAYCASTERIMAGE", this.intersects[0]);
         }
 
 
         
-        this.intersects = this.raycaster.intersectObjects( this.image.thumbs );
-        if ( this.intersects.length > 0 ) {
-            EventBus.$emit("RAYCASTERIMAGE", this.intersects[0]);
+       
+        // if ( this.intersects.length > 0 ) {
+        // } else {
+        // }   
 
-        } else {
-            EventBus.$emit("RAYCASTERIMAGE", false);
-        }   
+
+
+
     }
 
     onClick(e){

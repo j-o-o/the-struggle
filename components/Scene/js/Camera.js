@@ -1,6 +1,6 @@
 import * as THREE from 'three'
 import Common from "./Common"
-import Gallery from "./elements/Gallery"
+import Gallery from "./elements/Gallery_1"
 
 import { lerp } from 'math-toolbox'
 
@@ -36,15 +36,15 @@ class Camera{
 
     isOnImg(e){
 
-            if(Common.isInGallery == false){
-                if (e == false){
-                    this.slant = -3;
-                } else {
-                    if(this.camPos.x >= e.object.position.x-3){
-                        this.slant = -1;
-                    }
+        if(Common.isInGallery == false){
+            if (e == false){
+                this.slant = -3;
+            } else {
+                if(this.camPos.x >= e.object.position.x-3){
+                    this.slant = -1;
                 }
             }
+        }
 
     }
 
@@ -52,18 +52,13 @@ class Camera{
 
 
     onClickImage(e){
-        // if(this.scrollEnabled == true){
+        if(Common.isInGallery == false){
 
             this.transition = true
-            // if(this.clicks != 20){
-            //     this.clicks += 10
-            // }
-
             this.camPos.x = e.object.position.x
-            // this.camLookAt.x = e.object.position.x
             this.slant = 0
 
-        // }
+        }
     
 
     }
@@ -97,19 +92,21 @@ class Camera{
 
 
 
-        // console.log(this.camPos.y, Gallery.globalHeight, Gallery.sectionHeight, this.clicks)
-        // this is to check if the camera has entered the thumbnails
-        if(this.camPos.y >= - Gallery.globalHeight + Gallery.sectionHeight - Gallery.imageClicks){
-            // console.log('top switch')
-            EventBus.$emit("ISINGALLERY", false);
-            Gallery.clicks = Gallery.clicks -10
-            Gallery.imageClicks = Gallery.imageClicks -10
-            
-            Gallery.globalHeight = Gallery.globalHeight - Gallery.sectionHeight
-            // console.log(Gallery.globalHeight, Gallery.sectionHeight, Gallery.imageClicks)
-        } else if (this.camPos.y <= - Gallery.globalHeight - Gallery.clicks){
-            // console.log('bottom switch')
-            EventBus.$emit("ISINGALLERY", false);
+        if(Common.isInGallery == true){
+            // console.log(this.camPos.y, Gallery.globalHeight, Gallery.sectionHeight, this.clicks)
+            // this is to check if the camera has entered the thumbnails
+            if(this.camPos.y >= - Gallery.globalHeight + Gallery.sectionHeight - Gallery.imageClicks){
+                // console.log('top switch')
+                EventBus.$emit("ISINGALLERY", false);
+                Gallery.clicks = Gallery.clicks -10
+                Gallery.imageClicks = Gallery.imageClicks -10
+                
+                Gallery.globalHeight = Gallery.globalHeight - Gallery.sectionHeight
+                // console.log(Gallery.globalHeight, Gallery.sectionHeight, Gallery.imageClicks)
+            } else if (this.camPos.y <= - Gallery.globalHeight - Gallery.clicks){
+                // console.log('bottom switch')
+                EventBus.$emit("ISINGALLERY", false);
+            }
         }
 
 
@@ -163,9 +160,7 @@ class Camera{
         else {
             this.camPos.z = 40
             this.camPos.x += 0.01;
-
             Common.camera.position.x = lerp(Common.camera.position.x,this.camPos.x + this.mouse.x / 2, 0.08);
-
             if(Common.isInGallery == false){
                 this.camLookAt.x = lerp(this.camLookAt.x, this.camPos.x + this.mouse.x * 1.8, 0.3);
             }
@@ -184,9 +179,9 @@ class Camera{
         // slow the transition between thumbnails and gallery
         // position the camera on thumb click
         if(this.transition == true){
-            // console.log('%c oh my transition happendingngsndf,mn', 'color: magenta')
             this.camPos.y = - Gallery.globalHeight + Gallery.sectionHeight - Gallery.clicks
             Common.camera.position.y = lerp(Common.camera.position.y, this.camPos.y, 0.07);
+
             this.camLookAt.y = lerp(this.camLookAt.y, this.camPos.y, 0.1);
             this.camLookAt.x = lerp(this.camLookAt.x, this.camPos.x, 0.1);
             if (this.transition) {

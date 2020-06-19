@@ -45,7 +45,7 @@ export default class Wall{
     }
 
     onRayCastWall(e){
-        if(this.isOnImg == false){
+        if(e != false){
             this.rayWall.x = e.point.x
             this.rayWall.y = e.point.y
         }

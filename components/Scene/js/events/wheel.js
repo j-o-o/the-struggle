@@ -48,10 +48,6 @@ class Wheel{
     panMove(e){
         // console.log(e)
     }
-
-    // loop(){
-        // EventBus.$emit("WHEELSPEED", this.wheelSpeed);
-    // }
 }
 
 export default new Wheel();

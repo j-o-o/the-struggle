@@ -2,7 +2,7 @@ import * as THREE from 'three'
 import Common from "./Common"
 
 import Image from "./elements/Image"
-import Gallery from "./elements/Gallery"
+import Gallery from "./elements/Gallery_1"
 import Wall from "./elements/Wall"
 import Camera from "./Camera"
 
@@ -44,9 +44,6 @@ export default class Scene{
 
         this.loop();
 
-        // if (this.scrollEnabled == true){
-        // }
-
     }
 
     isScrollEnabled(e){
@@ -55,13 +52,16 @@ export default class Scene{
 
     onClickImage(e){
         // console.log('scene js')
-        if (this.scrollEnabled == true){
+        console.log(Common.isInGallery)
+        if (this.scrollEnabled == true && Common.isInGallery == false){
 
-            EventBus.$emit("ISINGALLERY", false);
-            
+            EventBus.$emit("ISINGALLERY", true);
+
             Common.isInGallery = true;
             Gallery.load(e)
+            console.log(Common.isInGallery)
         }
+
     }
 
 
@@ -79,6 +79,7 @@ export default class Scene{
             }
         }
     }
+
 
 
 

@@ -17,10 +17,6 @@ class Gallery{
         // this.imageClicks = 0
         this.imageClicks = 0
         this.shouldBeTop = true
-        this.topped = 0;
-
-
-
     }
 
     load(e){
@@ -41,17 +37,9 @@ class Gallery{
             this.clicks += 10
         }
 
-        // if (this.clicks == 20){
-        //     this.topped -= 10
-        // }
-
         if(this.imageClicks == -10 && this.clicks == 10){
-            console.log('this script right here took me 3 days to debug, you are welcome')
             this.imageClicks += 10
         }
-
-        // images position: 10 image clicks: -10, gallery clicks: 10
-        // images position: -40 image clicks: 10, gallery clicks: 20
 
     
         let images = [
@@ -100,7 +88,7 @@ class Gallery{
     }
 
     loadTexture(url) {
-        var loader = new THREE.ImageBitmapLoader()
+        let loader = new THREE.ImageBitmapLoader()
         loader.setOptions({ imageOrientation: 'flipY' })
         return new Promise(resolve => { loader.load(url, resolve) })
     }

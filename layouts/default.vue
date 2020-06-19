@@ -16,7 +16,7 @@ export default {
   mounted(){
     EventBus.$on("RAYCASTERIMAGE", this.onImg);
     EventBus.$on("SCROLLENABLED", this.isScroll);
-    console.info('%c%s', 'color: green; font-size: 18px; font-family: sans-serif; font-style: cursive', 'Website by Erik Sachse')
+    console.info('Hello, tell me who you are.')
   },
   methods: {
     onImg(e){

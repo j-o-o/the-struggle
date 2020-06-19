@@ -4,7 +4,7 @@ import EventBus from "~/utils/event-bus"
 import loadImage from 'image-promise';
 import Camera from "../Camera"
 import Scene from "../Scene"
-import Gallery from "./Gallery"
+import Gallery from "./Gallery_1"
 
 
 export default class Image{
@@ -45,8 +45,8 @@ export default class Image{
             '../images/img3.jpg',
             '../images/img4.jpg',
             '../images/img5.jpg',
-            '../images/img6.jpg',
-            '../images/img7.jpg',
+            // '../images/img6.jpg',
+            // '../images/img7.jpg',
             // '../images/img8.jpg',
             // '../images/img9.jpg',
             // '../images/img10.jpg',
@@ -67,10 +67,6 @@ export default class Image{
 
             this.loadTexture(images[i]).then(texture => {
                 
-                // let width = texture.image.naturalWidth
-                // let height = texture.image.naturalHeight
-                // let aspect = width/height
-                // texture.minFilter = THREE.LinearFilter;
                 var Ctexture = new THREE.CanvasTexture( texture );
                 Ctexture.minFilter = THREE.LinearFilter;
                 var material = new THREE.MeshBasicMaterial( { map: Ctexture } );
@@ -99,15 +95,6 @@ export default class Image{
         this.setInstancedMeshPositions(this.bgMesh);
 
     }
-
-    // loadTexture(url) {
-    //     var loader = new THREE.TextureLoader(this.manager)
-    //     return new Promise(resolve => {
-    //         loader.load(url, resolve)
-    //     })
-    // }
-
-
 
     loadTexture(url) {
         var loader = new THREE.ImageBitmapLoader(this.manager)
@@ -152,6 +139,7 @@ export default class Image{
                 // lsp = distance_;
                 let x = this.sectionWidth * distance_;
                 item.position.set((i * 10) + x, this.positionY, 0);
+
             }, this)
 
             // set the boxes X
