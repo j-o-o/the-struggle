@@ -59,8 +59,6 @@ class Camera{
             this.slant = 0
 
         }
-    
-
     }
 
 
@@ -192,8 +190,9 @@ class Camera{
 
 
 
-
-
+        //camera value
+        //get image length
+        // console.log(Common.camera.position.x)
 
 
 

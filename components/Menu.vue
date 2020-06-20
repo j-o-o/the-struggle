@@ -65,7 +65,6 @@ div.dom{
     padding: 20px 30px;
 
     h1{
-        // font-weight: normal;
         font-size: 20px;
         margin-bottom: 40px;
     }

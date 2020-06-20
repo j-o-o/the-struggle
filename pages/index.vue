@@ -66,8 +66,9 @@
       </div>
       </div>
       <hr>
+
       <div class="intro-container">
-        
+  
         <svg version="1.1" id="svg1" class="enter_svg" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
           viewBox="0 0 595.28 595.28" style="enable-background:new 0 0 595.28 595.28;" xml:space="preserve">
         <style type="text/css">
@@ -80,23 +81,14 @@
         <svg version="1.1" id="svg2" class="enter_svg" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
           viewBox="0 0 595.28 595.28" style="enable-background:new 0 0 595.28 595.28;" xml:space="preserve">
         <style type="text/css">
-          .st6{fill:none;stroke:#000000;stroke-width:20;stroke-miterlimit:10;stroke-dasharray:1.0089,30.2676;}
+          .st6{fill:none;stroke:#000000;stroke-width:20;stroke-miterlimit:10;stroke-dasharray:1, 30;}
         </style>
         <circle class="st6" cx="297.64" cy="297.64" r="129.42"/>
         </svg>
 
 
         <div id="enter">
-
-        
-
-
           <nuxt-link to="exhibition">
-            
-
-
-
-
             <div class="letter_1">Enter</div>
             <div class="letter_2">Exhibition</div>
           </nuxt-link>
@@ -368,19 +360,11 @@ export default {
   display: flex;
   text-align: center;
 }
-#info li{
-  /* display: inline-block; */
-}
 
 
-/* */
 #intro-text-grid{
-  /* display: grid;
-  grid-template-columns: 50% 50%; */
   padding: 24px;
   display: inline-block;
-  /* background: white; */
-  /* grid-gap: 12px; */
 }
 #intro-text-grid p{
   margin: 0;

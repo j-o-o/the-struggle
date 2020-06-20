@@ -1,7 +1,7 @@
 import * as THREE from "three";
 import Common from "../Common";
 import EventBus from "~/utils/event-bus"
-import { lerp } from 'math-toolbox'
+import { lerp, smoothStep } from 'math-toolbox'
 
 export default class Wall{
 
@@ -13,6 +13,8 @@ export default class Wall{
         this.isOnImg = false
         this.hoveredImg = null
         this.pr = 0
+        this.ps = 1
+        this.isLoading = false
 
         this.imgScale = 1
         
@@ -24,6 +26,7 @@ export default class Wall{
         EventBus.$on("RAYCASTERWALL", this.onRayCastWall.bind(this));
         EventBus.$on("RAYCASTERIMAGE", this.onRayCastImage.bind(this));
         EventBus.$on("WHEELSPEED", this.wheeled.bind(this));
+        EventBus.$on("LOADINGGALLERY", this.loader.bind(this))
 
         this.wall = new THREE.Mesh(new THREE.PlaneBufferGeometry(50,50), new THREE.MeshBasicMaterial({color: 0xffffff}))
         this.wall.visible = false;
@@ -41,7 +44,15 @@ export default class Wall{
 
     wheeled(e){
         this.pr += e/100
-        
+    }
+
+    loader(e){
+        console.log(e)
+        if(e == false){
+            this.isLoading = true
+        } else {
+            this.isLoading = false
+        }
     }
 
     onRayCastWall(e){
@@ -71,7 +82,14 @@ export default class Wall{
     loop(){
         this.wall.position.x = Common.camera.position.x
         this.wall.position.y = Common.camera.position.y
+
         this.pointer.rotation.y = this.pr
+
+        if(this.isLoading == true){
+            this.pr += 0.08
+        }
+
+
         if(this.isOnImg == false){
             this.breathing = 0
             this.pointer.position.x = lerp(this.pointer.position.x, this.rayWall.x, 0.1)

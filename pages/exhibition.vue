@@ -40,8 +40,26 @@ export default {
   asyncData ({ env }) {
     return { users: env.users }
   },
-  mounted() {
+  methods: {
+    getID(e){
 
+      // router.push({ name: 'user', params: { id: e } })
+      
+      // router.push({ path: '/exhibition/' + e })
+      // this.$nuxt.$route.params.id = e
+      // history.pushState(
+      //   {},
+      //   null,
+      //   this.$route.href + '/exhibition/' + e
+      // )
+      console.log(window.location.protocol + '//' + window.location.host + '/exhibition/' + e)
+      history.replaceState('', '', window.location.protocol + '//' + window.location.host + '/exhibition/' + e);
+
+
+    }
+  },
+  mounted() {
+    EventBus.$on("CLICKEDID", this.getID.bind(this))
     EventBus.$emit("SCROLLENABLED", true);
   }
 }

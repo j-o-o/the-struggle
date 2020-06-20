@@ -17,6 +17,7 @@ class Gallery{
         // this.imageClicks = 0
         this.imageClicks = 0
         this.shouldBeTop = true
+
     }
 
     load(e){
@@ -55,8 +56,12 @@ class Gallery{
             // '../images/img10.jpg',
             // '../images/img11.jpg'
         ];
-        
 
+        EventBus.$emit("LOADINGGALLERY", false)
+        this.manager = new THREE.LoadingManager( () => {
+            EventBus.$emit("LOADINGGALLERY", true)
+        });
+        
         this.mesh_ = [];
 
         for (let i = 0; i < images.length; i++) {
@@ -81,14 +86,12 @@ class Gallery{
             })
         }
 
-        // if(this.shouldBeTop == 'false') {
-            this.globalHeight += this.sectionHeight;
-        // }
+        this.globalHeight += this.sectionHeight;
         
     }
 
     loadTexture(url) {
-        let loader = new THREE.ImageBitmapLoader()
+        let loader = new THREE.ImageBitmapLoader(this.manager)
         loader.setOptions({ imageOrientation: 'flipY' })
         return new Promise(resolve => { loader.load(url, resolve) })
     }

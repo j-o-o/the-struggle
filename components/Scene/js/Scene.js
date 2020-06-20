@@ -56,9 +56,11 @@ export default class Scene{
         if (this.scrollEnabled == true && Common.isInGallery == false){
 
             EventBus.$emit("ISINGALLERY", true);
+            EventBus.$emit("CLICKEDID", e.object.uuid)
 
             Common.isInGallery = true;
             Gallery.load(e)
+            
             console.log(Common.isInGallery)
         }
 
@@ -93,8 +95,6 @@ export default class Scene{
         this.wall.loop();
         Pointer.loop();
         Camera.loop();
-
-        // console.log('Camera position: ', Common.camera.position.y, 'Global Height: ', Gallery.globalHeight, 'Section Height: ', Gallery.sectionHeight)
 
 	    this.stats.end();
         requestAnimationFrame(this.loop.bind(this));

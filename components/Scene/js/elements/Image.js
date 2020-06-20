@@ -40,17 +40,17 @@ export default class Image{
 
 
         let images = [
-            // '../images/img1.jpg',
-            // '../images/img2.jpg',
+            '../images/img1.jpg',
+            '../images/img2.jpg',
             '../images/img3.jpg',
             '../images/img4.jpg',
             '../images/img5.jpg',
-            // '../images/img6.jpg',
-            // '../images/img7.jpg',
-            // '../images/img8.jpg',
-            // '../images/img9.jpg',
-            // '../images/img10.jpg',
-            // '../images/img11.jpg'
+            '../images/img6.jpg',
+            '../images/img7.jpg',
+            '../images/img8.jpg',
+            '../images/img9.jpg',
+            '../images/img10.jpg',
+            '../images/img11.jpg'
         ];
         
         // used for the each loop
@@ -135,8 +135,6 @@ export default class Image{
             this.mesh_.forEach(function(item, i){
                 
                 let distance_ = Math.round((Common.camera.position.x - (i * 10)) / this.sectionWidth)
-                // let lsp = i * 10
-                // lsp = distance_;
                 let x = this.sectionWidth * distance_;
                 item.position.set((i * 10) + x, this.positionY, 0);
 

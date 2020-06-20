@@ -4,7 +4,7 @@
 } */
 @font-face{
     font-family: 'font1';
-    src: url('UCity-Regular.ttf');
+    src: url('General Grotesque Regular.otf');
 }
 
 @font-face{
@@ -19,7 +19,8 @@ html, body{
     margin: 0;
     font-family: 'font1', Helvetica, Arial, sans-serif;
     color: #585858;
-    letter-spacing: 0.01em;
+    letter-spacing: 0.04em;
+    font-size: 16px;
 }
 .letter{
     display: inline-block;
