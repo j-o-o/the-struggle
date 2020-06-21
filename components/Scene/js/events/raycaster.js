@@ -39,10 +39,11 @@ export default class RayCast{
             EventBus.$emit("RAYCASTERIMAGE", false);
         }  
         
-        if ( this.intersects.length > 0 ) {
+        if(Common.isInGallery == false)
+        {if ( this.intersects.length > 0 ) {
             EventBus.$emit("RAYCASTERIMAGE", this.intersects[0]);
         }
-
+}
 
         
        

@@ -33,13 +33,13 @@ export default {
     data () {
         return {
             current: this.$nuxt.$route.params.id,
-            artist: null
+            artist: false
         }
     },
 
 
     mounted () {
-        // EventBus.$on("RAYCASTERIMAGE", this.onImgHover);
+        EventBus.$on("RAYCASTERIMAGE", this.onImgHover);
     },
 
     watch: {
@@ -50,10 +50,9 @@ export default {
     methods: {
         onImgHover(e){
             if(e != false){
-                console.log(e.object.uuid)
+                this.artist = e.object.uuid
             }
         }
-
     }
 };
 </script>
