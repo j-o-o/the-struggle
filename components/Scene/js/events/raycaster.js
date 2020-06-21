@@ -34,18 +34,25 @@ export default class RayCast{
         this.intersect = this.raycaster.intersectObject( wall );
         this.intersects = this.raycaster.intersectObjects( this.image.thumbs, true );
     
-        if ( this.intersect.length > 0 ) {
-            EventBus.$emit("RAYCASTERWALL", this.intersect[0]);
-            EventBus.$emit("RAYCASTERIMAGE", false);
-        }  
-        
-        if(Common.isInGallery == false)
-        {if ( this.intersects.length > 0 ) {
-            EventBus.$emit("RAYCASTERIMAGE", this.intersects[0]);
-        }
-}
+
+
+        setTimeout( function() {
+            if ( this.intersect.length > 0 ) {
+                console.log('wall')
+                EventBus.$emit("RAYCASTERWALL", this.intersect[0]);
+                EventBus.$emit("RAYCASTERIMAGE", false);
+            }  
+            
+
+            if(Common.isInGallery == false) {
+                if ( this.intersects.length > 0 ) {
+                    EventBus.$emit("RAYCASTERIMAGE", this.intersects[0]);
+                }
+            }
+        }.bind(this), 1000 / 30,  );
 
         
+
        
         // if ( this.intersects.length > 0 ) {
         // } else {

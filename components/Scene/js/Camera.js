@@ -18,6 +18,7 @@ class Camera{
         this.mouse = new THREE.Vector2();
         this.transition = false
         this.direction = 'top'
+        this.autoScroll = 0.02
 
         this.init();
 
@@ -39,9 +40,11 @@ class Camera{
         if(Common.isInGallery == false){
             if (e == false){
                 this.slant = -3;
+                this.autoScroll = 0.02
             } else {
                 if(this.camPos.x >= e.object.position.x-3){
                     this.slant = -1;
+                    this.autoScroll = 0.005
                 }
             }
         }
@@ -71,7 +74,7 @@ class Camera{
                 this.camPos.y -= e/200;
             }
         } else {
-            this.slant = -3;
+            // this.slant = -3;
             if(this.scrollEnabled == true){
                 this.camPos.x += e/200;
             }
@@ -137,6 +140,7 @@ class Camera{
         
         let breathing = Math.sin(Date.now() * 0.0012) * Math.PI * 0.02;
         // console.log(this.camPos.y, Common.camera.position.y)
+        this.camPos.x += this.autoScroll;
 
         if(this.scrollEnabled == true){
             this.camPos.z = 20
@@ -157,7 +161,6 @@ class Camera{
         // this is for the intro page
         else {
             this.camPos.z = 40
-            this.camPos.x += 0.01;
             Common.camera.position.x = lerp(Common.camera.position.x,this.camPos.x + this.mouse.x / 2, 0.08);
             if(Common.isInGallery == false){
                 this.camLookAt.x = lerp(this.camLookAt.x, this.camPos.x + this.mouse.x * 1.8, 0.3);

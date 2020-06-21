@@ -29,7 +29,5 @@ export default class Ground{
 
     render(){
         this.cubeCamera.update(Common.renderer, Common.scene);
-
-
     }
 }

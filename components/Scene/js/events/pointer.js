@@ -10,6 +10,7 @@ class Pointer{
 
     constructor(){
         this.mouse = new THREE.Vector2( 0, 0 );
+        this.throttle = false
     }
 
     init(){
@@ -22,6 +23,7 @@ class Pointer{
     }
     
     mouseMove(e){
+
         EventBus.$emit("MOUSEMOVE", e);
 
         this.mouse.x = e.clientX

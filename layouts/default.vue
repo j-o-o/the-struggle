@@ -16,7 +16,6 @@ export default {
   mounted(){
     EventBus.$on("RAYCASTERIMAGE", this.onImg);
     EventBus.$on("SCROLLENABLED", this.isScroll);
-    console.info('Hello, tell me who you are.')
   },
   methods: {
     onImg(e){

@@ -33,25 +33,42 @@ export default {
     data () {
         return {
             current: this.$nuxt.$route.params.id,
-            artist: false
+            artist: false,
+            isInGallery: true
         }
     },
 
 
-    mounted () {
+    mounted () {            
         EventBus.$on("RAYCASTERIMAGE", this.onImgHover);
+        EventBus.$on("CLICKEDID", this.getID.bind(this))
+        EventBus.$on("ISINGALLERY", this.isItInGallery.bind(this))
     },
 
     watch: {
-        "$route.params.id": function(_new, _old){
-            this.current = _new
-        }
+        // "$route.params.id": function(_new, _old){
+        //     if(isInGallery != true){
+        //         this.current = _new
+        //     }
+        // }
     },
     methods: {
         onImgHover(e){
             if(e != false){
                 this.artist = e.object.uuid
+                
+            } 
+        },
+        getID(e){
+            if(this.isInGallery == true){
+                this.current = e
+            } else {
+                this.current = ''
             }
+        },
+        isItInGallery(e){
+            this.isInGallery = e
+            this.getID()
         }
     }
 };

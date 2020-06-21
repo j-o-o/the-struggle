@@ -20,13 +20,14 @@ class Common{
             total: null,
             delta: null
         };
+        this.fov = 55;
     }
 
     init($canvas){
 
         this.setSize();
         
-        this.fov = 55;
+        
         
         this.scene = new THREE.Scene();
         this.camera = new THREE.PerspectiveCamera(

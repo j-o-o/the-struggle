@@ -8,7 +8,7 @@
     <div id="pages">
 
       <div id="title">
-        Teilnehmer
+        Teilnehmer 
       </div>
 
 
@@ -22,10 +22,10 @@
 
 
     <ul class="artists">
-      <li v-for="user in users" :key="user.id">
-      <NuxtLink :to="'/exhibition/'+user.id" class="artists_url">
-        {{ user.name }}
-      </NuxtLink>
+      <li v-for="(user, index) in users" :key="user.id">
+        <NuxtLink :to="'/exhibition/'+user.id" class="artists_url" :id="index">
+          {{ user.name }}
+        </NuxtLink>
       </li>
     </ul>
 
@@ -41,6 +41,7 @@
 import Menu from "~/components/Menu"
 import Logo from '~/components/Logo.vue'
 import EventBus from "~/utils/event-bus"
+import anime from 'animejs/lib/anime.es.js';
 
 export default {
   transition: 'fade',
@@ -54,8 +55,8 @@ export default {
   },
   Data (){
     return{
-
-    isInGallery: true
+      isInGallery: true,
+      artist: null
     }
   },
   methods: {
@@ -76,21 +77,110 @@ export default {
     isInGallery(e){
       this.isInGallery = e
       this.getID()
-    }
+    },
+    onImgHover(e){
+      if(e != false){
+        this.artist = e.object.uuid
+        // var element = document.getElementById(this.artist);
+
+        // for (let i = 0; i < element.children.length; i++) {
+        //   element.children[i].classList.add("block")
+        // }
+
+      }
+    },
+
+    animateButton(el, scale, duration, elasticity) {
+      anime.remove(el);
+      anime({
+        targets: el,
+        scale: scale,
+        duration: duration,
+        elasticity: elasticity
+      });
+    },
   },
+
+
+
+
   mounted() {
     EventBus.$on("CLICKEDID", this.getID.bind(this))
     EventBus.$on("ISINGALLERY", this.isInGallery.bind(this))
     EventBus.$emit("SCROLLENABLED", true);
+    EventBus.$on("RAYCASTERIMAGE", this.onImgHover);
 
-    this.a_1 = document.querySelector('.artists_url');
-    this.a_1.innerHTML = this.a_1.textContent.replace(/\S/g, "<span class='letter'>$&</span>");
+
+
+    var urls = document.getElementsByClassName('artists_url');
+
+
+
+    for (var i = 0; i < urls.length; i++) {
+
+      var item = urls.item(i)
+      
+      item.innerHTML = urls.item(i).textContent.replace(/\S/g, "<span class='letter'>$&</span>");
+
+      // console.log(urls.item(i).children)
+      var spans = item.children
+
+
+
+      function animateButton(el, scale, duration, elasticity) {
+        anime.remove(el);
+        anime({
+          targets: el,
+          scale: scale,
+          duration: duration,
+          elasticity: elasticity
+        });
+      }
+      function enterButton(el) {
+        animateButton(el, 1.2, 800, 400)
+      }
+
+      function leaveButton(el) {
+        animateButton(el, 1.0, 600, 300)
+      }
+
+      item.addEventListener('mouseenter', function(e) {
+        enterButton(e.target);
+      }, false);
+      
+      item.addEventListener('mouseleave', function(e) {
+        leaveButton(e.target)
+      }, false); 
+
+
+
+      for (var j = 0; j < spans.length; j++) {
+        if(spans.item(j).innerHTML == spans.item(j).innerHTML.toLowerCase()){
+          spans.item(j).classList.add("lowercase");
+        }
+        if(spans.item(j).innerHTML == spans.item(j).innerHTML.toUpperCase()){
+          spans.item(j).classList.add("uppercase");
+        }
+
+      }
+
+
+
+
+
+
+    }
+
+      // var shorty = urls.item(i).innerHTML.replace(/[a-z]/g, '');
+      // var old = str.replace(/[A-Z]/g, '');
+      // console.log(shorty)
+
   }
 }
 </script>
 <style>
 html, body{
-  overflow: hidden
+  overflow: hidden;
 }
 
 
@@ -105,12 +195,29 @@ ul.artists{
 
   list-style: none;
   padding: 0;
+  text-align: center;
 }
-ul li{
-  margin: 0 24px
+ul.artists li{
+  margin: 0 14px;
+}
+ul.artists li .artist_url{
+  display: flex;
 }
 .artists a{
-    color: #585858;
-    text-decoration: none;
+  color: #585858;
+  text-decoration: none;
+  display: flex;
 }
+
+.lowercase{
+  display: none;
+}
+.artists_url:hover .lowercase, .block{
+  display: block
+}
+.artists_url:hover .uppercase{
+  margin-left: 6px;
+}
+
+
 </style>
