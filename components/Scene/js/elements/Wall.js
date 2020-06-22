@@ -47,7 +47,6 @@ export default class Wall{
     }
 
     loader(e){
-        console.log(e)
         if(e == false){
             this.isLoading = true
         } else {

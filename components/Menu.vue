@@ -56,7 +56,6 @@ export default {
         onImgHover(e){
             if(e != false){
                 this.artist = e.object.uuid
-                
             } 
         },
         getID(e){

@@ -19,6 +19,7 @@ class Camera{
         this.transition = false
         this.direction = 'top'
         this.autoScroll = 0.02
+        this.autoScrollEnabled = true
 
         this.init();
 
@@ -40,11 +41,15 @@ class Camera{
         if(Common.isInGallery == false){
             if (e == false){
                 this.slant = -3;
-                this.autoScroll = 0.02
+                if(this.autoScrollEnabled){
+                    this.autoScroll = 0.02
+                }
             } else {
                 if(this.camPos.x >= e.object.position.x-3){
                     this.slant = -1;
-                    this.autoScroll = 0.005
+                    if(this.autoScrollEnabled){
+                        this.autoScroll = 0.005
+                    }
                 }
             }
         }
@@ -67,7 +72,7 @@ class Camera{
 
 
     onWheel(e){
-
+        this.autoScrollEnabled = true
         if(Common.isInGallery == true){
             this.slant = 0;
             if(this.scrollEnabled == true){
@@ -140,15 +145,18 @@ class Camera{
         
         let breathing = Math.sin(Date.now() * 0.0012) * Math.PI * 0.02;
         // console.log(this.camPos.y, Common.camera.position.y)
-        this.camPos.x += this.autoScroll;
+        
+        if(this.autoScrollEnabled){
+            this.camPos.x += this.autoScroll;
+        }
 
         if(this.scrollEnabled == true){
-            this.camPos.z = 20
+            this.camPos.z = 15
             if(Common.isInGallery == false){
                 if(this.transition == false){
                     Common.camera.position.x = lerp(Common.camera.position.x, this.camPos.x + this.mouse.x / 2 + this.slant, 0.08);
                     Common.camera.position.y = lerp(Common.camera.position.y, this.mouse.y / 2 + breathing + this.camPos.y, 0.08);
-                    this.camLookAt.x = lerp(this.camLookAt.x, this.camPos.x + this.mouse.x * 1.8, 0.3);
+                    this.camLookAt.x = lerp(this.camLookAt.x, this.camPos.x + this.mouse.x * 3, 0.2);
                 }
             } else {
                 if(this.transition == false){
@@ -160,7 +168,7 @@ class Camera{
         } 
         // this is for the intro page
         else {
-            this.camPos.z = 40
+            this.camPos.z = 30
             Common.camera.position.x = lerp(Common.camera.position.x,this.camPos.x + this.mouse.x / 2, 0.08);
             if(Common.isInGallery == false){
                 this.camLookAt.x = lerp(this.camLookAt.x, this.camPos.x + this.mouse.x * 1.8, 0.3);
@@ -193,18 +201,14 @@ class Camera{
 
 
 
-        //camera value
-        //get image length
-        // console.log(Common.camera.position.x)
-
-
-
  
-        Common.camera.position.z = lerp(Common.camera.position.z, this.camPos.z / 2, 0.08);
+        Common.camera.position.z = lerp(Common.camera.position.z, this.camPos.z, 0.08);
 
         if (Common.isInGallery == false){
             this.camLookAt.y = lerp(this.camLookAt.y, this.mouse.y * 1.8 + breathing + this.camPos.y, 0.3);
-        } else if (Common.isInGallery == true) {
+        } 
+        //scroll lookat in gallery
+        else if (Common.isInGallery == true) {
             if(this.transition == false){
                 this.camLookAt.y = lerp(this.camLookAt.y, this.camPos.y, 0.3);
             }

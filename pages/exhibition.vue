@@ -56,9 +56,53 @@ export default {
   Data (){
     return{
       isInGallery: true,
-      artist: null
+      artist: null,
+      hoveredImg: null,
+      mouseenter: false,
+      element: null,
+      childs: null
     }
   },
+  mounted() {
+
+    EventBus.$on("CLICKEDID", this.getID.bind(this))
+    EventBus.$on("ISINGALLERY", this.isInGallery.bind(this))
+    EventBus.$emit("SCROLLENABLED", true);
+    EventBus.$on("RAYCASTERIMAGE", this.onImgHover.bind(this));
+
+
+
+    this.urls = document.getElementsByClassName('artists_url');
+
+
+    for (var i = 0; i < this.urls.length; i++) {
+
+      var item = this.urls.item(i)
+      
+      item.innerHTML = this.urls.item(i).textContent.replace(/\S/g, "<span class='letter'>$&</span>");
+
+      // console.log(urls.item(i).children)
+      var spans = item.children
+
+      item.addEventListener('mouseenter', this.animateButton.bind(this, item, 1.2, 800, 400))
+      item.addEventListener('mouseleave', this.animateButton.bind(this, item, 1.0, 600, 300))
+
+
+      for (var j = 0; j < spans.length; j++) {
+        if(spans.item(j).innerHTML == spans.item(j).innerHTML.toLowerCase()){
+          spans.item(j).classList.add("lowercase");
+        }
+        if(spans.item(j).innerHTML == spans.item(j).innerHTML.toUpperCase()){
+          spans.item(j).classList.add("uppercase");
+        }
+
+      }
+    }
+  },
+
+
+
+
   methods: {
 
 
@@ -72,25 +116,75 @@ export default {
         history.replaceState('', '', window.location.protocol + '//' + window.location.host + '/exhibition/' + e);
       }
 
-
     },
+
+
+
     isInGallery(e){
       this.isInGallery = e
       this.getID()
     },
+
+
     onImgHover(e){
-      if(e != false){
-        this.artist = e.object.uuid
-        // var element = document.getElementById(this.artist);
+      if( e != false){
 
-        // for (let i = 0; i < element.children.length; i++) {
-        //   element.children[i].classList.add("block")
-        // }
+        if(!this.mouseenter) {
+          this.hoveredImg = e.object.uuid
+          this.element = document.getElementById(this.hoveredImg);
+          this.animateButton(this.element, 1.2, 800, 400)
 
+          this.childs_lower = this.element.querySelectorAll('.lowercase')
+          this.childs_upper = this.element.querySelectorAll('.uppercase')
+          for (var i = 0; i < this.childs_lower.length; i++) {
+              this.childs_lower[i].style.display = 'block'
+          }
+          for (var i = 0; i < this.childs_upper.length; i++) {
+              this.childs_upper[i].style.marginLeft = '6px'
+          }
+
+          this.mouseenter = true
+        }
+
+      } 
+      else if( e == false){
+
+        if(this.mouseenter) {
+
+          for (var i = 0; i < this.urls.length; i++) {
+            this.animateButton(this.element, 1, 800, 400)
+            for (var j = 0; j < this.childs_lower.length; j++) {
+                this.childs_lower[j].style.display = 'none'
+            }
+            for (var g = 0; g < this.childs_upper.length; g++) {
+                this.childs_upper[g].style.marginLeft = '0px'
+            }
+          }
+
+          this.mouseenter = false
+
+        }
+      //   // if(this.mouseenter) {
+      //     if(!this.mouseenter) {
+      //       console.log('out')
+      //       this.animateButton(element, 1, 800, 400)
+      //       this.mouseenter = true
+      //     }
+      //     // this.mouseenter = true
+      //   // }
       }
     },
 
+
+    enterButton(el) {
+      this.animateButton.bind(el, 1.2, 800, 400)
+    },
+    leaveButton(el) {
+      this.animateButton.bind(el, 1.0, 600, 300)
+    } ,
+
     animateButton(el, scale, duration, elasticity) {
+      this.mouseenter = false
       anime.remove(el);
       anime({
         targets: el,
@@ -99,82 +193,6 @@ export default {
         elasticity: elasticity
       });
     },
-  },
-
-
-
-
-  mounted() {
-    EventBus.$on("CLICKEDID", this.getID.bind(this))
-    EventBus.$on("ISINGALLERY", this.isInGallery.bind(this))
-    EventBus.$emit("SCROLLENABLED", true);
-    EventBus.$on("RAYCASTERIMAGE", this.onImgHover);
-
-
-
-    var urls = document.getElementsByClassName('artists_url');
-
-
-
-    for (var i = 0; i < urls.length; i++) {
-
-      var item = urls.item(i)
-      
-      item.innerHTML = urls.item(i).textContent.replace(/\S/g, "<span class='letter'>$&</span>");
-
-      // console.log(urls.item(i).children)
-      var spans = item.children
-
-
-
-      function animateButton(el, scale, duration, elasticity) {
-        anime.remove(el);
-        anime({
-          targets: el,
-          scale: scale,
-          duration: duration,
-          elasticity: elasticity
-        });
-      }
-      function enterButton(el) {
-        animateButton(el, 1.2, 800, 400)
-      }
-
-      function leaveButton(el) {
-        animateButton(el, 1.0, 600, 300)
-      }
-
-      item.addEventListener('mouseenter', function(e) {
-        enterButton(e.target);
-      }, false);
-      
-      item.addEventListener('mouseleave', function(e) {
-        leaveButton(e.target)
-      }, false); 
-
-
-
-      for (var j = 0; j < spans.length; j++) {
-        if(spans.item(j).innerHTML == spans.item(j).innerHTML.toLowerCase()){
-          spans.item(j).classList.add("lowercase");
-        }
-        if(spans.item(j).innerHTML == spans.item(j).innerHTML.toUpperCase()){
-          spans.item(j).classList.add("uppercase");
-        }
-
-      }
-
-
-
-
-
-
-    }
-
-      // var shorty = urls.item(i).innerHTML.replace(/[a-z]/g, '');
-      // var old = str.replace(/[A-Z]/g, '');
-      // console.log(shorty)
-
   }
 }
 </script>

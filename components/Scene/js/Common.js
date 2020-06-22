@@ -20,7 +20,7 @@ class Common{
             total: null,
             delta: null
         };
-        this.fov = 55;
+        this.fov = 35;
     }
 
     init($canvas){

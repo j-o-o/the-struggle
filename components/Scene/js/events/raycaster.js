@@ -14,7 +14,6 @@ export default class RayCast{
         this.mouse = new THREE.Vector2();
         this.raycaster = new THREE.Raycaster();
         // this.camera = Common.camera;
-
         this.image = new Image();
 
 
@@ -33,23 +32,32 @@ export default class RayCast{
         let wall = Common.scene.getObjectByName( "wall" );
         this.intersect = this.raycaster.intersectObject( wall );
         this.intersects = this.raycaster.intersectObjects( this.image.thumbs, true );
-    
+
+
 
 
         setTimeout( function() {
             if ( this.intersect.length > 0 ) {
-                console.log('wall')
-                EventBus.$emit("RAYCASTERWALL", this.intersect[0]);
-                EventBus.$emit("RAYCASTERIMAGE", false);
-            }  
-            
+                if(this.onImg == false){
+                    EventBus.$emit("RAYCASTERWALL", this.intersect[0]);
+                } else {
+                    EventBus.$emit("RAYCASTERWALL", false);
+                }
+            }
 
             if(Common.isInGallery == false) {
                 if ( this.intersects.length > 0 ) {
+                    this.onImg = true
                     EventBus.$emit("RAYCASTERIMAGE", this.intersects[0]);
+                } else {
+                    this.onImg = false
+                    EventBus.$emit("RAYCASTERIMAGE", false);
                 }
             }
-        }.bind(this), 1000 / 30,  );
+
+
+
+        }.bind(this), 1000 / 10);
 
         
 

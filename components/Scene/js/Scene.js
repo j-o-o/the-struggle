@@ -80,6 +80,7 @@ export default class Scene{
                 }
             }
         }
+        
     }
 
 
@@ -120,6 +121,8 @@ export default class Scene{
 
 
     onTransition(path){
+        Camera.autoScrollEnabled = false
+        console.log('transition')
         switch(path.name){
             case "index":
                 EventBus.$emit("SCROLLENABLED", false);
