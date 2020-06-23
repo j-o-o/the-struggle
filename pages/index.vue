@@ -119,32 +119,49 @@ export default {
   data () {
     return {
       mouse: {x: null, y: null},
-      posX: null
+      posX: null,
+      isItTouch: null
     }
   },
   methods: {
     mouseMove(e){
-      this.mouse.x = lerp(this.mouse.x, ( e.x / window.innerWidth ) * 2 - 1, 0.1);
-      this.mouse.y = lerp(this.mouse.y, -( e.y / window.innerHeight ) * 2 + 1, 0.1);
-      let scale_1 = -this.mouse.y/1.2 + 1.4
-      let scale_2 = this.mouse.y/1.2 + 1.4
-      // this.t_1.style.transform = "translate(" + this.mouse.x * 40 + 'px, ' + this.mouse.y * 40 + 'px) scaleY(' + scale_1 + ')'
-      // this.t_2.style.transform = "translate(" + this.mouse.x * 40 + 'px, ' + this.mouse.y * 40 + 'px) scaleY(' + scale_2 + ')'
-      // this.t_1.style.transform = 'scaleY(' + scale_1 + ')'
-      // this.t_2.style.transform = 'scaleY(' + scale_2 + ')'
-      this.t_1.style.transform = "translate(" + this.mouse.x * 40 + 'px, ' + ( - this.mouse.y * 40) + 'px) scaleY(' + scale_1 + ')'
-      this.t_2.style.transform = "translate(" + this.mouse.x * 40 + 'px, ' + ( - this.mouse.y * 40) + 'px) scaleY(' + scale_2 + ')' 
+      if(this.isItTouch == false){
+        this.mouse.x = lerp(this.mouse.x, ( e.x / window.innerWidth ) * 2 - 1, 0.1);
+        this.mouse.y = lerp(this.mouse.y, -( e.y / window.innerHeight ) * 2 + 1, 0.1);
+        let scale_1 = -this.mouse.y/1.2 + 1.4
+        let scale_2 = this.mouse.y/1.2 + 1.4
+        // this.t_1.style.transform = "translate(" + this.mouse.x * 40 + 'px, ' + this.mouse.y * 40 + 'px) scaleY(' + scale_1 + ')'
+        // this.t_2.style.transform = "translate(" + this.mouse.x * 40 + 'px, ' + this.mouse.y * 40 + 'px) scaleY(' + scale_2 + ')'
+        // this.t_1.style.transform = 'scaleY(' + scale_1 + ')'
+        // this.t_2.style.transform = 'scaleY(' + scale_2 + ')'
+        this.t_1.style.transform = "translate(" + this.mouse.x * 40 + 'px, ' + ( - this.mouse.y * 40) + 'px) scaleY(' + scale_1 + ')'
+        this.t_2.style.transform = "translate(" + this.mouse.x * 40 + 'px, ' + ( - this.mouse.y * 40) + 'px) scaleY(' + scale_2 + ')' 
+      }
     },
+    handleOrientation(e){
+      console.log(e)
+      let scale_1 = (e.beta - 10)/16
+      this.t_1.style.transform = "translate(" + e.gamma + 'px, ' + ( - e.beta - 20 ) + 'px) scaleY(' + scale_1 + ')'
+      this.t_2.style.transform = "translate(" + e.gamma + 'px, ' + ( - e.beta - 20 ) + 'px) scaleY(' + scale_1 + ')' 
+    },
+    isTouch(e){
+      this.isItTouch = e
+    }
   },
-  beforeLeave: function(el) {
-    console.log(el)
-    console.log("beforeLeave");
-  },
-  mounted() {
 
+
+  beforeLeave: function(el) {
+  },
+
+
+
+  mounted() {
 
     EventBus.$emit("SCROLLENABLED", false);
     EventBus.$on("MOUSEMOVELOOP", this.mouseMove);
+    EventBus.$on("ISTOUCH", this.isTouch);
+    window.addEventListener("deviceorientation", this.handleOrientation, true);
+
     this.intro = document.querySelector('.intro-container')
 
 
@@ -451,5 +468,30 @@ p {
 }
 #enter:hover .st5{
   stroke-width: 120;
+}
+
+@media screen and (max-width: 710px) and (orientation: portrait){
+  .title{
+    line-height: 280px;
+  }
+  #info ul{
+    display: inherit;
+  }
+  .left{
+    border-right: none;
+  }
+  .right{
+    padding-left: 0px;
+  }
+  .left, .right{
+    display: block;
+    width: inherit;
+  }
+  #intro-text-grid{
+    padding: 24px 24px;
+  }
+  #intro-text-grid p{
+    text-indent: 0px;
+  }
 }
 </style>

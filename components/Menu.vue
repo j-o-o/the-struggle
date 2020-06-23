@@ -1,18 +1,7 @@
 <template>
     <div class="dom">
-        <section class="title">
-            <ul>
-                <li>
-                    Current page: {{ current }}
-                </li>
-            </ul>
-        </section>
         <section class="nav">
-            <ul>
-                <li>
-                    <nuxt-link to="/">Index</nuxt-link>
-                </li>
-            </ul>
+            <nuxt-link to="/" id="home"></nuxt-link>
         </section>
         <section class="artist">
             {{ artist }}
@@ -78,31 +67,15 @@ div.dom{
     top: 0;
     left: 50%;
     padding: 20px 30px;
-
-    h1{
-        font-size: 20px;
-        margin-bottom: 40px;
-    }
-
-    ul{
-        padding: 0;
-        li{
-            list-style: none;
-            a{
-                color: #000;
-                text-decoration: none;
-                opacity: 0.5;
-                &.nuxt-link-exact-active{
-                    opacity: 1;
-                }
-
-                &:hover{
-                    opacity: 1;
-                }
-            }
-
-            
-        }
-    }
+}
+#home{
+    right: 0;
+    top: 0;
+    position: fixed;
+    width: 12px;
+    height: 12px;
+    margin: 6px;
+    border-radius: 6px;
+    background: #585858;
 }
 </style>

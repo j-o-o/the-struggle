@@ -82,8 +82,10 @@ class Common{
         };
         if(window.mobileAndTabletCheck() == true){
             this.isTouch = false
+            EventBus.$emit("ISTOUCH", false)
         } else {
             this.isTouch = true
+            EventBus.$emit("ISTOUCH", true)
         }
         console.log(window.mobileAndTabletCheck())
     }

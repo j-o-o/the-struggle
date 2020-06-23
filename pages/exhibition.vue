@@ -277,7 +277,7 @@ ul.artists li .artist_url{
 }
 
 
-@media screen and (max-width: 710px){
+@media screen and (max-width: 710px) and (orientation: portrait){
 
   ul.artists{
     
