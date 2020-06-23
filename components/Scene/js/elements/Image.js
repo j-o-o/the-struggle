@@ -58,7 +58,9 @@ export default class Image{
 
         this.manager = new THREE.LoadingManager( () => {
             this.loadingScreen = document.getElementById( 'loading-screen' );
-            this.loadingScreen.addEventListener( 'transitionend', EventBus.$emit("IMAGESLOADED", true) );    
+            this.loadingScreen.addEventListener( 'transitionend', loaded() );
+            function loaded(){
+            EventBus.$emit("IMAGESLOADED", true)    }
         });
 
         // display all thumbnails
@@ -97,8 +99,8 @@ export default class Image{
     }
 
     loadTexture(url) {
-        var loader = new THREE.ImageBitmapLoader(this.manager)
-        loader.setOptions({ imageOrientation: 'flipY' })
+        var loader = new THREE.ImageLoader(this.manager)
+        // loader.setOptions({ imageOrientation: 'flipY' })
         return new Promise(resolve => { loader.load(url, resolve) })
     }
 

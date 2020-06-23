@@ -88,7 +88,6 @@ div.dom{
         padding: 0;
         li{
             list-style: none;
-            
             a{
                 color: #000;
                 text-decoration: none;

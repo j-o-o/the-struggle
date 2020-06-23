@@ -13,14 +13,16 @@ class Wheel{
 
 
     constructor(){
-        this.wheeled = 0;
+        // this.wheeled = 0;
         this.wheelSpeed = 0;
         this.stopWheelTimer;
+        this.panned = 0;
     }
 
     init(){
-        const hammertime = new Hammer(Common.renderer.domElement);
         document.addEventListener("wheel", this.onWheel.bind(this));
+        const hammertime = new Hammer(Common.renderer.domElement);
+        hammertime.get('pan').set({ direction: Hammer.DIRECTION_ALL });
         hammertime.on('pan', this.panMove.bind(this));
     }
 
@@ -30,7 +32,7 @@ class Wheel{
     
     onWheel(e){
 
-        this.wheeled += e.deltaY
+        // this.wheeled += e.deltaY
         this.wheelSpeed = e.deltaY
 
         if(this.stopWheelTimer!==undefined){
@@ -38,15 +40,17 @@ class Wheel{
         };
         
         this.stopWheelTimer = setTimeout(() => this.onStopWheel(), 200);
-        EventBus.$emit("WHEELED", this.wheeled);
         EventBus.$emit("WHEELSPEED", this.wheelSpeed);
 
-        // this.RayCast.mouseMove()
-        
     }
 
     panMove(e){
-        // console.log(e)
+        
+        this.panned = - e.velocityX - e.velocityY
+        console.log(this.panned)
+    
+        EventBus.$emit("PANNED", this.panned)
+
     }
 }
 

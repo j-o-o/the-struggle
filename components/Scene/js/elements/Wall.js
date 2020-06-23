@@ -25,7 +25,7 @@ export default class Wall{
         
         EventBus.$on("RAYCASTERWALL", this.onRayCastWall.bind(this));
         EventBus.$on("RAYCASTERIMAGE", this.onRayCastImage.bind(this));
-        EventBus.$on("WHEELSPEED", this.wheeled.bind(this));
+        // EventBus.$on("WHEELSPEED", this.wheeled.bind(this));
         EventBus.$on("LOADINGGALLERY", this.loader.bind(this))
 
         this.wall = new THREE.Mesh(new THREE.PlaneBufferGeometry(50,50), new THREE.MeshBasicMaterial({color: 0xffffff}))
@@ -35,15 +35,10 @@ export default class Wall{
         Common.scene.add(this.wall)
 
         this.pointer = new THREE.Mesh(new THREE.SphereBufferGeometry(0.1, 3, 2, 1, 6.3, 0),new THREE.MeshNormalMaterial())
-        // this.pointer.position.z = -0.1;
 
         Common.scene.add(this.pointer)
 
 
-    }
-
-    wheeled(e){
-        this.pr += e/100
     }
 
     loader(e){
@@ -88,16 +83,20 @@ export default class Wall{
             this.pr += 0.08
         }
 
-
-        if(this.isOnImg == false){
-            this.breathing = 0
-            this.pointer.position.x = lerp(this.pointer.position.x, this.rayWall.x, 0.1)
-            this.pointer.position.y = lerp(this.pointer.position.y, this.rayWall.y + this.breathing, 0.1)
+        if(Common.isMobile == true){
+            if(this.isOnImg == false){
+                this.breathing = 0
+                this.pointer.position.x = lerp(this.pointer.position.x, this.rayWall.x, 0.1)
+                this.pointer.position.y = lerp(this.pointer.position.y, this.rayWall.y + this.breathing, 0.1)
+            } else {
+                this.breathing = Math.sin(Date.now() * 0.003) * Math.PI * 0.02
+                this.pr += 0.05
+                this.pointer.position.x = lerp(this.pointer.position.x, this.hoveredImg.position.x, 0.1)
+                this.pointer.position.y = lerp(this.pointer.position.y, this.hoveredImg.position.y + this.hoveredImg.geometry.parameters.height/2 + this.breathing + 0.2, 0.1)
+            }
         } else {
-            this.breathing = Math.sin(Date.now() * 0.003) * Math.PI * 0.02
-            this.pr += 0.05
-            this.pointer.position.x = lerp(this.pointer.position.x, this.hoveredImg.position.x, 0.1)
-            this.pointer.position.y = lerp(this.pointer.position.y, this.hoveredImg.position.y + this.hoveredImg.geometry.parameters.height/2 + this.breathing + 0.2, 0.1)
-        }
+            this.pointer.position.x = lerp(this.pointer.position.x, Common.camera.position.x + 3, 0.1)
+            this.pointer.position.y = lerp(this.pointer.position.y, Common.camera.position.y, 0.1)
+        }   
     }
 }

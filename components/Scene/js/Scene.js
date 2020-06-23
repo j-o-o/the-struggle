@@ -47,7 +47,7 @@ export default class Scene{
     }
 
     isScrollEnabled(e){
-        this.scrollEnabled=e;
+        this.scrollEnabled = e
     }
 
     onClickImage(e){
@@ -61,7 +61,6 @@ export default class Scene{
             Common.isInGallery = true;
             Gallery.load(e)
             
-            console.log(Common.isInGallery)
         }
 
     }

@@ -49,8 +49,8 @@ class Gallery{
             '../images/img3.jpg',
             '../images/img4.jpg',
             '../images/img5.jpg',
-            // '../images/img6.jpg',
-            // '../images/img7.jpg',
+            '../images/img6.jpg',
+            '../images/img7.jpg',
             // '../images/img8.jpg',
             // '../images/img9.jpg',
             // '../images/img10.jpg',
@@ -91,8 +91,8 @@ class Gallery{
     }
 
     loadTexture(url) {
-        let loader = new THREE.ImageBitmapLoader(this.manager)
-        loader.setOptions({ imageOrientation: 'flipY' })
+        let loader = new THREE.ImageLoader(this.manager)
+        // loader.setOptions({ imageOrientation: 'flipY' })
         return new Promise(resolve => { loader.load(url, resolve) })
     }
 

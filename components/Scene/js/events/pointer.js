@@ -23,11 +23,12 @@ class Pointer{
     }
     
     mouseMove(e){
+        if(Common.isMobile == true){
+            EventBus.$emit("MOUSEMOVE", e);
 
-        EventBus.$emit("MOUSEMOVE", e);
-
-        this.mouse.x = e.clientX
-        this.mouse.y = e.clientY
+            this.mouse.x = e.clientX
+            this.mouse.y = e.clientY
+        }
 
     }
     panMove(e){

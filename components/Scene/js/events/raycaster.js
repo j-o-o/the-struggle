@@ -23,43 +23,45 @@ export default class RayCast{
 
     mouseMove(e){
         
-        this.mouse.x = ( e.x / window.innerWidth ) * 2 - 1;
-        this.mouse.y = - ( e.y / window.innerHeight ) * 2 + 1;
+        if(Common.isMobile == true){
+            
+            this.mouse.x = ( e.x / window.innerWidth ) * 2 - 1;
+            this.mouse.y = - ( e.y / window.innerHeight ) * 2 + 1;
 
-        this.raycaster.setFromCamera( this.mouse, Common.camera );
+            this.raycaster.setFromCamera( this.mouse, Common.camera );
 
-        // calculate objects intersecting the picking ray
-        let wall = Common.scene.getObjectByName( "wall" );
-        this.intersect = this.raycaster.intersectObject( wall );
-        this.intersects = this.raycaster.intersectObjects( this.image.thumbs, true );
-
-
+            // calculate objects intersecting the picking ray
+            let wall = Common.scene.getObjectByName( "wall" );
+            this.intersect = this.raycaster.intersectObject( wall );
+            this.intersects = this.raycaster.intersectObjects( this.image.thumbs, true );
 
 
-        setTimeout( function() {
-            if ( this.intersect.length > 0 ) {
-                if(this.onImg == false){
-                    EventBus.$emit("RAYCASTERWALL", this.intersect[0]);
-                } else {
-                    EventBus.$emit("RAYCASTERWALL", false);
+
+
+            setTimeout( function() {
+                if ( this.intersect.length > 0 ) {
+                    if(this.onImg == false){
+                        EventBus.$emit("RAYCASTERWALL", this.intersect[0]);
+                    } else {
+                        EventBus.$emit("RAYCASTERWALL", false);
+                    }
                 }
-            }
 
-            if(Common.isInGallery == false) {
-                if ( this.intersects.length > 0 ) {
-                    this.onImg = true
-                    EventBus.$emit("RAYCASTERIMAGE", this.intersects[0]);
-                } else {
-                    this.onImg = false
-                    EventBus.$emit("RAYCASTERIMAGE", false);
+                if(Common.isInGallery == false) {
+                    if ( this.intersects.length > 0 ) {
+                        this.onImg = true
+                        EventBus.$emit("RAYCASTERIMAGE", this.intersects[0]);
+                    } else {
+                        this.onImg = false
+                        EventBus.$emit("RAYCASTERIMAGE", false);
+                    }
                 }
-            }
 
 
 
-        }.bind(this), 1000 / 10);
-
-        
+            }.bind(this), 1000 / 10);
+        }
+            
 
        
         // if ( this.intersects.length > 0 ) {

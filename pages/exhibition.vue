@@ -2,28 +2,11 @@
   <main>
 
     <Menu />
-    <logo />
-
-
-    <div id="pages">
-
-      <div id="title">
-        Teilnehmer 
-      </div>
-
-
-
-      <div class="right">
-        <NuxtChild :key="$route.params.id" />
-      </div>
-
-    </div>
-
-
+    <!-- <logo /> -->
 
     <ul class="artists">
       <li v-for="(user, index) in users" :key="user.id">
-        <NuxtLink :to="'/exhibition/'+user.id" class="artists_url" :id="index">
+        <NuxtLink :to="'/exhibition/'+user.id" class="artists_url" :id="index" >
           {{ user.name }}
         </NuxtLink>
       </li>
@@ -60,7 +43,8 @@ export default {
       hoveredImg: null,
       mouseenter: false,
       element: null,
-      childs: null
+      childs: null,
+      mobile: null
     }
   },
   mounted() {
@@ -71,6 +55,14 @@ export default {
     EventBus.$on("RAYCASTERIMAGE", this.onImgHover.bind(this));
 
 
+    var w = window.innerWidth;
+    if(w <= 710){
+      this.mobile = true
+    } else {
+      this.mobile = false
+    }
+    window.addEventListener("resize", this.resize.bind(this));
+
 
     this.urls = document.getElementsByClassName('artists_url');
 
@@ -80,14 +72,13 @@ export default {
       var item = this.urls.item(i)
       
       item.innerHTML = this.urls.item(i).textContent.replace(/\S/g, "<span class='letter'>$&</span>");
-
-      // console.log(urls.item(i).children)
       var spans = item.children
 
-      item.addEventListener('mouseenter', this.animateButton.bind(this, item, 1.2, 800, 400))
-      item.addEventListener('mouseleave', this.animateButton.bind(this, item, 1.0, 600, 300))
+      item.addEventListener('mouseenter', this.hoverArtistTitle.bind(item))
+      item.addEventListener('mouseleave', this.hoverOutArtistTitle.bind(item))
+      // this.enterButton(this.element) 
 
-
+      //add classes to each menu artist
       for (var j = 0; j < spans.length; j++) {
         if(spans.item(j).innerHTML == spans.item(j).innerHTML.toLowerCase()){
           spans.item(j).classList.add("lowercase");
@@ -95,15 +86,33 @@ export default {
         if(spans.item(j).innerHTML == spans.item(j).innerHTML.toUpperCase()){
           spans.item(j).classList.add("uppercase");
         }
-
       }
+
     }
+
+
+    
   },
 
 
 
 
   methods: {
+
+    hoverArtistTitle(e){
+      this.element = e.target
+      this.childs_lower = this.element.querySelectorAll('.lowercase')
+      this.childs_upper = this.element.querySelectorAll('.uppercase')
+      this.enterButton(this.element)
+    },
+    hoverOutArtistTitle(e){
+      this.element = e.target
+      this.childs_lower = this.element.querySelectorAll('.lowercase')
+      this.childs_upper = this.element.querySelectorAll('.uppercase')
+      this.leaveButton(this.element)
+    },
+
+
 
 
     getID(e){
@@ -120,79 +129,98 @@ export default {
 
 
 
-    isInGallery(e){
-      this.isInGallery = e
-      this.getID()
-    },
-
-
     onImgHover(e){
       if( e != false){
-
         if(!this.mouseenter) {
           this.hoveredImg = e.object.uuid
           this.element = document.getElementById(this.hoveredImg);
-          this.animateButton(this.element, 1.2, 800, 400)
-
           this.childs_lower = this.element.querySelectorAll('.lowercase')
           this.childs_upper = this.element.querySelectorAll('.uppercase')
-          for (var i = 0; i < this.childs_lower.length; i++) {
-              this.childs_lower[i].style.display = 'block'
-          }
-          for (var i = 0; i < this.childs_upper.length; i++) {
-              this.childs_upper[i].style.marginLeft = '6px'
-          }
+          this.enterButton(this.element)
 
           this.mouseenter = true
         }
-
       } 
+
+
+
+
       else if( e == false){
 
         if(this.mouseenter) {
 
           for (var i = 0; i < this.urls.length; i++) {
-            this.animateButton(this.element, 1, 800, 400)
+            this.animateButton(this.element, 1, 0, 800, 400)
             for (var j = 0; j < this.childs_lower.length; j++) {
-                this.childs_lower[j].style.display = 'none'
+              this.childs_lower[j].classList.remove('visible')
             }
             for (var g = 0; g < this.childs_upper.length; g++) {
-                this.childs_upper[g].style.marginLeft = '0px'
+              this.childs_upper[g].classList.remove('margin6')
             }
           }
 
           this.mouseenter = false
 
         }
-      //   // if(this.mouseenter) {
-      //     if(!this.mouseenter) {
-      //       console.log('out')
-      //       this.animateButton(element, 1, 800, 400)
-      //       this.mouseenter = true
-      //     }
-      //     // this.mouseenter = true
-      //   // }
       }
     },
 
 
     enterButton(el) {
-      this.animateButton.bind(el, 1.2, 800, 400)
+      this.animateButton( el, 1.2, 12, 800, 400)
+      
+      for (var i = 0; i < this.childs_lower.length; i++) {
+          this.childs_lower[i].classList.add('visible')
+      }
+      for (var i = 0; i < this.childs_upper.length; i++) {
+          this.childs_upper[i].classList.add('margin6')
+      }
     },
     leaveButton(el) {
-      this.animateButton.bind(el, 1.0, 600, 300)
-    } ,
+      this.animateButton( el, 1, 0, 800, 400)
+      // el.classList.remove('highlight')
+      for (var i = 0; i < this.childs_lower.length; i++) {
+          this.childs_lower[i].classList.remove('visible')
+      }
+      for (var i = 0; i < this.childs_upper.length; i++) {
+          this.childs_upper[i].classList.remove('margin6')
+      }
+    },
 
-    animateButton(el, scale, duration, elasticity) {
+    animateButton(el, scale, margin, duration, elasticity) {
       this.mouseenter = false
       anime.remove(el);
       anime({
         targets: el,
         scale: scale,
+        marginLeft: margin,
+        marginRight: margin,
         duration: duration,
         elasticity: elasticity
       });
     },
+
+
+    isInGallery(e){
+      this.isInGallery = e
+      this.getID()
+    },
+
+
+
+resize(e){
+    var w = window.innerWidth;
+    if(w <= 710){
+      this.mobile = true
+      console.log('mobile')
+    } else {
+      this.mobile = false
+      console.log('desktop')
+    }
+}
+
+
+
   }
 }
 </script>
@@ -206,14 +234,14 @@ ul.artists{
   position: fixed;
   bottom: 0;
   left: 0;
-  width: 100%;
-  height: 24px;
+  width: calc(100% - 24px);
   display: flex;
   justify-content: space-between;
 
   list-style: none;
   padding: 0;
   text-align: center;
+  margin: 12px;
 }
 ul.artists li{
   margin: 0 14px;
@@ -225,16 +253,46 @@ ul.artists li .artist_url{
   color: #585858;
   text-decoration: none;
   display: flex;
+  transform-origin: bottom;
 }
 
 .lowercase{
   display: none;
 }
-.artists_url:hover .lowercase, .block{
+/* .artists_url:hover .lowercase, .block{
+  display: block
+} */
+/* .artists_url:hover .uppercase{
+  margin-left: 6px;
+} */
+
+.visible{
   display: block
 }
-.artists_url:hover .uppercase{
+.margin6{
   margin-left: 6px;
+}
+.white_name{
+  display: none;
+}
+
+
+@media screen and (max-width: 710px){
+
+  ul.artists{
+    
+    position: absolute;
+    top: 50%;
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+    display: inherit;
+    left: 0;
+    width: inherit;
+    justify-content: space-between;
+    list-style: none;
+    padding: 0;
+    margin: 12px;
+  }
 }
 
 
