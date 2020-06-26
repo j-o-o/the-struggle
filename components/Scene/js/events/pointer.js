@@ -10,7 +10,7 @@ class Pointer{
 
     constructor(){
         this.mouse = new THREE.Vector2( 0, 0 );
-        this.throttle = false
+        this.throttle = false;
     }
 
     init(){
@@ -26,8 +26,8 @@ class Pointer{
         if(Common.isMobile == true){
             EventBus.$emit("MOUSEMOVE", e);
 
-            this.mouse.x = e.clientX
-            this.mouse.y = e.clientY
+            this.mouse.x = e.clientX;
+            this.mouse.y = e.clientY;
         }
 
     }

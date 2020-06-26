@@ -9,7 +9,6 @@
 import Scene from "./js/Scene";
 import EventBus from "~/utils/event-bus";
 
-
 export default {
   name: 'scene',
   data () {
@@ -21,11 +20,7 @@ export default {
     if(!this.scene) this.scene = new Scene({
       $canvas: this.$refs.canvas,
     });
-    // this.importAll(require.context('../../assets/images/', true, /\.jpg$/));
-    // console.log(this.images)
-    
     EventBus.$emit("TRANSITION", this.$route);
-
   },
 
   methods: {

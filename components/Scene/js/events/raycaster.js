@@ -16,9 +16,13 @@ export default class RayCast{
         // this.camera = Common.camera;
         this.image = new Image();
 
-
         window.addEventListener("click", this.onClick.bind(this));
+        EventBus.$on("SCROLLENABLED", this.isIndex.bind(this));
 
+    }
+
+    isIndex(e){
+        this.isIndex = e
     }
 
     mouseMove(e){
@@ -35,51 +39,41 @@ export default class RayCast{
             this.intersect = this.raycaster.intersectObject( wall );
             this.intersects = this.raycaster.intersectObjects( this.image.thumbs, true );
 
-
-
-
-            setTimeout( function() {
-                if ( this.intersect.length > 0 ) {
-                    if(this.onImg == false){
-                        EventBus.$emit("RAYCASTERWALL", this.intersect[0]);
-                    } else {
-                        EventBus.$emit("RAYCASTERWALL", false);
-                    }
+            if ( this.intersect.length > 0 ) {
+                if(this.onImg == false){
+                    EventBus.$emit("RAYCASTERWALL", this.intersect[0]);
+                } else {
+                    EventBus.$emit("RAYCASTERWALL", false);
                 }
+            }
 
+            if(this.isIndex == true ){
                 if(Common.isInGallery == false) {
                     if ( this.intersects.length > 0 ) {
-                        this.onImg = true
+                        this.onImg = true;
                         EventBus.$emit("RAYCASTERIMAGE", this.intersects[0]);
                     } else {
-                        this.onImg = false
+                        this.onImg = false;
                         EventBus.$emit("RAYCASTERIMAGE", false);
                     }
+                } else {
+                    if ( this.intersect.length > 0 ) {
+                        EventBus.$emit("RAYCASTERWALL", this.intersect[0]);
+                    }
                 }
-
-
-
-            }.bind(this), 1000 / 10);
+            }
         }
-            
-
-       
-        // if ( this.intersects.length > 0 ) {
-        // } else {
-        // }   
-
-
-
-
     }
 
-    onClick(e){
+    onClick(){
         this.intersects = this.raycaster.intersectObjects( this.image.thumbs );
-        if ( this.intersects.length > 0 ) {
-            // console.log(this.intersects[0])
-            EventBus.$emit("RAYCASTERIMAGECLICK", this.intersects[0]);
-        } else {
-            // EventBus.$emit("RAYCASTERIMAGECLICK", false);
-        }   
+        if(this.isIndex == true ){
+            if ( this.intersects.length > 0 ) {
+                // console.log(this.intersects[0])
+                EventBus.$emit("RAYCASTERIMAGECLICK", this.intersects[0]);
+            } else {
+                // EventBus.$emit("RAYCASTERIMAGECLICK", false);
+            }   
+        }
     }
 }

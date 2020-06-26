@@ -9,26 +9,28 @@
 <script>
 
 import Scene from "~/components/Scene";
+// import Common from "~/components/Common";
 import Loading from "~/components/loading";
 import EventBus from "~/utils/event-bus";
 export default {
 
+  Data (){
+    return{
+      isInGallery: null,
+      isScroll: null
+    }
+  },
   mounted(){
     EventBus.$on("RAYCASTERIMAGE", this.onImg);
-    EventBus.$on("SCROLLENABLED", this.isScroll);
+
   },
   methods: {
     onImg(e){
-      if(this.isScroll == true){
-        if(e != false){
-          document.getElementsByTagName("body")[0].style.cursor = "pointer";
-        } else {
-          document.getElementsByTagName("body")[0].style.cursor = "inherit";
-        }
+      if(e != false){
+        document.getElementsByTagName("body")[0].style.cursor = "pointer";
+      } else {
+        document.getElementsByTagName("body")[0].style.cursor = "inherit";
       }
-    },
-    isScroll(e){
-      this.isScroll = e
     }
   },
   components: {

@@ -36,9 +36,7 @@
       
     </div>
 
-<hr>
-
-
+    <hr>
 
     <div id="intro-text-grid">
       <div class="left">
@@ -111,10 +109,8 @@ export default {
     return new Promise((resolve) => {
       setTimeout(function () {
         resolve({})
-      }, 1000)
+      }, 100)
     })
-  },
-  components: {
   },
   data () {
     return {
@@ -124,6 +120,10 @@ export default {
     }
   },
   methods: {
+    isTouch(e){
+      this.isItTouch = e
+      console.log(e)
+    },
     mouseMove(e){
       if(this.isItTouch == false){
         this.mouse.x = lerp(this.mouse.x, ( e.x / window.innerWidth ) * 2 - 1, 0.1);
@@ -139,17 +139,11 @@ export default {
       }
     },
     handleOrientation(e){
-      console.log(e)
       let scale_1 = (e.beta - 10)/16
       this.t_1.style.transform = "translate(" + e.gamma + 'px, ' + ( - e.beta - 20 ) + 'px) scaleY(' + scale_1 + ')'
       this.t_2.style.transform = "translate(" + e.gamma + 'px, ' + ( - e.beta - 20 ) + 'px) scaleY(' + scale_1 + ')' 
-    },
-    isTouch(e){
-      this.isItTouch = e
     }
   },
-
-
   beforeLeave: function(el) {
   },
 
@@ -159,7 +153,7 @@ export default {
 
     EventBus.$emit("SCROLLENABLED", false);
     EventBus.$on("MOUSEMOVELOOP", this.mouseMove);
-    EventBus.$on("ISTOUCH", this.isTouch);
+    EventBus.$on("ISTOUCH", this.isTouch.bind(this));
     window.addEventListener("deviceorientation", this.handleOrientation, true);
 
     this.intro = document.querySelector('.intro-container')

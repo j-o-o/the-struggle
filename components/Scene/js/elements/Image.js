@@ -10,13 +10,10 @@ import Gallery from "./Gallery_1"
 export default class Image{
     constructor(){
 
-        this.sectionWidth = 0
-        this.positionY = 0
+        this.sectionWidth = 0;
+        this.positionY = 0;
         
         this.init();
-
-
-
     }
 
     init(){
@@ -25,19 +22,10 @@ export default class Image{
         this.addInstancedMesh();
         this.startAnimating(10);
 
-
-
-
-        // this.camera = new Camera();
-        // this.gallery = new Gallery();
-
-        // used for the raycast
         this.thumbs = [];
     }
 
     addInstancedMesh() {
-
-
 
         let images = [
             '../images/img1.jpg',
@@ -55,15 +43,14 @@ export default class Image{
         
         // used for the each loop
         this.mesh_ = [];
-
+        // remove loading after all images are loaded
         this.manager = new THREE.LoadingManager( () => {
             this.loadingScreen = document.getElementById( 'loading-screen' );
             this.loadingScreen.addEventListener( 'transitionend', loaded() );
-            function loaded(){
-            EventBus.$emit("IMAGESLOADED", true)    }
+            function loaded(){EventBus.$emit("IMAGESLOADED", true)};
         });
 
-        // display all thumbnails
+        // display all thumbnails an ddisplace them
         for (let i = 0; i < images.length; i++) {
             this.sectionWidth += 10;
 
@@ -73,9 +60,9 @@ export default class Image{
                 Ctexture.minFilter = THREE.LinearFilter;
                 var material = new THREE.MeshBasicMaterial( { map: Ctexture } );
 
-                let width = Ctexture.image.width
-                let height = Ctexture.image.height
-                let aspect = width/height
+                let width = Ctexture.image.width;
+                let height = Ctexture.image.height;
+                let aspect = width/height;
 
                 if(aspect >= 1){
                     this.mesh_[i] = new THREE.Mesh(new THREE.PlaneBufferGeometry(aspect*5,5), material);
@@ -99,9 +86,9 @@ export default class Image{
     }
 
     loadTexture(url) {
-        var loader = new THREE.ImageLoader(this.manager)
+        var loader = new THREE.ImageLoader(this.manager);
         // loader.setOptions({ imageOrientation: 'flipY' })
-        return new Promise(resolve => { loader.load(url, resolve) })
+        return new Promise(resolve => { loader.load(url, resolve) });
     }
 
     // positioning the boxes
@@ -117,7 +104,7 @@ export default class Image{
         this.bgMesh.instanceMatrix.needsUpdate = true;
     }
 
-    
+    // throttle the animation
     startAnimating(fps) {
         this.fpsInterval = 1000 / fps;
         this.then = Date.now();
@@ -140,47 +127,35 @@ export default class Image{
                 let x = this.sectionWidth * distance_;
                 item.position.set((i * 10) + x, this.positionY, 0);
 
-            }, this)
+            }, this);
 
             // set the boxes X
-            var bgDistance = Math.round(Common.camera.position.x / 10)
+            var bgDistance = Math.round(Common.camera.position.x / 10);
             if (bgDistance !== this.loopSectionPosition) {
-                this.loopSectionPosition = bgDistance
-                this.setInstancedMeshPositions(this.bgMesh, this.loopSectionPosition)
+                this.loopSectionPosition = bgDistance;
+                this.setInstancedMeshPositions(this.bgMesh, this.loopSectionPosition);
             }
             // set the boxes Y
-            var bgDistanceY = Math.round(Common.camera.position.y / 10)
+            var bgDistanceY = Math.round(Common.camera.position.y / 10);
             if (bgDistanceY !== this.loopSectionPosition) {
-                this.loopSectionPosition = bgDistance
-                this.setInstancedMeshPositions(this.bgMesh, this.loopSectionPosition)
+                this.loopSectionPosition = bgDistance;
+                this.setInstancedMeshPositions(this.bgMesh, this.loopSectionPosition);
             }
 
         }
 
-
-
-
-
-
-
-        // are the thumbs top or bottom?
+        // are the thumbs top or bottom? (looking for 1/2 scroll-position in gallery)
         if(Common.isInGallery == true){
-
-            // console.log('\x1b[35m%s\x1b[0m', 'global height ', - Gallery.globalHeight)
-            // console.log('\x1b[31m%s\x1b[0m', 'section height ', - Gallery.sectionHeight)
-            // console.log('\x1b[32m%s\x1b[0m', 'cam pos ', Camera.camPos.y);
-
             if (Camera.camPos.y >= - Gallery.globalHeight + Gallery.sectionHeight/2 - Gallery.clicks) {
                 // top
-                Gallery.shouldBeTop = true
+                Gallery.shouldBeTop = true;
                 this.positionY = - Gallery.globalHeight + Gallery.sectionHeight - Gallery.imageClicks;
 
             } else if(Camera.camPos.y <= - Gallery.globalHeight + Gallery.sectionHeight/2 - Gallery.clicks){
                 // bottom
-                Gallery.shouldBeTop = false
-                this.positionY = - Gallery.globalHeight - Gallery.clicks
+                Gallery.shouldBeTop = false;
+                this.positionY = - Gallery.globalHeight - Gallery.clicks;
             }
-            // console.log('\x1b[36m%s\x1b[0m', 'tumbs pos ', this.positionY)
         }
 
 

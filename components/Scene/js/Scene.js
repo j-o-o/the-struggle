@@ -33,9 +33,9 @@ export default class Scene{
 
         window.addEventListener("resize", this.resize.bind(this));
 
-        this.stats = new Stats();
-        let element = document.getElementById('stats')
-        element.appendChild( this.stats.dom )
+        // this.stats = new Stats();
+        // let element = document.getElementById('stats')
+        // element.appendChild( this.stats.dom )
 
         this.wall = new Wall();
         
@@ -52,14 +52,14 @@ export default class Scene{
 
     onClickImage(e){
         // console.log('scene js')
-        console.log(Common.isInGallery)
         if (this.scrollEnabled == true && Common.isInGallery == false){
 
             EventBus.$emit("ISINGALLERY", true);
-            EventBus.$emit("CLICKEDID", e.object.uuid)
+            EventBus.$emit("CLICKEDID", e.object.uuid);
+            EventBus.$emit("RAYCASTERIMAGE", false);
 
             Common.isInGallery = true;
-            Gallery.load(e)
+            Gallery.load(e);
             
         }
 
@@ -73,9 +73,9 @@ export default class Scene{
             for( var i = Common.scene.children.length - 1; i >= 0; i--) { 
                 var obj = Common.scene.children[i];
                 if (obj.name == "gallery") {
-                    obj.geometry.dispose()
-                    obj.material.dispose()
-                    Common.scene.remove(obj)
+                    obj.geometry.dispose();
+                    obj.material.dispose();
+                    Common.scene.remove(obj);
                 }
             }
         }
@@ -88,7 +88,7 @@ export default class Scene{
 
     loop(){
 
-        this.stats.begin();
+        // this.stats.begin();
     
         this.render();
 
@@ -96,7 +96,7 @@ export default class Scene{
         Pointer.loop();
         Camera.loop();
 
-	    this.stats.end();
+	    // this.stats.end();
         requestAnimationFrame(this.loop.bind(this));
 
     }

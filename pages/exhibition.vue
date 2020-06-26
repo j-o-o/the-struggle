@@ -2,8 +2,6 @@
   <main>
 
     <Menu />
-    <!-- <logo /> -->
-
     <ul class="artists">
       <li v-for="(user, index) in users" :key="user.id">
         <NuxtLink :to="'/exhibition/'+user.id" class="artists_url" :id="index" >
@@ -22,15 +20,13 @@
 <script>
 
 import Menu from "~/components/Menu"
-import Logo from '~/components/Logo.vue'
 import EventBus from "~/utils/event-bus"
 import anime from 'animejs/lib/anime.es.js';
 
 export default {
   transition: 'fade',
   components: {
-    Menu,
-    Logo
+    Menu
   },  
   name: 'deprecated',
   asyncData ({ env }) {
@@ -74,6 +70,7 @@ export default {
       item.innerHTML = this.urls.item(i).textContent.replace(/\S/g, "<span class='letter'>$&</span>");
       var spans = item.children
 
+
       item.addEventListener('mouseenter', this.hoverArtistTitle.bind(item))
       item.addEventListener('mouseleave', this.hoverOutArtistTitle.bind(item))
       // this.enterButton(this.element) 
@@ -87,11 +84,7 @@ export default {
           spans.item(j).classList.add("uppercase");
         }
       }
-
     }
-
-
-    
   },
 
 
@@ -101,12 +94,14 @@ export default {
 
     hoverArtistTitle(e){
       this.element = e.target
+      // this.element.classList.add('active');
       this.childs_lower = this.element.querySelectorAll('.lowercase')
       this.childs_upper = this.element.querySelectorAll('.uppercase')
       this.enterButton(this.element)
     },
     hoverOutArtistTitle(e){
       this.element = e.target
+      this.element.classList.remove('active');
       this.childs_lower = this.element.querySelectorAll('.lowercase')
       this.childs_upper = this.element.querySelectorAll('.uppercase')
       this.leaveButton(this.element)
@@ -150,6 +145,7 @@ export default {
         if(this.mouseenter) {
 
           for (var i = 0; i < this.urls.length; i++) {
+            this.element.classList.remove('active');
             this.animateButton(this.element, 1, 0, 800, 400)
             for (var j = 0; j < this.childs_lower.length; j++) {
               this.childs_lower[j].classList.remove('visible')
@@ -168,6 +164,8 @@ export default {
 
     enterButton(el) {
       this.animateButton( el, 1.2, 12, 800, 400)
+
+      el.classList.add('active');
       
       for (var i = 0; i < this.childs_lower.length; i++) {
           this.childs_lower[i].classList.add('visible')
@@ -178,6 +176,9 @@ export default {
     },
     leaveButton(el) {
       this.animateButton( el, 1, 0, 800, 400)
+
+      el.classList.remove('active');
+
       // el.classList.remove('highlight')
       for (var i = 0; i < this.childs_lower.length; i++) {
           this.childs_lower[i].classList.remove('visible')
@@ -274,6 +275,22 @@ ul.artists li .artist_url{
 }
 .white_name{
   display: none;
+}
+
+.active:after{
+  content: '';
+  position: absolute;
+
+  top: -2px;
+  left: 50%;
+  margin-right: -50%;
+  transform: translate(-50%, -50%) ;
+  width: 6px;
+  height: 6px;
+  opacity: .6;
+  background: red;
+  border-radius: 3px;
+
 }
 
 

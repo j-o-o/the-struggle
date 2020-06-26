@@ -3,9 +3,6 @@
         <section class="nav">
             <nuxt-link to="/" id="home"></nuxt-link>
         </section>
-        <section class="artist">
-            {{ artist }}
-        </section>
         
 
     </div>
@@ -28,7 +25,7 @@ export default {
     },
 
 
-    mounted () {            
+    mounted () {
         EventBus.$on("RAYCASTERIMAGE", this.onImgHover);
         EventBus.$on("CLICKEDID", this.getID.bind(this))
         EventBus.$on("ISINGALLERY", this.isItInGallery.bind(this))

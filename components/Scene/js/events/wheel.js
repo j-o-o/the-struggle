@@ -33,10 +33,10 @@ class Wheel{
     onWheel(e){
 
         // this.wheeled += e.deltaY
-        this.wheelSpeed = e.deltaY
+        this.wheelSpeed = e.deltaY;
 
         if(this.stopWheelTimer!==undefined){
-            clearTimeout(this.stopWheelTimer)
+            clearTimeout(this.stopWheelTimer);
         };
         
         this.stopWheelTimer = setTimeout(() => this.onStopWheel(), 200);
@@ -46,10 +46,8 @@ class Wheel{
 
     panMove(e){
         
-        this.panned = - e.velocityX - e.velocityY
-        console.log(this.panned)
-    
-        EventBus.$emit("PANNED", this.panned)
+        this.panned = - e.velocityX - e.velocityY;
+        EventBus.$emit("PANNED", this.panned);
 
     }
 }

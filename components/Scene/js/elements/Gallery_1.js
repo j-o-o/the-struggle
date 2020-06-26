@@ -22,7 +22,7 @@ class Gallery{
 
     load(e){
 
-
+        console.log(e)
         if(this.imageClicks >= 10){
             this.imageClicks += 10
         }

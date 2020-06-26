@@ -17,10 +17,10 @@ class Camera {
         this.camPos = new THREE.Vector3(0, 0, 0);
         this.camLookAt = new THREE.Vector3();
         this.mouse = new THREE.Vector2();
-        this.transition = false
-        this.direction = 'top'
-        this.autoScroll = 0.02
-        this.autoScrollEnabled = null
+        this.transition = false;
+        this.direction = 'top';
+        this.autoScroll = 0.02;
+        this.autoScrollEnabled = null;
 
         this.init();
 
@@ -36,9 +36,9 @@ class Camera {
         EventBus.$on("RAYCASTERIMAGECLICK", this.onClickImage.bind(this));
 
         if (Common.isTouch == true) {
-            this.autoScrollEnabled = false
+            this.autoScrollEnabled = false;
         } else {
-            this.autoScrollEnabled = true
+            this.autoScrollEnabled = true;
         }
 
 
@@ -46,17 +46,19 @@ class Camera {
 
     isOnImg(e) {
 
+
+        // pan camera if thumb hover
         if (Common.isInGallery == false) {
             if (e == false) {
                 this.slant = -3;
                 if (this.autoScrollEnabled) {
-                    this.autoScroll = 0.02
+                    this.autoScroll = 0.02;
                 }
             } else {
                 if (this.camPos.x >= e.object.position.x - 3) {
                     this.slant = -1;
                     if (this.autoScrollEnabled) {
-                        this.autoScroll = 0.005
+                        this.autoScroll = 0.005;
                     }
                 }
             }
@@ -65,17 +67,19 @@ class Camera {
     }
 
     isScrollEnabled(e) {
-        this.scrollEnabled = e
+        this.scrollEnabled = e;
     }
 
 
     onClickImage(e) {
-        if (Common.isInGallery == false) {
-            this.autoScrollEnabled = false
 
-            this.transition = true
-            this.camPos.x = e.object.position.x
-            this.slant = 0
+        if (Common.isInGallery == false) {
+
+            this.autoScrollEnabled = false;
+
+            this.transition = true;
+            this.camPos.x = e.object.position.x;
+            this.slant = 0;
 
         }
     }
@@ -98,13 +102,13 @@ class Camera {
 
         if (Common.isInGallery == true) {
             if (this.camPos.y >= -Gallery.globalHeight + Gallery.sectionHeight - Gallery.imageClicks) {
-                EventBus.$emit("ISINGALLERY", false)
-                Gallery.clicks = Gallery.clicks - 10
-                Gallery.imageClicks = Gallery.imageClicks - 10
+                EventBus.$emit("ISINGALLERY", false);
+                Gallery.clicks = Gallery.clicks - 10;
+                Gallery.imageClicks = Gallery.imageClicks - 10;
 
-                Gallery.globalHeight = Gallery.globalHeight - Gallery.sectionHeight
+                Gallery.globalHeight = Gallery.globalHeight - Gallery.sectionHeight;
             } else if (this.camPos.y <= -Gallery.globalHeight - Gallery.clicks) {
-                EventBus.$emit("ISINGALLERY", false)
+                EventBus.$emit("ISINGALLERY", false);
             }
         }
 
@@ -138,10 +142,10 @@ class Camera {
             if (this.camPos.y >= -Gallery.globalHeight + Gallery.sectionHeight - Gallery.imageClicks) {
                 // console.log('top switch')
                 EventBus.$emit("ISINGALLERY", false);
-                Gallery.clicks = Gallery.clicks - 10
-                Gallery.imageClicks = Gallery.imageClicks - 10
+                Gallery.clicks = Gallery.clicks - 10;
+                Gallery.imageClicks = Gallery.imageClicks - 10;
 
-                Gallery.globalHeight = Gallery.globalHeight - Gallery.sectionHeight
+                Gallery.globalHeight = Gallery.globalHeight - Gallery.sectionHeight;
                 // console.log(Gallery.globalHeight, Gallery.sectionHeight, Gallery.imageClicks)
             } else if (this.camPos.y <= -Gallery.globalHeight - Gallery.clicks) {
                 // console.log('bottom switch')
@@ -172,7 +176,7 @@ class Camera {
         }
 
         if (this.scrollEnabled == true) {
-            this.camPos.z = 15
+            this.camPos.z = 15;
             if (Common.isInGallery == false) {
                 if (this.transition == false) {
                     Common.camera.position.x = lerp(Common.camera.position.x, this.camPos.x + this.mouse.x / 2 + this.slant, 0.08);
@@ -189,7 +193,7 @@ class Camera {
         }
         // this is for the intro page
         else {
-            this.camPos.z = 30
+            this.camPos.z = 30;
             Common.camera.position.x = lerp(Common.camera.position.x, this.camPos.x + this.mouse.x / 2, 0.08);
             if (Common.isInGallery == false) {
                 this.camLookAt.x = lerp(this.camLookAt.x, this.camPos.x + this.mouse.x * 1.8, 0.3);
@@ -202,14 +206,14 @@ class Camera {
         // slow the transition between thumbnails and gallery
         // position the camera on thumb click
         if (this.transition == true) {
-            this.camPos.y = -Gallery.globalHeight + Gallery.sectionHeight - Gallery.clicks
+            this.camPos.y = -Gallery.globalHeight + Gallery.sectionHeight - Gallery.clicks;
             Common.camera.position.y = lerp(Common.camera.position.y, this.camPos.y, 0.07);
 
             this.camLookAt.y = lerp(this.camLookAt.y, this.camPos.y, 0.1);
             this.camLookAt.x = lerp(this.camLookAt.x, this.camPos.x, 0.1);
             if (this.transition) {
                 setTimeout(() => {
-                    this.transition = false
+                    this.transition = false;
                 }, 1000);
             }
         }
@@ -229,7 +233,7 @@ class Camera {
             }
         }
 
-        Common.camera.lookAt(this.camLookAt.x, this.camLookAt.y, 0)
+        Common.camera.lookAt(this.camLookAt.x, this.camLookAt.y, 0);
 
     }
 }
