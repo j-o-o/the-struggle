@@ -1,11 +1,6 @@
 import * as THREE from "three";
 import Common from "../Common";
-import Camera from "../Camera";
-import Image from "./Image";
 import EventBus from "~/utils/event-bus"
-import loadImage from 'image-promise';
-import { Int8Attribute } from "three";
-
 
 class Gallery{
     constructor(){
@@ -201,7 +196,7 @@ class Gallery{
         this.mesh_ = [];
 
         for (let i = 0; i < images.length; i++) {
-            this.sectionHeight = images.length * 10;
+            this.sectionHeight = images.length * 6 + 4;
             this.loadTexture(images[i]).then(texture => {
                 
                 var Ctexture = new THREE.CanvasTexture( texture );
@@ -214,7 +209,7 @@ class Gallery{
 
                 this.mesh_[i] = new THREE.Mesh(new THREE.PlaneBufferGeometry( aspect * 5, 5), material);
                 this.mesh_[i].name = 'gallery';
-                this.mesh_[i].position.y =-i * 10 - this.globalHeight + this.sectionHeight - this.clicks;
+                this.mesh_[i].position.y =-i * 6 - this.globalHeight + this.sectionHeight - this.clicks;
                 this.mesh_[i].position.x = e.object.position.x;
                 Common.scene.add(this.mesh_[i]);
                 this.gallery.push(this.mesh_[i])

@@ -66,7 +66,7 @@ export default {
     this.textContainer = document.getElementById('textcontent')
     this.artists = document.getElementById('artists')
 
-    var w = window.innerWidth;
+    let w = window.innerWidth;
     if(w <= 710){
       this.mobile = true
     } else {
@@ -76,20 +76,19 @@ export default {
 
     this.urls = document.getElementsByClassName('artists_url');
 
-    for (var i = 0; i < this.urls.length; i++) {
+    for (let i = 0; i < this.urls.length; i++) {
 
-      var item = this.urls.item(i)
+      let item = this.urls.item(i)
       
       item.innerHTML = this.urls.item(i).textContent.replace(/\S/g, "<span class='letter'>$&</span>");
-      var spans = item.children
+      let spans = item.children
 
 
       item.addEventListener('mouseenter', this.hoverArtistTitle.bind(item))
       item.addEventListener('mouseleave', this.hoverOutArtistTitle.bind(item))
-      // this.enterButton(this.element) 
 
       //add classes to each menu artist
-      for (var j = 0; j < spans.length; j++) {
+      for (let j = 0; j < spans.length; j++) {
         if(spans.item(j).innerHTML == spans.item(j).innerHTML.toLowerCase()){
           spans.item(j).classList.add("lowercase");
         }
@@ -107,6 +106,21 @@ export default {
 
     textContent(e){
       this.textContainer.innerHTML = e
+
+
+      this.textContainer.innerHTML = this.textContainer.innerHTML.replace(/\S/g, "<span class='lol'>$&</span>");
+
+
+      anime.timeline({loop: false})
+        .add({
+          targets: '.lol',
+          translateY: [-100,0],
+          easing: "easeOutExpo",
+          duration: 1400,
+          delay: (el, i) => 30 * i
+        })
+
+
     },
 
     hoverArtistTitle(e){
@@ -160,13 +174,13 @@ export default {
 
         if(this.mouseenter) {
 
-          for (var i = 0; i < this.urls.length; i++) {
+          for (let i = 0; i < this.urls.length; i++) {
             // this.element.classList.remove('active');
             this.animateButton(this.element, 1, 0, 800, 400)
-            for (var j = 0; j < this.childs_lower.length; j++) {
+            for (let j = 0; j < this.childs_lower.length; j++) {
               this.childs_lower[j].classList.remove('visible')
             }
-            for (var g = 0; g < this.childs_upper.length; g++) {
+            for (let g = 0; g < this.childs_upper.length; g++) {
               this.childs_upper[g].classList.remove('margin6')
             }
           }
@@ -183,10 +197,10 @@ export default {
 
       // el.classList.add('active');
       
-      for (var i = 0; i < this.childs_lower.length; i++) {
+      for (let i = 0; i < this.childs_lower.length; i++) {
           this.childs_lower[i].classList.add('visible')
       }
-      for (var i = 0; i < this.childs_upper.length; i++) {
+      for (let i = 0; i < this.childs_upper.length; i++) {
           this.childs_upper[i].classList.add('margin6')
       }
     },
@@ -196,10 +210,10 @@ export default {
       // el.classList.remove('active');
 
       // el.classList.remove('highlight')
-      for (var i = 0; i < this.childs_lower.length; i++) {
+      for (let i = 0; i < this.childs_lower.length; i++) {
           this.childs_lower[i].classList.remove('visible')
       }
-      for (var i = 0; i < this.childs_upper.length; i++) {
+      for (let i = 0; i < this.childs_upper.length; i++) {
           this.childs_upper[i].classList.remove('margin6')
       }
     },
@@ -225,8 +239,19 @@ export default {
       if(this.isInGallery == false){
 
         //delete text description if scrolled out of gallery
-        this.textContainer.innerHTML = ''
         
+        anime.timeline({loop: false})
+        .add({
+          targets: '.lol',
+          translateY: [0, -100],
+          easing: "easeInExpo",
+          duration: 800,
+          delay: (el, i) => 30 * i
+        })
+        setTimeout(() => {
+          this.textContainer.innerHTML = ''
+        }, 1400);
+
         //hide artists bar
         this.artists.style.display = 'flex'
       } else if(this.isInGallery == true){
@@ -237,7 +262,7 @@ export default {
 
 
 resize(e){
-    var w = window.innerWidth;
+    let w = window.innerWidth;
     if(w <= 710){
       this.mobile = true
       console.log('mobile')
@@ -329,6 +354,11 @@ ul#artists li .artist_url{
 /* .active{
   border-bottom: 1px solid red;
 } */
+
+.lol{
+  display: inline-block;
+}
+
 
 @keyframes blink{
   0%{ opacity: .1 }

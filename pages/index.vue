@@ -1,8 +1,6 @@
 <template>
   <main>
 
-    <!-- <logo /> -->
-
     <div id="intro">
 
     <div class="intro-container">
@@ -17,13 +15,13 @@
       <div id="info">
         <ul>
           <li>
-            Digitale Ausstellung
+            Digital Exhibition
           </li>
           <li>
             Klasse Julia Albrecht
           </li>
           <li>
-            Fotografisches Storytelling
+            Photographic storytelling
           </li>
           <li>
             Bauhaus-University Weimar
@@ -62,8 +60,9 @@
       Man muss lernen, die Geschichte im Alltag zu erkennen, oder man plant diese 
       und setzt Sie im entsprechendem Setting&nbsp;in&nbsp;Szene.</p>
       </div>
-      </div>
-      <hr>
+    </div>
+    <hr>
+
 
       <div class="intro-container">
   
@@ -91,7 +90,12 @@
             <div class="letter_2">Exhibition</div>
           </nuxt-link>
         </div>
+
       </div>
+  <hr>
+    <div id="footer">
+    Class provided by <a href="https://www.uni-weimar.de/bauhausmodule/" target="_blank">Bauhaus.Module</a> • Led by <a href="http://albrechtjulia.de/" target="_blank">Julia Albrecht</a> • Website by <a href="http://eriksachse.com/" target="_blank">Erik Sachse</a> • <nuxt-link to="privacypolicy">Privacy Policy and Imprint</nuxt-link>
+    </div>
     </div>
   </main>
 </template>
@@ -381,6 +385,15 @@ export default {
   margin: 0;
   text-indent: 48px;
   /* float: left; */
+}
+#footer{
+
+  padding: 24px;
+}
+#footer a{
+
+  color: #313131;
+  text-decoration: none;
 }
 .left{
   padding-right: 12px;
