@@ -13,8 +13,7 @@ class Gallery{
         this.sectionHeight = 0
         this.globalHeight = 0
         this.gallery = []
-        this.clicks = 0;
-        // this.imageClicks = 0
+        this.clicks = 0
         this.imageClicks = 0
         this.shouldBeTop = true
 
@@ -42,21 +41,158 @@ class Gallery{
             this.imageClicks += 10
         }
 
-    
-        let images = [
-            // '../images/img1.jpg',
-            // '../images/img2.jpg',
-            '../images/img3.jpg',
-            '../images/img4.jpg',
-            '../images/img5.jpg',
-            '../images/img6.jpg',
-            '../images/img7.jpg',
-            // '../images/img8.jpg',
-            // '../images/img9.jpg',
-            // '../images/img10.jpg',
-            // '../images/img11.jpg'
-        ];
+        let images = []
 
+        if(e.object.uuid == 0){
+    
+            images = [
+                // '../images/img1.jpg',
+                // '../images/img2.jpg',
+                '../images/img3.jpg',
+                '../images/img4.jpg',
+                '../images/img5.jpg',
+                '../images/img6.jpg',
+                '../images/img7.jpg',
+                // '../images/img8.jpg',
+                // '../images/img9.jpg',
+                // '../images/img10.jpg',
+                // '../images/img11.jpg'
+            ];
+
+        }
+        if(e.object.uuid == 1){
+    
+            images = [
+                '../images/img4.jpg',
+                '../images/img5.jpg',
+            ];
+
+        }
+
+        if(e.object.uuid == 2){
+    
+            images = [
+                '../images/img4.jpg',
+                '../images/img6.jpg',
+                '../images/img7.jpg',
+            ];
+
+        }
+
+
+
+        if(e.object.uuid == 3){
+    
+            images = [
+                '../images/img8.jpg',
+                '../images/img9.jpg',
+                '../images/img10.jpg',
+            ];
+
+        }        
+        
+        if(e.object.uuid == 4){
+    
+            images = [
+                '../images/img8.jpg',
+                '../images/img9.jpg',
+                '../images/img10.jpg',
+            ];
+
+        }
+
+        if(e.object.uuid == 5){
+    
+            images = [
+                '../images/img8.jpg',
+                '../images/img9.jpg',
+                '../images/img10.jpg',
+            ];
+
+        }
+
+        if(e.object.uuid == 6){
+    
+            images = [
+                '../images/img8.jpg',
+                '../images/img9.jpg',
+                '../images/img10.jpg',
+            ];
+
+        }
+
+        if(e.object.uuid == 7){
+    
+            images = [
+                '../images/img8.jpg',
+                '../images/img9.jpg',
+                '../images/img10.jpg',
+            ];
+
+        }
+
+        if(e.object.uuid == 8){
+    
+            images = [
+                '../images/img8.jpg',
+                '../images/img9.jpg',
+                '../images/img10.jpg',
+            ];
+
+        }
+
+        if(e.object.uuid == 9){
+    
+            images = [
+                '../images/img8.jpg',
+                '../images/img9.jpg',
+                '../images/img10.jpg',
+            ];
+
+        }
+
+        if(e.object.uuid == 10){
+    
+            images = [
+                '../images/img8.jpg',
+                '../images/img9.jpg',
+                '../images/img10.jpg',
+            ];
+
+        }
+
+        if(e.object.uuid == 11){
+    
+            images = [
+                '../images/img8.jpg',
+                '../images/img9.jpg',
+                '../images/img10.jpg',
+            ];
+
+        }
+
+
+        if(e.object.uuid == 12){
+    
+            images = [
+                '../images/img8.jpg',
+                '../images/img9.jpg',
+                '../images/img10.jpg',
+            ];
+
+        }
+
+
+
+        if(e.object.uuid == 13){
+    
+            images = [
+                '../images/img8.jpg',
+                '../images/img9.jpg',
+                '../images/img10.jpg',
+            ];
+
+        }
         EventBus.$emit("LOADINGGALLERY", false)
         this.manager = new THREE.LoadingManager( () => {
             EventBus.$emit("LOADINGGALLERY", true)
@@ -87,6 +223,11 @@ class Gallery{
         }
 
         this.globalHeight += this.sectionHeight;
+
+        // text description
+        let text = '../texts/' + e.object.uuid + '.txt'
+        console.log(text)
+        this.readTextFile(text)
         
     }
 
@@ -94,6 +235,19 @@ class Gallery{
         let loader = new THREE.ImageLoader(this.manager)
         // loader.setOptions({ imageOrientation: 'flipY' })
         return new Promise(resolve => { loader.load(url, resolve) })
+    }
+
+    readTextFile(file){
+        var rawFile = new XMLHttpRequest();
+        rawFile.open("GET", file, true);
+        rawFile.onreadystatechange = function (){
+            if(rawFile.readyState === 4){
+                if(rawFile.status === 200 || rawFile.status == 0){
+                    EventBus.$emit("TEXTCONTENT", rawFile.responseText)
+                }
+            }
+        }
+        rawFile.send(null);
     }
 
 }

@@ -285,32 +285,32 @@ export default {
 
 
       anime.timeline({loop: false})
-          .add({
-          delay: 400,
-          complete: function(anim) {
-            anime.timeline({loop: true})
-              .add({
-                delay: 400
-              })
-              .add({
-                targets: '.letter_2 .letter',
-                rotate: [-40, 40],
-                easing: "easeInOutQuad",
-                duration: 2000,
-                delay:anime.stagger(150)
-              })
-              .add({
-                delay: 400
-              })
-              .add({
-                targets: '.letter_2 .letter',
-                rotate: [40, -40],
-                easing: "easeInOutQuad",
-                duration: 2000,
-                delay: anime.stagger(150)
-              })
-          }
-        })
+        .add({
+        delay: 400,
+        complete: function(anim) {
+          anime.timeline({loop: true})
+            .add({
+              delay: 400
+            })
+            .add({
+              targets: '.letter_2 .letter',
+              rotate: [-40, 40],
+              easing: "easeInOutQuad",
+              duration: 2000,
+              delay:anime.stagger(150)
+            })
+            .add({
+              delay: 400
+            })
+            .add({
+              targets: '.letter_2 .letter',
+              rotate: [40, -40],
+              easing: "easeInOutQuad",
+              duration: 2000,
+              delay: anime.stagger(150)
+            })
+        }
+      })
   },
 }
 </script>

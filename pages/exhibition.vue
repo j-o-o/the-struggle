@@ -2,13 +2,17 @@
   <main>
 
     <Menu />
-    <ul class="artists">
+    <ul id="artists">
       <li v-for="(user, index) in users" :key="user.id">
         <NuxtLink :to="'/exhibition/'+user.id" class="artists_url" :id="index" >
           {{ user.name }}
         </NuxtLink>
       </li>
     </ul>
+
+    <div id="textcontent">
+      
+    </div>
 
 
 
@@ -30,26 +34,37 @@ export default {
   },  
   name: 'deprecated',
   asyncData ({ env }) {
-    return { users: env.users }
+    return { 
+      users: env.users 
+    }
   },
   Data (){
     return{
       isInGallery: true,
       artist: null,
+      artists: null,
       hoveredImg: null,
       mouseenter: false,
       element: null,
       childs: null,
-      mobile: null
+      mobile: null,
+      textContainer: null,
+
+
+      text: null
     }
   },
   mounted() {
 
     EventBus.$on("CLICKEDID", this.getID.bind(this))
     EventBus.$on("ISINGALLERY", this.isInGallery.bind(this))
-    EventBus.$emit("SCROLLENABLED", true);
-    EventBus.$on("RAYCASTERIMAGE", this.onImgHover.bind(this));
+    EventBus.$emit("SCROLLENABLED", true)
+    EventBus.$on("RAYCASTERIMAGE", this.onImgHover.bind(this))
 
+    EventBus.$on("TEXTCONTENT", this.textContent.bind(this))
+
+    this.textContainer = document.getElementById('textcontent')
+    this.artists = document.getElementById('artists')
 
     var w = window.innerWidth;
     if(w <= 710){
@@ -59,9 +74,7 @@ export default {
     }
     window.addEventListener("resize", this.resize.bind(this));
 
-
     this.urls = document.getElementsByClassName('artists_url');
-
 
     for (var i = 0; i < this.urls.length; i++) {
 
@@ -92,16 +105,19 @@ export default {
 
   methods: {
 
+    textContent(e){
+      this.textContainer.innerHTML = e
+    },
+
     hoverArtistTitle(e){
       this.element = e.target
-      // this.element.classList.add('active');
       this.childs_lower = this.element.querySelectorAll('.lowercase')
       this.childs_upper = this.element.querySelectorAll('.uppercase')
       this.enterButton(this.element)
     },
     hoverOutArtistTitle(e){
       this.element = e.target
-      this.element.classList.remove('active');
+      // this.element.classList.remove('active');
       this.childs_lower = this.element.querySelectorAll('.lowercase')
       this.childs_upper = this.element.querySelectorAll('.uppercase')
       this.leaveButton(this.element)
@@ -145,7 +161,7 @@ export default {
         if(this.mouseenter) {
 
           for (var i = 0; i < this.urls.length; i++) {
-            this.element.classList.remove('active');
+            // this.element.classList.remove('active');
             this.animateButton(this.element, 1, 0, 800, 400)
             for (var j = 0; j < this.childs_lower.length; j++) {
               this.childs_lower[j].classList.remove('visible')
@@ -165,7 +181,7 @@ export default {
     enterButton(el) {
       this.animateButton( el, 1.2, 12, 800, 400)
 
-      el.classList.add('active');
+      // el.classList.add('active');
       
       for (var i = 0; i < this.childs_lower.length; i++) {
           this.childs_lower[i].classList.add('visible')
@@ -177,7 +193,7 @@ export default {
     leaveButton(el) {
       this.animateButton( el, 1, 0, 800, 400)
 
-      el.classList.remove('active');
+      // el.classList.remove('active');
 
       // el.classList.remove('highlight')
       for (var i = 0; i < this.childs_lower.length; i++) {
@@ -205,6 +221,17 @@ export default {
     isInGallery(e){
       this.isInGallery = e
       this.getID()
+
+      if(this.isInGallery == false){
+
+        //delete text description if scrolled out of gallery
+        this.textContainer.innerHTML = ''
+        
+        //hide artists bar
+        this.artists.style.display = 'flex'
+      } else if(this.isInGallery == true){
+          this.artists.style.display = 'none'
+      }
     },
 
 
@@ -231,26 +258,27 @@ html, body{
 }
 
 
-ul.artists{
+ul#artists{
   position: fixed;
   bottom: 0;
   left: 0;
   width: calc(100% - 24px);
   display: flex;
   justify-content: space-between;
+  transition: opacity .4s;
 
   list-style: none;
   padding: 0;
   text-align: center;
   margin: 12px;
 }
-ul.artists li{
+ul#artists li{
   margin: 0 14px;
 }
-ul.artists li .artist_url{
+ul#artists li .artist_url{
   display: flex;
 }
-.artists a{
+#artists a{
   color: #585858;
   text-decoration: none;
   display: flex;
@@ -260,10 +288,10 @@ ul.artists li .artist_url{
 .lowercase{
   display: none;
 }
-/* .artists_url:hover .lowercase, .block{
+/* #artists_url:hover .lowercase, .block{
   display: block
 } */
-/* .artists_url:hover .uppercase{
+/* #artists_url:hover .uppercase{
   margin-left: 6px;
 } */
 
@@ -277,26 +305,43 @@ ul.artists li .artist_url{
   display: none;
 }
 
-.active:after{
+/* .active:after{
   content: '';
   position: absolute;
 
-  top: -2px;
+  top: 50%;
   left: 50%;
   margin-right: -50%;
-  transform: translate(-50%, -50%) ;
-  width: 6px;
-  height: 6px;
-  opacity: .6;
-  background: red;
-  border-radius: 3px;
+  transform: translate(-50%, -50%);
 
+  border-radius: 3px;
+  z-index: -2;
+  width: 100%;
+  height: 100%;
+  filter: blur(4px);
+  padding: 4px;
+  margin-right: 4px;
+  border-radius: 8px;
+  animation: blink 4s ease infinite
+
+} */
+
+/* .active{
+  border-bottom: 1px solid red;
+} */
+
+@keyframes blink{
+  0%{ opacity: .1 }
+  50%{ opacity: .3 }
+  100%{ opacity: .1 }
 }
+
+
 
 
 @media screen and (max-width: 710px) and (orientation: portrait){
 
-  ul.artists{
+  ul#artists{
     
     position: absolute;
     top: 50%;
@@ -312,5 +357,13 @@ ul.artists li .artist_url{
   }
 }
 
+
+
+#textcontent{
+  position: fixed;
+  top: 24px;
+  left: 12px;
+  letter-spacing: 0;
+}
 
 </style>

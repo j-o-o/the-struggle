@@ -1,10 +1,8 @@
 <template>
     <div class="dom">
         <section class="nav">
-            <nuxt-link to="/" id="home"></nuxt-link>
+            <nuxt-link to="/" >The Struggle <br>is Part of <br>the Story</nuxt-link>
         </section>
-        
-
     </div>
 </template>
 <script>
@@ -23,7 +21,6 @@ export default {
             isInGallery: true
         }
     },
-
 
     mounted () {
         EventBus.$on("RAYCASTERIMAGE", this.onImgHover);
@@ -61,18 +58,23 @@ export default {
 <style lang="scss">
 div.dom{
     position: fixed;
+    font-family: 'font2';
+    font-size: 28px;
     top: 0;
+    margin: 0 auto;
     left: 50%;
-    padding: 20px 30px;
+    transform: translateX(-50%);
+    padding: 12px;
+    text-align: center;
+    transition: transform .4s ease;
+    transform-origin: top;
+    line-height: 28px;
 }
-#home{
-    right: 0;
-    top: 0;
-    position: fixed;
-    width: 12px;
-    height: 12px;
-    margin: 6px;
-    border-radius: 6px;
-    background: #585858;
+div.dom:hover{
+    transform: translateX(-50%) scale(1.1);
+}
+div.dom a{
+    text-decoration: none;
+    color: #585858;
 }
 </style>
