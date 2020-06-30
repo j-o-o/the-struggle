@@ -21,7 +21,7 @@ class Wheel{
 
     init(){
         document.addEventListener("wheel", this.onWheel.bind(this));
-        const hammertime = new Hammer(Common.renderer.domElement);
+        let hammertime = new Hammer(Common.renderer.domElement);
         hammertime.get('pan').set({ direction: Hammer.DIRECTION_ALL });
         hammertime.on('pan', this.panMove.bind(this));
     }
@@ -46,7 +46,7 @@ class Wheel{
 
     panMove(e){
         
-        this.panned = - e.velocityX - e.velocityY;
+        this.panned = + e.velocityX + e.velocityY;
         EventBus.$emit("PANNED", this.panned);
 
     }

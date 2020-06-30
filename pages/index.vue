@@ -480,6 +480,7 @@ p {
 @media screen and (max-width: 710px) and (orientation: portrait){
   .title{
     line-height: 80px;
+    font-size: 16vw;
   }
   #info ul{
     display: inherit;

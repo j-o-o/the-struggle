@@ -18,7 +18,7 @@ class Pointer{
         this.RayCast = new RayCast();
         document.addEventListener("mousemove", this.mouseMove.bind(this));
 
-        const hammertime = new Hammer(Common.renderer.domElement);
+        let hammertime = new Hammer(Common.renderer.domElement);
         hammertime.on('pan', this.panMove.bind(this) );
     }
     

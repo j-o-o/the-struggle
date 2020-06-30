@@ -2,9 +2,6 @@
   <main>
 
     <Menu />
-    <div id="mobile_menu">
-      …
-    </div>
     <ul id="artists">
       <li v-for="(user, index) in users" :key="user.id">
         <NuxtLink :to="'/exhibition/'+user.id" class="artists_url" :id="index" >
@@ -79,36 +76,26 @@ export default {
 
     this.urls = document.getElementsByClassName('artists_url');
 
-    if(this.isItTouch == false){
-      for (let i = 0; i < this.urls.length; i++) {
+    for (let i = 0; i < this.urls.length; i++) {
 
-        let item = this.urls.item(i)
-        
-        item.innerHTML = this.urls.item(i).textContent.replace(/\S/g, "<span class='letter'>$&</span>");
-        let spans = item.children
+      let item = this.urls.item(i)
+      
+      item.innerHTML = this.urls.item(i).textContent.replace(/\S/g, "<span class='letter'>$&</span>");
+      let spans = item.children
 
 
-        item.addEventListener('mouseenter', this.hoverArtistTitle.bind(item))
-        item.addEventListener('mouseleave', this.hoverOutArtistTitle.bind(item))
+      item.addEventListener('mouseenter', this.hoverArtistTitle.bind(item))
+      item.addEventListener('mouseleave', this.hoverOutArtistTitle.bind(item))
 
-        //add classes to each menu artist
-        for (let j = 0; j < spans.length; j++) {
-          if(spans.item(j).innerHTML == spans.item(j).innerHTML.toLowerCase()){
-            spans.item(j).classList.add("lowercase");
-          }
-          if(spans.item(j).innerHTML == spans.item(j).innerHTML.toUpperCase()){
-            spans.item(j).classList.add("uppercase");
-          }
+      //add classes to each menu artist
+      for (let j = 0; j < spans.length; j++) {
+        if(spans.item(j).innerHTML == spans.item(j).innerHTML.toLowerCase()){
+          spans.item(j).classList.add("lowercase");
+        }
+        if(spans.item(j).innerHTML == spans.item(j).innerHTML.toUpperCase()){
+          spans.item(j).classList.add("uppercase");
         }
       }
-    }
-
-
-    //mobile menu click
-    let mobiler = document.getElementById('mobile_menu')
-    let mobiler_menu = document.getElementById('artists')
-    mobiler.onclick = function() {
-      mobiler_menu.classList.toggle('mobile_active')
     }
   },
 
@@ -118,10 +105,11 @@ export default {
   methods: {
 
     textContent(e){
-
-      // project description
       this.textContainer.innerHTML = e
+
+
       this.textContainer.innerHTML = this.textContainer.innerHTML.replace(/\S/g, "<span class='lol'>$&</span>");
+
 
       anime.timeline({loop: false})
         .add({
@@ -136,24 +124,17 @@ export default {
     },
 
     hoverArtistTitle(e){
-
-      if(this.isItTouch == false){
-        this.element = e.target
-        this.childs_lower = this.element.querySelectorAll('.lowercase')
-        this.childs_upper = this.element.querySelectorAll('.uppercase')
-        this.enterButton(this.element)
-      }
+      this.element = e.target
+      this.childs_lower = this.element.querySelectorAll('.lowercase')
+      this.childs_upper = this.element.querySelectorAll('.uppercase')
+      this.enterButton(this.element)
     },
     hoverOutArtistTitle(e){
-
-      if(this.isItTouch == false){
-        this.element = e.target
-        // this.element.classList.remove('active');
-        this.childs_lower = this.element.querySelectorAll('.lowercase')
-        this.childs_upper = this.element.querySelectorAll('.uppercase')
-        this.leaveButton(this.element)
-      }
-
+      this.element = e.target
+      // this.element.classList.remove('active');
+      this.childs_lower = this.element.querySelectorAll('.lowercase')
+      this.childs_upper = this.element.querySelectorAll('.uppercase')
+      this.leaveButton(this.element)
     },
 
 
@@ -174,41 +155,38 @@ export default {
 
 
     onImgHover(e){
+      if( e != false){
+        if(!this.mouseenter) {
+          this.hoveredImg = e.object.uuid
+          this.element = document.getElementById(this.hoveredImg);
+          this.childs_lower = this.element.querySelectorAll('.lowercase')
+          this.childs_upper = this.element.querySelectorAll('.uppercase')
+          this.enterButton(this.element)
 
-      if(this.isItTouch == false){
-        if( e != false){
-          if(!this.mouseenter) {
-            this.hoveredImg = e.object.uuid
-            this.element = document.getElementById(this.hoveredImg);
-            this.childs_lower = this.element.querySelectorAll('.lowercase')
-            this.childs_upper = this.element.querySelectorAll('.uppercase')
-            this.enterButton(this.element)
-
-            this.mouseenter = true
-          }
-        } 
+          this.mouseenter = true
+        }
+      } 
 
 
 
 
-        else if( e == false){
+      else if( e == false){
 
-          if(this.mouseenter) {
+        if(this.mouseenter) {
 
-            for (let i = 0; i < this.urls.length; i++) {
-              // this.element.classList.remove('active');
-              this.animateButton(this.element, 1, 0, 800, 400)
-              for (let j = 0; j < this.childs_lower.length; j++) {
-                this.childs_lower[j].classList.remove('visible')
-              }
-              for (let g = 0; g < this.childs_upper.length; g++) {
-                this.childs_upper[g].classList.remove('margin6')
-              }
+          for (let i = 0; i < this.urls.length; i++) {
+            // this.element.classList.remove('active');
+            this.animateButton(this.element, 1, 0, 800, 400)
+            for (let j = 0; j < this.childs_lower.length; j++) {
+              this.childs_lower[j].classList.remove('visible')
             }
-
-            this.mouseenter = false
-
+            for (let g = 0; g < this.childs_upper.length; g++) {
+              this.childs_upper[g].classList.remove('margin6')
+            }
           }
+
+          this.mouseenter = false
+
         }
       }
     },
@@ -389,40 +367,12 @@ ul#artists li .artist_url{
 }
 
 
-#mobile_menu{
-  width: 24px;
-  height: 24px;
-  background: grey;
-  border-radius: 50%;
-  position: fixed;
-  top: 6px;
-  left: 6px;
-}
+
 
 @media screen and (max-width: 710px) and (orientation: portrait){
-
   ul#artists{
-    
-    position: absolute;
-    top: 50%;
-    -ms-transform: translateY(-50%);
-    transform: translateY(-50%);
-    display: inherit;
-    left: 0;
-    width: inherit;
-    justify-content: space-between;
-    list-style: none;
-    padding: 0;
-    margin: 12px;
-    display: none;
-
+    display: none!important;
   }
-  .mobile_active{
-    display: block;
-  }
-
-
-
 }
 
 
