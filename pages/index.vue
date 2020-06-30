@@ -142,11 +142,11 @@ export default {
         this.t_2.style.transform = "translate(" + this.mouse.x * 40 + 'px, ' + ( - this.mouse.y * 40) + 'px) scaleY(' + scale_2 + ')' 
       }
     },
-    handleOrientation(e){
-      let scale_1 = (e.beta - 10)/16
-      this.t_1.style.transform = "translate(" + e.gamma + 'px, ' + ( - e.beta - 20 ) + 'px) scaleY(' + scale_1 + ')'
-      this.t_2.style.transform = "translate(" + e.gamma + 'px, ' + ( - e.beta - 20 ) + 'px) scaleY(' + scale_1 + ')' 
-    }
+    // handleOrientation(e){
+    //   let scale_1 = (e.beta - 10)/16
+    //   this.t_1.style.transform = "translate(" + e.gamma + 'px, ' + ( - e.beta - 20 ) + 'px) scaleY(' + scale_1 + ')'
+    //   this.t_2.style.transform = "translate(" + e.gamma + 'px, ' + ( - e.beta - 20 ) + 'px) scaleY(' + scale_1 + ')' 
+    // }
   },
   beforeLeave: function(el) {
   },
@@ -158,7 +158,7 @@ export default {
     EventBus.$emit("SCROLLENABLED", false);
     EventBus.$on("MOUSEMOVELOOP", this.mouseMove);
     EventBus.$on("ISTOUCH", this.isTouch.bind(this));
-    window.addEventListener("deviceorientation", this.handleOrientation, true);
+    // window.addEventListener("deviceorientation", this.handleOrientation, true);
 
     this.intro = document.querySelector('.intro-container')
 
@@ -479,7 +479,7 @@ p {
 
 @media screen and (max-width: 710px) and (orientation: portrait){
   .title{
-    line-height: 280px;
+    line-height: 80px;
   }
   #info ul{
     display: inherit;

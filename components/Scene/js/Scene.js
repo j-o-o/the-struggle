@@ -1,17 +1,12 @@
-import * as THREE from 'three'
 import Common from "./Common"
 
-import Image from "./elements/Image"
-import Gallery from "./elements/Gallery_1"
+import Gallery from "./elements/gallery"
 import Wall from "./elements/Wall"
 import Camera from "./Camera"
 
 import Pointer from "./events/pointer"
 import Wheel from "./events/wheel"
-import { lerp } from 'math-toolbox'
 import EventBus from "~/utils/event-bus"
-
-import Stats from 'stats.js'
 
 export default class Scene{
 
@@ -33,10 +28,6 @@ export default class Scene{
 
         window.addEventListener("resize", this.resize.bind(this));
 
-        // this.stats = new Stats();
-        // let element = document.getElementById('stats')
-        // element.appendChild( this.stats.dom )
-
         this.wall = new Wall();
         
         Pointer.init();
@@ -51,7 +42,6 @@ export default class Scene{
     }
 
     onClickImage(e){
-        // console.log('scene js')
         if (this.scrollEnabled == true && Common.isInGallery == false){
 
             EventBus.$emit("ISINGALLERY", true);
@@ -62,13 +52,10 @@ export default class Scene{
             Gallery.load(e);
             
         }
-
     }
 
 
     isItInGallery(e){
-
-        // destroy gallery if back in thumbnails
         if(e == false){
             for( var i = Common.scene.children.length - 1; i >= 0; i--) { 
                 var obj = Common.scene.children[i];
@@ -79,7 +66,6 @@ export default class Scene{
                 }
             }
         }
-        
     }
 
 
@@ -87,18 +73,13 @@ export default class Scene{
 
 
     loop(){
-
-        // this.stats.begin();
-    
         this.render();
 
         this.wall.loop();
         Pointer.loop();
         Camera.loop();
 
-	    // this.stats.end();
         requestAnimationFrame(this.loop.bind(this));
-
     }
 
     render(){
@@ -139,35 +120,50 @@ export default class Scene{
             break;
         }
         switch(path.params.id){
-            case "1": 
+            case "0": 
                 Camera.camPos.x = 0
             break;
-            case "2":
+            case "1":
                 Camera.camPos.x = 10
             break;
-            case "3":
+            case "2":
                 Camera.camPos.x = 20
             break;
-            case "4":
+            case "3":
                 Camera.camPos.x = 30
             break;
-            case "5":
+            case "4":
                 Camera.camPos.x = 40
             break;
-            case "6":
+            case "5":
                 Camera.camPos.x = 50
             break;
-            case "7":
+            case "6":
                 Camera.camPos.x = 60
             break;
-            case "8":
+            case "7":
                 Camera.camPos.x = 70
             break;
-            case "9":
+            case "8":
                 Camera.camPos.x = 80
             break;
-            case "10":
+            case "9":
                 Camera.camPos.x = 90
+            break;
+            case "10":
+                Camera.camPos.x = 100
+            break;
+            case "11":
+                Camera.camPos.x = 110
+            break;
+            case "12":
+                Camera.camPos.x = 120
+            break;
+            case "13":
+                Camera.camPos.x = 130
+            break;
+            case "14":
+                Camera.camPos.x = 140
             break;
         }
     }

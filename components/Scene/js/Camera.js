@@ -1,6 +1,6 @@
 import * as THREE from 'three'
 import Common from "./Common"
-import Gallery from "./elements/Gallery_1"
+import Gallery from "./elements/gallery"
 
 import {
     lerp
@@ -63,7 +63,6 @@ class Camera {
                 }
             }
         }
-
     }
 
     isScrollEnabled(e) {
@@ -111,9 +110,6 @@ class Camera {
                 EventBus.$emit("ISINGALLERY", false);
             }
         }
-
-
-
     }
 
 
@@ -137,18 +133,15 @@ class Camera {
 
 
         if (Common.isInGallery == true) {
-            // console.log(this.camPos.y, Gallery.globalHeight, Gallery.sectionHeight, this.clicks)
+            
             // this is to check if the camera has entered the thumbnails
             if (this.camPos.y >= -Gallery.globalHeight + Gallery.sectionHeight - Gallery.imageClicks) {
-                // console.log('top switch')
+                // coming in from top
                 EventBus.$emit("ISINGALLERY", false);
                 Gallery.clicks = Gallery.clicks - 10;
                 Gallery.imageClicks = Gallery.imageClicks - 10;
-
                 Gallery.globalHeight = Gallery.globalHeight - Gallery.sectionHeight;
-                // console.log(Gallery.globalHeight, Gallery.sectionHeight, Gallery.imageClicks)
             } else if (this.camPos.y <= -Gallery.globalHeight - Gallery.clicks) {
-                // console.log('bottom switch')
                 EventBus.$emit("ISINGALLERY", false);
             }
         }

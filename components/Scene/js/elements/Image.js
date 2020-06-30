@@ -1,15 +1,12 @@
 import * as THREE from "three";
 import Common from "../Common";
 import EventBus from "~/utils/event-bus"
-import loadImage from 'image-promise';
 import Camera from "../Camera"
-import Scene from "../Scene"
-import Gallery from "./Gallery_1"
+import Gallery from "./gallery"
 
 
 export default class Image{
     constructor(){
-
         this.sectionWidth = 0;
         this.positionY = 0;
         
@@ -141,7 +138,6 @@ export default class Image{
                 this.loopSectionPosition = bgDistance;
                 this.setInstancedMeshPositions(this.bgMesh, this.loopSectionPosition);
             }
-
         }
 
         // are the thumbs top or bottom? (looking for 1/2 scroll-position in gallery)
@@ -157,9 +153,5 @@ export default class Image{
                 this.positionY = - Gallery.globalHeight - Gallery.clicks;
             }
         }
-
-
     }
-
-
 }

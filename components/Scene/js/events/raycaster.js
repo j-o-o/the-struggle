@@ -11,9 +11,9 @@ export default class RayCast{
         this.init();
     }
     init(){
+        
         this.mouse = new THREE.Vector2();
         this.raycaster = new THREE.Raycaster();
-        // this.camera = Common.camera;
         this.image = new Image();
 
         window.addEventListener("click", this.onClick.bind(this));
