@@ -94,7 +94,17 @@
       </div>
   <hr>
     <div id="footer">
-    Class provided by <a href="https://www.uni-weimar.de/bauhausmodule/" target="_blank">Bauhaus.Module</a> • Led by <a href="http://albrechtjulia.de/" target="_blank">Julia Albrecht</a> • Website by <a href="http://eriksachse.com/" target="_blank">Erik Sachse</a> • <nuxt-link to="privacypolicy">Privacy Policy and Imprint</nuxt-link>
+        <ul>
+          <li>
+            Class provided by <a href="https://www.uni-weimar.de/bauhausmodule/" target="_blank">Bauhaus.Module</a> 
+            </li><li>
+            Led by <a href="http://albrechtjulia.de/" target="_blank">Julia Albrecht</a>
+            </li><li>
+            Website by <a href="http://eriksachse.com/" target="_blank">Erik Sachse</a>
+            </li><li>
+            <nuxt-link to="privacypolicy">Privacy Policy and Imprint</nuxt-link>
+            </li>
+          </ul>
     </div>
     </div>
   </main>
@@ -367,7 +377,15 @@ export default {
   width: calc(100% - 48px);
   text-transform: uppercase;
 }
-#info ul{
+#footer{
+  bottom: 0;
+  left: 0;
+  margin: 24px;
+  font-size: inherit;
+  width: calc(100% - 48px);
+  text-transform: uppercase;
+}
+#info ul, #footer ul{
   padding: 0;
   margin: 0;
   list-style: none;
@@ -385,10 +403,6 @@ export default {
   margin: 0;
   text-indent: 48px;
   /* float: left; */
-}
-#footer{
-
-  padding: 24px;
 }
 #footer a{
 
