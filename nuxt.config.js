@@ -1,4 +1,11 @@
 export default {
+  vue: {
+    config: {
+      productionTip: true,
+      devtools: false,
+      silent: true
+    }
+  },
   head: {
     title: process.env.npm_package_name || '',
     meta: [
@@ -23,8 +30,16 @@ export default {
         config.module.rules.push(
           { 
             test: /\.(vert|frag)$/i, 
-            use: ["raw-loader"] },
-            {
+            use: ["raw-loader"] 
+          },
+          {
+            test: /\.(ogg|mp3|wav|mpe?g)$/i,
+            loader: 'file-loader',
+            options: {
+              name: '[path][name].[ext]'
+            }
+          },
+          {
             test: /\.(png|jpe?g|gif|svg)$/i,
             use: [
               {

@@ -165,9 +165,9 @@ export default {
 
   mounted() {
 
-    EventBus.$emit("SCROLLENABLED", false);
-    EventBus.$on("MOUSEMOVELOOP", this.mouseMove);
-    EventBus.$on("ISTOUCH", this.isTouch.bind(this));
+    EventBus.$emit("SCROLLENABLED", false)
+    EventBus.$on("MOUSEMOVELOOP", this.mouseMove)
+    EventBus.$on("ISTOUCH", this.isTouch.bind(this))
     // window.addEventListener("deviceorientation", this.handleOrientation, true);
 
     this.intro = document.querySelector('.intro-container')
@@ -182,7 +182,6 @@ export default {
     this.t_2.innerHTML = this.t_2.textContent.replace(/\S/g, "<span class='letter'>$&</span>");
 
 
-
     let t_3 = document.querySelector('.letter_1');
     t_3.style.display = 'block'
     t_3.innerHTML = t_3.textContent.replace(/\S/g, "<span class='letter'>$&</span>");
@@ -191,140 +190,9 @@ export default {
     t_4.style.display = 'block'
     t_4.innerHTML = t_4.textContent.replace(/\S/g, "<span class='letter'>$&</span>");
 
-    anime.timeline({loop: false})
-      .add({
-        targets: '.title_1 .letter',
-        scale: [0.2, 1],
-        scaleX: [1, 0.9],
-        opacity: [0, 1],
-        rotate: ['10deg', '0deg'],
-        easing: "easeOutCirc",
-        duration: 950,
-        delay: (el, i) => 70*i,
-        complete: function(anim) {
-          anime.timeline({loop: true})
-          .add({
-            delay: 800
-          })
-          .add({
-            targets: '.title_1 .letter',
-            scale: 1,
-            scaleX: [0.9, 1.2],
-            easing: "easeInOutQuad",
-            duration: 2000,
-            delay: (el, i) => 70*i + 70
-          })
-          .add({
-            delay: 800
-          })
-          .add({
-            targets: '.title_1 .letter',
-            scaleX: [1.2, 0.9],
-            easing: "easeInOutQuad",
-            duration: 2000,
-            delay: (el, i) => 70*i + 70
-          })
-        }
-      })
-
-
-      
-
-
-      anime.timeline({loop: false})
-        .add({
-            delay: 900
-        })
-        .add({  
-          targets: '.title_2 .letter',
-          scale: [0.2,1],
-          opacity: [0,1],
-          scaleX: [1.2, 0.9],
-          rotate: ['10deg', '0deg'],
-          easing: "easeOutCirc",
-          duration: 950,
-          delay: (el, i) => 70*i,
-
-
-          complete: function(anim) {
-            anime.timeline({loop: true})
-            .add({
-              delay: 800
-            })
-            .add({
-              targets: '.title_2 .letter',
-              scale: 1,
-              scaleX: [0.9, 1.2],
-              easing: "easeInOutQuad",
-              duration: 2000,
-              delay: (el, i) => 70*i
-            })
-            .add({
-              delay: 800
-            })
-            .add({
-              targets: '.title_2 .letter',
-              scaleX: [1.2, 0.9],
-              easing: "easeInOutQuad",
-              duration: 2000,
-              delay: (el, i) => 70*i
-            })
-          }
-
-        })
-
-
-
-        anime.timeline({loop: true})
-          .add({
-            delay: 800
-          })
-          .add({
-            targets: '.letter_1 .letter',
-                rotate: [-40, 40],
-            easing: "easeInOutQuad",
-            duration: 2150,
-            delay: anime.stagger(300)
-          })
-          .add({
-            delay: 800
-          })
-          .add({
-            targets: '.letter_1 .letter',
-                rotate: [40, -40],
-            easing: "easeInOutQuad",
-            duration: 2150,
-            delay: anime.stagger(300)
-          })
-
-
-      anime.timeline({loop: false})
-        .add({
-        delay: 400,
-        complete: function(anim) {
-          anime.timeline({loop: true})
-            .add({
-              delay: 400
-            })
-            .add({
-              targets: '.letter_2 .letter',
-              rotate: [-40, 40],
-              easing: "easeInOutQuad",
-              duration: 2000,
-              delay:anime.stagger(150)
-            })
-            .add({
-              delay: 400
-            })
-            .add({
-              targets: '.letter_2 .letter',
-              rotate: [40, -40],
-              easing: "easeInOutQuad",
-              duration: 2000,
-              delay: anime.stagger(150)
-            })
-        }
-      })
+    anime.timeline({loop:!1}).add({targets:".title_1 .letter",scale:[.2,1],scaleX:[1,.9],opacity:[0,1],rotate:["10deg","0deg"],easing:"easeOutCirc",duration:950,delay:(e,a)=>70*a,complete:function(e){anime.timeline({loop:!0}).add({delay:800}).add({targets:".title_1 .letter",scale:1,scaleX:[.9,1.2],easing:"easeInOutQuad",duration:2e3,delay:(e,a)=>70*a+70}).add({delay:800}).add({targets:".title_1 .letter",scaleX:[1.2,.9],easing:"easeInOutQuad",duration:2e3,delay:(e,a)=>70*a+70})}}),anime.timeline({loop:!1}).add({delay:900}).add({targets:".title_2 .letter",scale:[.2,1],opacity:[0,1],scaleX:[1.2,.9],rotate:["10deg","0deg"],easing:"easeOutCirc",duration:950,delay:(e,a)=>70*a,complete:function(e){anime.timeline({loop:!0}).add({delay:800}).add({targets:".title_2 .letter",scale:1,scaleX:[.9,1.2],easing:"easeInOutQuad",duration:2e3,delay:(e,a)=>70*a}).add({delay:800}).add({targets:".title_2 .letter",scaleX:[1.2,.9],easing:"easeInOutQuad",duration:2e3,delay:(e,a)=>70*a})}});
+    anime.timeline({loop:!0}).add({delay:800}).add({targets:".letter_1 .letter",rotate:[-40,40],easing:"easeInOutQuad",duration:2150,delay:anime.stagger(300)}).add({delay:800}).add({targets:".letter_1 .letter",rotate:[40,-40],easing:"easeInOutQuad",duration:2150,delay:anime.stagger(300)});
+    anime.timeline({loop:!1}).add({delay:400,complete:function(e){anime.timeline({loop:!0}).add({delay:400}).add({targets:".letter_2 .letter",rotate:[-40,40],easing:"easeInOutQuad",duration:2e3,delay:anime.stagger(150)}).add({delay:400}).add({targets:".letter_2 .letter",rotate:[40,-40],easing:"easeInOutQuad",duration:2e3,delay:anime.stagger(150)})}});
   },
 }
 </script>
@@ -338,6 +206,7 @@ export default {
   z-index: 2;
   overflow: scroll;
   height: 100%;
+  width: 100%;
 }
 .intro-container{
   font-weight: inherit;
@@ -496,7 +365,10 @@ p {
     line-height: 80px;
     font-size: 16vw;
   }
-  #info ul{
+  #enter{
+    font-size: 20vw;
+  }
+  #info ul, #footer ul{
     display: inherit;
   }
   .left{
