@@ -85,11 +85,11 @@
 
 
         <div id="enter">
-          <nuxt-link to="exhibition">
-            <div class="letter_1">Enter</div>
-            <div class="letter_2">Exhibition</div>
-          </nuxt-link>
+          <nuxt-link to='exhibition' id="expired"> <div class='letter_1'>Enter</div> <div class='letter_2'>Exhibition</div> </nuxt-link>
+          <div id='countdown'></div>
         </div>
+
+
 
       </div>
   <hr>
@@ -157,6 +157,34 @@ export default {
     //   this.t_1.style.transform = "translate(" + e.gamma + 'px, ' + ( - e.beta - 20 ) + 'px) scaleY(' + scale_1 + ')'
     //   this.t_2.style.transform = "translate(" + e.gamma + 'px, ' + ( - e.beta - 20 ) + 'px) scaleY(' + scale_1 + ')' 
     // }
+
+    countdown(){
+      let exp = document.getElementById("expired");
+      console.log(exp)
+      var countDownDate = new Date("jul 30, 2020 00:00").getTime();
+      var x = setInterval(function() {
+        var now = new Date().getTime();
+        var distance = countDownDate - now;
+
+        var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+        var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+
+
+        // If the count down is finished, write some text
+
+        if (distance < 0) {
+          clearInterval(x);
+          exp.style.display = "block"
+
+        } else {
+          exp.style.display = "none"
+          document.getElementById("countdown").innerHTML = "" + days + "d " + hours + "h " + minutes + "m " + seconds + "s ";
+        }
+      }, 1000);
+    }
   },
   beforeLeave: function(el) {
   },
@@ -172,6 +200,8 @@ export default {
 
     this.intro = document.querySelector('.intro-container')
 
+
+    this.countdown()
 
     this.t_1 = document.querySelector('.title_1');
     this.t_1.style.display = 'block'
@@ -387,5 +417,16 @@ p {
   #intro-text-grid p{
     text-indent: 0px;
   }
+}
+
+
+
+#countdown{
+
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%);
 }
 </style>
