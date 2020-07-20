@@ -7,7 +7,7 @@ export default {
     }
   },
   head: {
-    title: process.env.npm_package_name || '',
+    title: 'The Struggle is Part of the Story',
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
