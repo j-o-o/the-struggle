@@ -179,17 +179,23 @@ class Camera {
             } else {
                 if (this.transition == false) {
                     Common.camera.position.y = lerp(Common.camera.position.y, this.camPos.y + this.mouse.y / 2 + breathing, 0.08);
+                    Common.camera.position.x = lerp(Common.camera.position.x, this.camPos.x + this.mouse.x / 2 + this.slant, 0.08);
                 } else {
                     Common.camera.position.x = lerp(Common.camera.position.x, this.camPos.x + this.slant, 0.08);
                 }
             }
         }
+
         // this is for the intro page
         else {
             this.camPos.z = 30;
-            Common.camera.position.x = lerp(Common.camera.position.x, this.camPos.x + this.mouse.x / 2, 0.08);
+            // this.camPos.x = 10;
+            Common.camera.position.x = lerp(Common.camera.position.x, this.camPos.x + this.mouse.x / 2 + - 60, 0.08);
+            Common.camera.position.y = lerp(Common.camera.position.y, this.camPos.y + this.mouse.y / 2 + breathing + 40, 0.08);
+            // Common.camera.position.y = lerp(Common.camera.position.y, this.mouse.y / 2 + breathing + this.camPos.y, 0.08);
+            this.camLookAt.y = lerp(this.camLookAt.y, this.camPos.y, 0.1);
             if (Common.isInGallery == false) {
-                this.camLookAt.x = lerp(this.camLookAt.x, this.camPos.x + this.mouse.x * 1.8, 0.3);
+                this.camLookAt.x = lerp(this.camLookAt.x, this.camPos.x + this.mouse.x * 1.8 - 30, 0.3);
             }
         }
 

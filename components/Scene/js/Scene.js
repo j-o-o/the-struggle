@@ -101,7 +101,7 @@ export default class Scene{
 
 
     onTransition(path){
-        Camera.autoScrollEnabled = false
+        Camera.autoScrollEnabled = true
         console.log('transition')
         switch(path.name){
             case "index":

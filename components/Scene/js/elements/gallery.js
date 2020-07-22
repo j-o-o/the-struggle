@@ -41,17 +41,18 @@ class Gallery{
         if(e.object.uuid == 0){
     
             images = [
-                // '../images/img1.jpg',
-                // '../images/img2.jpg',
-                '../images/img3.jpg',
-                '../images/img4.jpg',
-                '../images/img5.jpg',
-                '../images/img6.jpg',
-                '../images/img7.jpg',
-                // '../images/img8.jpg',
-                // '../images/img9.jpg',
-                // '../images/img10.jpg',
-                // '../images/img11.jpg'
+                '../images/saudade/saudade1.png',
+                '../images/saudade/saudade2.png',
+                '../images/saudade/saudade3.png',
+                '../images/saudade/saudade4.png',
+                '../images/saudade/saudade5.png',
+                '../images/saudade/saudade6.png',
+                '../images/saudade/saudade7.png',
+                '../images/saudade/saudade8.png',
+                '../images/saudade/saudade9.png',
+                '../images/saudade/saudade10.png',
+                '../images/saudade/saudade11.png',
+                '../images/saudade/saudade12.png'
             ];
 
         }
