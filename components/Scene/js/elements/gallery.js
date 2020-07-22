@@ -1,6 +1,7 @@
 import * as THREE from "three";
 import Common from "../Common";
-import EventBus from "~/utils/event-bus"
+import EventBus from "~/utils/event-bus";
+import {clamp} from "math-toolbox"
 
 class Gallery{
     constructor(){
@@ -37,40 +38,67 @@ class Gallery{
         }
 
         let images = []
-
+        this.w_width = 0;
         if(e.object.uuid == 0){
+
+            this.w_width = clamp( 2, 6, Common.size.windowW / 200);
     
             images = [
-                '../images/saudade/saudade1.png',
-                '../images/saudade/saudade2.png',
-                '../images/saudade/saudade3.png',
-                '../images/saudade/saudade4.png',
-                '../images/saudade/saudade5.png',
-                '../images/saudade/saudade6.png',
-                '../images/saudade/saudade7.png',
-                '../images/saudade/saudade8.png',
-                '../images/saudade/saudade9.png',
-                '../images/saudade/saudade10.png',
-                '../images/saudade/saudade11.png',
-                '../images/saudade/saudade12.png'
+                '../images/saudade/saudade1.jpeg',
+                '../images/saudade/saudade2.jpeg',
+                '../images/saudade/saudade3.jpeg',
+                '../images/saudade/saudade4.jpeg',
+                '../images/saudade/saudade5.jpeg',
+                '../images/saudade/saudade6.jpeg',
+                '../images/saudade/saudade7.jpeg',
+                '../images/saudade/saudade8.jpeg',
+                '../images/saudade/saudade9.jpeg',
+                '../images/saudade/saudade10.jpeg',
+                '../images/saudade/saudade11.jpeg',
+                '../images/saudade/saudade12.jpeg'
             ];
 
         }
         if(e.object.uuid == 1){
-    
+            this.w_width = clamp( 2, 6, Common.size.windowW / 200);
             images = [
-                '../images/img4.jpg',
-                '../images/img5.jpg',
+                '../images/perception/perception2.jpeg',
+                '../images/perception/perception3.jpeg',
+                '../images/perception/perception4.jpeg',
+                '../images/perception/perception5.jpeg',
+                '../images/perception/perception6.jpeg',
+                '../images/perception/perception7.jpeg',
+                '../images/perception/perception8.jpeg',
+                '../images/perception/perception9.jpeg',
+                '../images/perception/perception10.jpeg',
+                '../images/perception/perception11.jpeg',
+                '../images/perception/perception12.jpeg',
+                '../images/perception/perception13.jpeg',
+                '../images/perception/perception14.jpeg',
+                '../images/perception/perception15.jpeg',
             ];
 
         }
 
         if(e.object.uuid == 2){
     
+            this.w_width = clamp( 2, 5, Common.size.windowW / 200);
+
             images = [
-                '../images/img4.jpg',
-                '../images/img6.jpg',
-                '../images/img7.jpg',
+                '../images/vergessen/vergessen2.jpg',
+                '../images/vergessen/vergessen3.jpg',
+                '../images/vergessen/vergessen4.jpg',
+                '../images/vergessen/vergessen5.jpg',
+                '../images/vergessen/vergessen6.jpg',
+                '../images/vergessen/vergessen7.jpg',
+                '../images/vergessen/vergessen8.jpg',
+                '../images/vergessen/vergessen9.jpg',
+                '../images/vergessen/vergessen10.jpg',
+                '../images/vergessen/vergessen11.jpg',
+                '../images/vergessen/vergessen12.jpg',
+                '../images/vergessen/vergessen13.jpg',
+                '../images/vergessen/vergessen14.jpg',
+                '../images/vergessen/vergessen15.jpg',
             ];
 
         }
@@ -196,6 +224,13 @@ class Gallery{
         
         this.mesh_ = [];
 
+
+        
+
+
+        
+        
+
         for (let i = 0; i < images.length; i++) {
             this.sectionHeight = images.length * 6 + 4;
             this.loadTexture(images[i]).then(texture => {
@@ -208,7 +243,7 @@ class Gallery{
                 let height = Ctexture.image.height
                 let aspect = width/height
 
-                this.mesh_[i] = new THREE.Mesh(new THREE.PlaneBufferGeometry( aspect * 5, 5), material);
+                this.mesh_[i] = new THREE.Mesh(new THREE.PlaneBufferGeometry( aspect * this.w_width, this.w_width), material);
                 this.mesh_[i].name = 'gallery';
                 this.mesh_[i].position.y =-i * 6 - this.globalHeight + this.sectionHeight - this.clicks;
                 this.mesh_[i].position.x = e.object.position.x;

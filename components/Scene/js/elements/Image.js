@@ -25,9 +25,9 @@ export default class Image{
     addInstancedMesh() {
 
         let images = [
-            '../images/img1.jpg',
-            '../images/img2.jpg',
-            '../images/img3.jpg',
+            '../images/saudade/saudade3.png',
+            '../images/perception/perception1.jpeg',
+            '../images/vergessen/vergessen2.jpg',
             '../images/img4.jpg',
             '../images/img5.jpg',
             '../images/img6.jpg',
@@ -56,6 +56,7 @@ export default class Image{
                 var Ctexture = new THREE.CanvasTexture( texture );
                 Ctexture.minFilter = THREE.LinearFilter;
                 var material = new THREE.MeshBasicMaterial( { map: Ctexture } );
+                material.transparent = true
 
                 let width = Ctexture.image.width;
                 let height = Ctexture.image.height;

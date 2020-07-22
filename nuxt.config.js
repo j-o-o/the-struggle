@@ -56,9 +56,9 @@ export default {
   },
   env: {
     users: [
-      { id: 0, name: 'Hanna Lene Wellpott'},
-      { id: 1, name: 'Böbst Henry'},
-      { id: 2, name: 'Anika Annette Enke'},
+      { id: 0, name: 'Emilia Haar'},
+      { id: 1, name: 'Luisa Behrendt'},
+      { id: 2, name: 'Jana Köhler'},
       { id: 3, name: 'Suriñe Gracia-Pozuelo Iglesias'},
       { id: 4, name: 'Emilia Haar'},
       { id: 5, name: 'Camille Magnin'},

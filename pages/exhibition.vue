@@ -2,7 +2,7 @@
   <main>
 
     <Menu />
-    <audio />
+    <!-- <audio /> -->
     <ul id="artists">
       <li v-for="(user, index) in users" :key="user.id">
         <NuxtLink :to="'/exhibition/'+user.id" class="artists_url" :id="index" >
@@ -25,15 +25,13 @@
 <script>
 
 import Menu from "~/components/Menu"
-import audio from "~/components/audio"
 import EventBus from "~/utils/event-bus"
 import anime from 'animejs/lib/anime.es.js';
 
 export default {
   transition: 'fade',
   components: {
-    Menu,
-    audio
+    Menu
   },  
   name: 'deprecated',
   asyncData ({ env }) {

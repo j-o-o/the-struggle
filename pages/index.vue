@@ -178,7 +178,7 @@ export default {
         if (distance < 0) {
           clearInterval(x);
           exp.style.display = "block"
-
+          document.getElementById("countdown").style.display = 'none'
         } else {
           exp.style.display = "none"
           document.getElementById("countdown").innerHTML = "" + days + "d " + hours + "h " + minutes + "m " + seconds + "s ";
