@@ -207,78 +207,7 @@ class Gallery{
 
         }
 
-        if(e.object.uuid == 7){
-    
-            images = [
-                '../images/img8.jpg',
-                '../images/img9.jpg',
-                '../images/img10.jpg',
-            ];
 
-        }
-
-        if(e.object.uuid == 8){
-    
-            images = [
-                '../images/img8.jpg',
-                '../images/img9.jpg',
-                '../images/img10.jpg',
-            ];
-
-        }
-
-        if(e.object.uuid == 9){
-    
-            images = [
-                '../images/img8.jpg',
-                '../images/img9.jpg',
-                '../images/img10.jpg',
-            ];
-
-        }
-
-        if(e.object.uuid == 10){
-    
-            images = [
-                '../images/img8.jpg',
-                '../images/img9.jpg',
-                '../images/img10.jpg',
-            ];
-
-        }
-
-        if(e.object.uuid == 11){
-    
-            images = [
-                '../images/img8.jpg',
-                '../images/img9.jpg',
-                '../images/img10.jpg',
-            ];
-
-        }
-
-
-        if(e.object.uuid == 12){
-    
-            images = [
-                '../images/img8.jpg',
-                '../images/img9.jpg',
-                '../images/img10.jpg',
-            ];
-
-        }
-
-
-
-        if(e.object.uuid == 13){
-    
-            images = [
-                '../images/img8.jpg',
-                '../images/img9.jpg',
-                '../images/img10.jpg',
-            ];
-
-        }
         EventBus.$emit("LOADINGGALLERY", false)
         this.manager = new THREE.LoadingManager( () => {
             EventBus.$emit("LOADINGGALLERY", true)
