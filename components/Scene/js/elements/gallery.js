@@ -12,6 +12,7 @@ class Gallery{
         this.clicks = 0
         this.imageClicks = 0
         this.shouldBeTop = true
+        this.random = true
 
     }
 
@@ -42,6 +43,7 @@ class Gallery{
         if(e.object.uuid == 0){
 
             this.w_width = clamp( 2, 6, Common.size.windowW / 200);
+            this.random = false;
     
             images = [
                 '../images/saudade/saudade1.jpeg',
@@ -61,6 +63,7 @@ class Gallery{
         }
         if(e.object.uuid == 1){
             this.w_width = clamp( 2, 6, Common.size.windowW / 200);
+            this.random = true;
             images = [
                 '../images/perception/perception2.jpeg',
                 '../images/perception/perception3.jpeg',
@@ -83,6 +86,7 @@ class Gallery{
         if(e.object.uuid == 2){
     
             this.w_width = clamp( 2, 5, Common.size.windowW / 200);
+            this.random = true;
 
             images = [
                 '../images/vergessen/vergessen2.jpg',
@@ -107,30 +111,88 @@ class Gallery{
 
         if(e.object.uuid == 3){
     
+            this.w_width = clamp( 2, 5, Common.size.windowW / 200);
+            this.random = true;
             images = [
-                '../images/img8.jpg',
-                '../images/img9.jpg',
-                '../images/img10.jpg',
+                '../images/absent/absent1.jpg',
+                '../images/absent/absent2.jpg',
+                '../images/absent/absent3.jpg',
+                '../images/absent/absent4.jpg',
+                '../images/absent/absent5.jpg',
+                '../images/absent/absent6.jpg',
+                '../images/absent/absent7.jpg',
+                '../images/absent/absent8.jpg',
+                '../images/absent/absent9.jpg',
+                '../images/absent/absent10.jpg',
+                '../images/absent/absent11.jpg',
+                '../images/absent/absent12.jpg',
+                '../images/absent/absent13.jpg',
+                '../images/absent/absent14.jpg',
+                '../images/absent/absent15.jpg',
+                '../images/absent/absent16.jpg',
+                '../images/absent/absent17.jpg',
+                '../images/absent/absent18.jpg',
+                '../images/absent/absent19.jpg',
+                '../images/absent/absent20.jpg',
+                '../images/absent/absent21.jpg',
+                '../images/absent/absent22.jpg',
+                '../images/absent/absent23.jpg',
+                '../images/absent/absent24.jpg',
+                '../images/absent/absent25.jpg',
+                '../images/absent/absent26.jpg',
             ];
 
         }        
         
         if(e.object.uuid == 4){
     
+            this.w_width = clamp( 2, 5, Common.size.windowW / 200);
+            this.random = true;
             images = [
-                '../images/img8.jpg',
-                '../images/img9.jpg',
-                '../images/img10.jpg',
+                '../images/masks/masks1.jpg',
+                '../images/masks/masks2.jpg',
+                '../images/masks/masks3.jpg',
+                '../images/masks/masks4.jpg',
+                '../images/masks/masks5.jpg',
+                '../images/masks/masks6.jpg',
+                '../images/masks/masks7.jpg',
+                '../images/masks/masks8.jpg',
+                '../images/masks/masks9.jpg',
+                '../images/masks/masks10.jpg',
+                '../images/masks/masks11.jpg',
+                '../images/masks/masks12.jpg',
+                '../images/masks/masks13.jpg',
+                '../images/masks/masks14.jpg',
+                '../images/masks/masks15.jpg',
+                '../images/masks/masks16.jpg',
             ];
 
         }
 
         if(e.object.uuid == 5){
     
+            this.w_width = clamp( 2, 5, Common.size.windowW / 200);
+            this.random = true;
             images = [
-                '../images/img8.jpg',
-                '../images/img9.jpg',
-                '../images/img10.jpg',
+                '../images/dazwischen/dazwischen1.jpg',
+                '../images/dazwischen/dazwischen2.jpg',
+                '../images/dazwischen/dazwischen3.jpg',
+                '../images/dazwischen/dazwischen4.jpg',
+                '../images/dazwischen/dazwischen5.jpg',
+                '../images/dazwischen/dazwischen6.jpg',
+                '../images/dazwischen/dazwischen7.jpg',
+                '../images/dazwischen/dazwischen8.jpg',
+                '../images/dazwischen/dazwischen9.jpg',
+                '../images/dazwischen/dazwischen10.jpg',
+                '../images/dazwischen/dazwischen11.jpg',
+                '../images/dazwischen/dazwischen12.jpg',
+                '../images/dazwischen/dazwischen13.jpg',
+                '../images/dazwischen/dazwischen14.jpg',
+                '../images/dazwischen/dazwischen15.jpg',
+                '../images/dazwischen/dazwischen16.jpg',
+                '../images/dazwischen/dazwischen17.jpg',
+                '../images/dazwischen/dazwischen18.jpg',
+                '../images/dazwischen/dazwischen19.jpg',
             ];
 
         }
@@ -246,7 +308,12 @@ class Gallery{
                 this.mesh_[i] = new THREE.Mesh(new THREE.PlaneBufferGeometry( aspect * this.w_width, this.w_width), material);
                 this.mesh_[i].name = 'gallery';
                 this.mesh_[i].position.y =-i * 6 - this.globalHeight + this.sectionHeight - this.clicks;
-                this.mesh_[i].position.x = e.object.position.x;
+                if(this.random == true){
+                    let random =  Math.random() * (3 - (-3)) + (-3);
+                    this.mesh_[i].position.x = e.object.position.x + random;
+                } else {
+                    this.mesh_[i].position.x = e.object.position.x;
+                }
                 Common.scene.add(this.mesh_[i]);
                 this.gallery.push(this.mesh_[i])
 
