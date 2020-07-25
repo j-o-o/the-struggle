@@ -11,8 +11,10 @@
       </li>
     </ul>
 
-    <div id="textcontent">
-      
+    <div id="textcontainer">
+      <div id="textcontent">
+        
+      </div>
     </div>
 
 
@@ -107,21 +109,8 @@ export default {
 
     textContent(e){
       this.textContainer.innerHTML = e
-
-
-      this.textContainer.innerHTML = this.textContainer.innerHTML.replace(/\S/g, "<span class='lol'>$&</span>");
-
-
-      anime.timeline({loop: false})
-        .add({
-          targets: '.lol',
-          translateY: [-100,0],
-          easing: "easeOutExpo",
-          duration: 1400,
-          delay: (el, i) => 30 * i
-        })
-
-
+      this.textContainer.style.visibility = "visible"
+      this.textContainer.style.opacity = "1"
     },
 
     hoverArtistTitle(e){
@@ -240,18 +229,9 @@ export default {
       if(this.isInGallery == false){
 
         //delete text description if scrolled out of gallery
-        
-        anime.timeline({loop: false})
-        .add({
-          targets: '.lol',
-          translateY: [0, -100],
-          easing: "easeInExpo",
-          duration: 800,
-          delay: (el, i) => 30 * i
-        })
-        setTimeout(() => {
-          this.textContainer.innerHTML = ''
-        }, 1400);
+          this.textContainer.style.visibility = "hidden"
+
+        this.textContainer.style.opacity = "0"
 
         //hide artists bar
         this.artists.style.display = 'flex'
@@ -377,12 +357,29 @@ ul#artists li .artist_url{
 }
 
 
-
-#textcontent{
+#textcontainer{
+  width: 100%;
+  max-width: 600px;
+  height: 320px;
+  /* overflow: scroll; */
   position: fixed;
-  top: 24px;
+  bottom: 0px;
   left: 12px;
-  letter-spacing: 0;
+
 }
 
+
+
+#textcontent{
+  position:relative;
+  width: 100%;
+  height: 100%;
+  letter-spacing: 0;
+  /* transition: opacity .6s ease; */
+  overflow: scroll;
+
+  visibility: hidden;
+  opacity: 0;
+  transition: visibility 0.5s, opacity 0.5s linear;
+}
 </style>

@@ -62,8 +62,9 @@ export default {
       { id: 3, name: 'Alejandra Arévalo'},
       { id: 4, name: 'Angel Kenkov'},
       { id: 5, name: 'Henry Boebst'},
-      { id: 6, name: 'Garo Seferian'},
-      { id: 7, name: 'Luisa Behrendt'},
+      { id: 6, name: 'Iva Coskun'},
+      { id: 7, name: 'Zita Felizitas Frohloff'},
+      
       { id: 8, name: 'Artur Maier'},
       { id: 9, name: 'Maria Alejandra Arevalo Martinez'},
       { id: 10, name: 'Iva Mago Maria'},

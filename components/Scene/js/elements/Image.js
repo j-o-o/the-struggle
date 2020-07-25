@@ -26,11 +26,13 @@ export default class Image{
 
         let images = [
             '../images/saudade/saudade3.png',
-            '../images/perception/perception1.jpeg',
+            '../images/perception/perception2.jpeg',
             '../images/vergessen/vergessen2.jpg',
             '../images/absent/absent4.jpg',
             '../images/masks/masks5.jpg',
-            '../images/dazwischen/dazwischen6.jpg'
+            '../images/dazwischen/dazwischen6.jpg',
+            '../images/ivco/ivco6.jpg',
+            '../images/blue/blue8.jpeg',
         ];
         
         // used for the each loop

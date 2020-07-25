@@ -17,7 +17,12 @@ html, body{
 .letter{
     display: inline-block;
 }
+h1{
 
+    font-family: 'font2';
+    font-weight: inherit;
+    font-size: 4.2rem;
+}
 #pages{
     position: fixed;
     z-index: 2;

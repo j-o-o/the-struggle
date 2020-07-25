@@ -198,14 +198,52 @@ class Gallery{
         }
 
         if(e.object.uuid == 6){
+            this.w_width = clamp( 2, 5, Common.size.windowW / 200);
+            this.random = true;
     
             images = [
-                '../images/img8.jpg',
-                '../images/img9.jpg',
-                '../images/img10.jpg',
+                '../images/ivco/ivco1.jpg',
+                '../images/ivco/ivco2.jpg',
+                '../images/ivco/ivco3.jpg',
+                '../images/ivco/ivco4.jpg',
+                '../images/ivco/ivco5.jpg',
+                '../images/ivco/ivco6.jpg',
+                '../images/ivco/ivco7.jpg',
+                '../images/ivco/ivco8.jpg',
+                '../images/ivco/ivco9.jpg',
             ];
 
         }
+
+        if(e.object.uuid == 7){
+    
+            this.w_width = clamp( 2, 5, Common.size.windowW / 200);
+            this.random = true;
+            images = [
+                '../images/blue/blue1.jpeg',
+                '../images/blue/blue2.jpeg',
+                '../images/blue/blue3.jpeg',
+                '../images/blue/blue4.jpeg',
+                '../images/blue/blue5.jpeg',
+                '../images/blue/blue6.jpeg',
+                '../images/blue/blue7.jpeg',
+                '../images/blue/blue8.jpeg',
+                '../images/blue/blue9.jpeg',
+                '../images/blue/blue10.jpeg',
+                '../images/blue/blue11.jpeg',
+                '../images/blue/blue12.jpeg',
+                '../images/blue/blue13.jpeg',
+                '../images/blue/blue14.jpeg',
+                '../images/blue/blue15.jpeg',
+                '../images/blue/blue16.jpeg',
+                '../images/blue/blue17.jpeg',
+                '../images/blue/blue18.jpeg',
+                '../images/blue/blue19.jpeg',
+                '../images/blue/blue20.jpeg',
+                '../images/blue/blue21.jpeg',
+            ];
+
+        }    
 
 
         EventBus.$emit("LOADINGGALLERY", false)
