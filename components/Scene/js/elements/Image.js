@@ -33,6 +33,8 @@ export default class Image{
             '../images/dazwischen/dazwischen6.jpg',
             '../images/ivco/ivco6.jpg',
             '../images/blue/blue8.jpeg',
+            '../images/dystopie/dystopie13.jpg',
+            '../images/into/into6.jpg',
         ];
         
         // used for the each loop

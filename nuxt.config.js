@@ -64,14 +64,9 @@ export default {
       { id: 5, name: 'Henry Boebst'},
       { id: 6, name: 'Iva Coskun'},
       { id: 7, name: 'Zita Felizitas Frohloff'},
-      
-      { id: 8, name: 'Artur Maier'},
-      { id: 9, name: 'Maria Alejandra Arevalo Martinez'},
-      { id: 10, name: 'Iva Mago Maria'},
-      { id: 11, name: 'Zita Felizitas Frohloff'},
-      { id: 12, name: 'Angle Genkov'},
-      { id: 13, name: 'Jana Köhler'},
-      { id: 14, name: 'Kaya Peters'},
+
+      { id: 8, name: 'Camille Magnin'},
+      { id: 9, name: 'Suriñe Garcia-Pozuelo Iglesias'}
       // { id: 1, name: '1'},
       // { id: 2, name: '2'},
       // { id: 3, name: '3'},

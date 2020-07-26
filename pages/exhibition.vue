@@ -358,14 +358,26 @@ ul#artists li .artist_url{
 
 
 #textcontainer{
-  width: 100%;
-  max-width: 600px;
+  width: 320px;
   height: 320px;
   /* overflow: scroll; */
+  overflow: hidden;
   position: fixed;
-  bottom: 0px;
+  top: 0px;
   left: 12px;
+  transition: height .6s ease, opacity .6s ease, width .6s ease, mask-image .6s ease, -webkit-mask-image .6s ease;
+  opacity: .5;
 
+  -webkit-mask-image: linear-gradient(to bottom, black 50%, transparent 100%);
+  mask-image: linear-gradient(to bottom, black 50%, transparent 100%);
+
+}
+#textcontainer:hover{
+  height: 100%;
+  width: 600px;
+  opacity: 1;
+  -webkit-mask-image: linear-gradient(to bottom, black 50%, black 100%);
+  mask-image: linear-gradient(to bottom, black 50%, black 100%);
 }
 
 

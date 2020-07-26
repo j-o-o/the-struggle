@@ -244,6 +244,52 @@ class Gallery{
             ];
 
         }    
+        if(e.object.uuid == 8){
+    
+            this.w_width = clamp( 2, 5, Common.size.windowW / 200);
+            this.random = true;
+            images = [
+                '../images/dystopie/dystopie1.jpg',
+                '../images/dystopie/dystopie2.jpg',
+                '../images/dystopie/dystopie3.jpg',
+                '../images/dystopie/dystopie4.jpg',
+                '../images/dystopie/dystopie5.jpg',
+                '../images/dystopie/dystopie6.jpg',
+                '../images/dystopie/dystopie7.jpg',
+                '../images/dystopie/dystopie8.jpg',
+                '../images/dystopie/dystopie9.jpg',
+                '../images/dystopie/dystopie10.jpg',
+                '../images/dystopie/dystopie11.jpg',
+                '../images/dystopie/dystopie12.jpg',
+                '../images/dystopie/dystopie13.jpg',
+                '../images/dystopie/dystopie14.jpg',
+                '../images/dystopie/dystopie15.jpg',
+            ];
+
+        }   
+        if(e.object.uuid == 9){
+    
+            this.w_width = clamp( 2, 5, Common.size.windowW / 200);
+            this.random = true;
+            images = [
+                '../images/into/into1.jpg',
+                '../images/into/into2.jpg',
+                '../images/into/into3.jpg',
+                '../images/into/into4.jpg',
+                '../images/into/into5.jpg',
+                '../images/into/into6.jpg',
+                '../images/into/into7.jpg',
+                '../images/into/into8.jpg',
+                '../images/into/into9.jpg',
+                '../images/into/into10.jpg',
+                '../images/into/into11.jpg',
+                '../images/into/into12.jpg',
+                '../images/into/into13.jpg',
+                '../images/into/into14.jpg',
+                '../images/into/into15.jpg',
+            ];
+
+        }   
 
 
         EventBus.$emit("LOADINGGALLERY", false)
