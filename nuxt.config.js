@@ -60,7 +60,7 @@ export default {
       { id: 1, name: 'Luisa Behrendt'},
       { id: 2, name: 'Jana Köhler'},
       { id: 3, name: 'Alejandra Arévalo'},
-      { id: 4, name: 'Angel Kenkov'},
+      { id: 4, name: 'Angel Genkov'},
       { id: 5, name: 'Henry Boebst'},
       { id: 6, name: 'Iva Coskun'},
       { id: 7, name: 'Zita Felizitas Frohloff'},
