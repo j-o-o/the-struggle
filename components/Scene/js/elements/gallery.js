@@ -220,8 +220,6 @@ class Gallery{
             this.w_width = clamp( 2, 5, Common.size.windowW / 200);
             this.random = true;
             images = [
-                '../images/blue/blue1.jpeg',
-                '../images/blue/blue2.jpeg',
                 '../images/blue/blue3.jpeg',
                 '../images/blue/blue4.jpeg',
                 '../images/blue/blue5.jpeg',
