@@ -174,7 +174,6 @@ class Camera {
                 if (this.transition == false) {
                     Common.camera.position.x = lerp(Common.camera.position.x, this.camPos.x + this.mouse.x / 2 + this.slant, 0.08);
                     Common.camera.position.y = lerp(Common.camera.position.y, this.mouse.y + breathing + this.camPos.y, 0.08);
-                    console.log(Common.camera.rotation)
                     this.camLookAt.x = lerp(this.camLookAt.x, this.camPos.x + this.mouse.x * 6, 0.1);
                     this.camLookAt.y = lerp(this.camLookAt.y, this.camPos.y + this.mouse.y * 6, 0.1);
                 }
