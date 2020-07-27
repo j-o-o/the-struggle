@@ -1,6 +1,5 @@
 <template>
   <div>
-    <Loading />
     <Scene />
     <nuxt />
   </div>
@@ -10,7 +9,6 @@
 
 import Scene from "~/components/Scene";
 // import Common from "~/components/Common";
-import Loading from "~/components/loading";
 import EventBus from "~/utils/event-bus";
 export default {
 
@@ -35,7 +33,6 @@ export default {
   },
   components: {
     Scene,
-    Loading,
   }
 }
 </script>

@@ -289,6 +289,34 @@ class Gallery{
 
         }   
 
+        if(e.object.uuid == 10){
+    
+            this.w_width = clamp( 2, 5, Common.size.windowW / 200);
+            this.random = true;
+            images = [
+                '../images/bliznak/bliznak1.jpeg',
+                '../images/bliznak/bliznak2.jpeg',
+                '../images/bliznak/bliznak3.jpeg',
+                '../images/bliznak/bliznak4.jpeg',
+                '../images/bliznak/bliznak5.jpeg',
+                '../images/bliznak/bliznak6.jpeg',
+                '../images/bliznak/bliznak7.jpeg',
+                '../images/bliznak/bliznak8.jpeg',
+                '../images/bliznak/bliznak9.jpeg',
+                '../images/bliznak/bliznak10.jpeg',
+                '../images/bliznak/bliznak11.jpeg',
+                '../images/bliznak/bliznak12.jpeg',
+                '../images/bliznak/bliznak13.jpeg',
+                '../images/bliznak/bliznak14.jpeg',
+                '../images/bliznak/bliznak15.jpeg',
+                '../images/bliznak/bliznak16.jpeg',
+                '../images/bliznak/bliznak17.jpeg',
+                '../images/bliznak/bliznak18.jpeg',
+                '../images/bliznak/bliznak19.jpeg',
+            ];
+
+        }   
+
 
         EventBus.$emit("LOADINGGALLERY", false)
         this.manager = new THREE.LoadingManager( () => {

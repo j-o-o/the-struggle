@@ -66,7 +66,8 @@ export default {
       { id: 7, name: 'Zita Felizitas Frohloff'},
 
       { id: 8, name: 'Camille Magnin'},
-      { id: 9, name: 'Suriñe Garcia-Pozuelo Iglesias'}
+      { id: 9, name: 'Suriñe Garcia-Pozuelo Iglesias'},
+      { id: 10, name: 'Artur Meier'}
       // { id: 1, name: '1'},
       // { id: 2, name: '2'},
       // { id: 3, name: '3'},

@@ -35,6 +35,7 @@ export default class Image{
             '../images/blue/blue8.jpeg',
             '../images/dystopie/dystopie13.jpg',
             '../images/into/into6.jpg',
+            '../images/bliznak/bliznak17.jpeg',
         ];
         
         // used for the each loop
