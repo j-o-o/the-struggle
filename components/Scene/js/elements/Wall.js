@@ -81,9 +81,8 @@ export default class Wall{
 
         if(this.isLoading == true){
             this.pr += 0.08;
-            this.ps = lerp(this.ps, 2, 0.2)
+            this.ps = lerp(this.ps, Math.sin(Date.now() * 0.008) * Math.PI * 1, .07);
         } else {
-
             this.ps = lerp(this.ps, 1, 0.2)
         }
 
@@ -97,7 +96,6 @@ export default class Wall{
                     // console.log('image', Common.isInGallery)
                     this.breathing = Math.sin(Date.now() * 0.003) * Math.PI * 0.02;
                     this.pr += 0.05;
-                    this.ps = lerp(this.ps, 1.4, 0.2);
                     this.pointer.position.x = lerp(this.pointer.position.x, this.hoveredImg.position.x, 0.1);
                     this.pointer.position.y = lerp(this.pointer.position.y, this.hoveredImg.position.y + this.hoveredImg.geometry.parameters.height/2 + this.breathing + 0.2, 0.1);
                     
