@@ -58,7 +58,7 @@ class Camera {
                 if (this.camPos.x >= e.object.position.x - 3) {
                     this.slant = -1;
                     if (this.autoScrollEnabled) {
-                        this.autoScroll = 0.005;
+                        this.autoScroll = 0.001;
                     }
                 }
             }
@@ -173,8 +173,10 @@ class Camera {
             if (Common.isInGallery == false) {
                 if (this.transition == false) {
                     Common.camera.position.x = lerp(Common.camera.position.x, this.camPos.x + this.mouse.x / 2 + this.slant, 0.08);
-                    Common.camera.position.y = lerp(Common.camera.position.y, this.mouse.y / 2 + breathing + this.camPos.y, 0.08);
-                    this.camLookAt.x = lerp(this.camLookAt.x, this.camPos.x + this.mouse.x * 3, 0.2);
+                    Common.camera.position.y = lerp(Common.camera.position.y, this.mouse.y + breathing + this.camPos.y, 0.08);
+                    console.log(Common.camera.rotation)
+                    this.camLookAt.x = lerp(this.camLookAt.x, this.camPos.x + this.mouse.x * 6, 0.1);
+                    this.camLookAt.y = lerp(this.camLookAt.y, this.camPos.y + this.mouse.y * 6, 0.1);
                 }
             } else {
                 if (this.transition == false) {
@@ -233,6 +235,7 @@ class Camera {
         }
 
         Common.camera.lookAt(this.camLookAt.x, this.camLookAt.y, 0);
+        // Common.camera.rotation.z = lerp(Common.camera.rotation.z, this.mouse.x / (-2), 0.08);
 
     }
 }
