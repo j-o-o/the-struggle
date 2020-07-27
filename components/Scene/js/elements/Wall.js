@@ -81,7 +81,7 @@ export default class Wall{
 
         if(this.isLoading == true){
             this.pr += 0.08;
-            this.ps = lerp(this.ps, Math.sin(Date.now() * 0.008) * Math.PI * 1, .07);
+            this.ps = lerp(this.ps, Math.sin(Date.now() * 0.003) * Math.PI * 1, .07);
         } else {
             this.ps = lerp(this.ps, 1, 0.2)
         }
