@@ -198,7 +198,11 @@ class Gallery{
         }
 
         if(e.object.uuid == 6){
-            this.w_width = clamp( 2, 5, Common.size.windowW / 200);
+            if(Common.isTouch == true){
+                this.w_width = clamp( 5, 10, Common.size.windowW / 200);
+            } else if(Common.isTouch == false) {
+                this.w_width = clamp( 2, 5, Common.size.windowW / 200);
+            }
             this.random = true;
     
             images = [
@@ -216,8 +220,11 @@ class Gallery{
         }
 
         if(e.object.uuid == 7){
-    
-            this.w_width = clamp( 2, 5, Common.size.windowW / 200);
+            if(Common.isTouch == true){
+                this.w_width = clamp( 5, 10, Common.size.windowW / 200);
+            } else if(Common.isTouch == false) {
+                this.w_width = clamp( 2, 5, Common.size.windowW / 200);
+            }
             this.random = true;
             images = [
                 '../images/blue/blue3.jpeg',
@@ -243,8 +250,11 @@ class Gallery{
 
         }    
         if(e.object.uuid == 8){
-    
-            this.w_width = clamp( 2, 5, Common.size.windowW / 200);
+            if(Common.isTouch == true){
+                this.w_width = clamp( 5, 10, Common.size.windowW / 200);
+            } else if(Common.isTouch == false) {
+                this.w_width = clamp( 2, 5, Common.size.windowW / 200);
+            }
             this.random = true;
             images = [
                 '../images/dystopie/dystopie1.jpg',
