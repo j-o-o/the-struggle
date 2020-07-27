@@ -77,7 +77,6 @@ export default class Wall{
 
         this.pointer.rotation.y = this.pr;
         this.pointer.scale.set(this.ps,this.ps,this.ps)
-        console.log(this.pointer.scale)
 
         if(this.isLoading == true){
             this.pr += 0.08;
