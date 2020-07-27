@@ -81,7 +81,7 @@ export default class Wall{
             this.pr += 0.08;
         }
 
-        if(Common.isTouch == true){
+        if(Common.isTouch == false){
             if(Common.isInGallery == false){
                 if(this.isOnImg == false){
                     this.breathing = 0;

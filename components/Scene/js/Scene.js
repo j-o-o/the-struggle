@@ -106,7 +106,7 @@ export default class Scene{
         switch(path.name){
             case "index":
                 EventBus.$emit("SCROLLENABLED", false);
-                EventBus.$emit("ISTOUCH", false);
+                //EventBus.$emit("ISTOUCH", false);
             break;
             case "exhibition":
                 setTimeout(function(){

@@ -48,7 +48,7 @@ export default class RayCast{
 
     mouseMove(e){
         
-        if(Common.isTouch == true){
+        if(Common.isTouch == false){
             
             this.mouse.x = ( e.x / window.innerWidth ) * 2 - 1
             this.mouse.y = - ( e.y / window.innerHeight ) * 2 + 1

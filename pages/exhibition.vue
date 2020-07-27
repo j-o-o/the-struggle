@@ -372,7 +372,7 @@ ul#artists li .artist_url{
   mask-image: linear-gradient(to bottom, black 50%, transparent 100%);
 
 }
-@media screen and (max-width: 710px) and (orientation: portrait){
+@media screen and (max-width: 710px){
 
   #textcontainer{
     display: none;

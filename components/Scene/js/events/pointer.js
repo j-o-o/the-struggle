@@ -23,7 +23,7 @@ class Pointer{
     }
     
     mouseMove(e){
-        if(Common.isTouch == true){
+        if(Common.isTouch == false){
             EventBus.$emit("MOUSEMOVE", e);
 
             this.mouse.x = e.clientX;

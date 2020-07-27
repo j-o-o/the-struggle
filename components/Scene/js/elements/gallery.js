@@ -347,8 +347,12 @@ class Gallery{
                 this.mesh_[i] = new THREE.Mesh(new THREE.PlaneBufferGeometry( aspect * this.w_width, this.w_width), material);
                 this.mesh_[i].name = 'gallery';
                 this.mesh_[i].position.y =-i * 6 - this.globalHeight + this.sectionHeight - this.clicks;
+                if(Common.isTouch == true){
+                    this.random = false
+                }
+                console.log(Common.size.windowW/400)
                 if(this.random == true){
-                    let random =  Math.random() * (3 - (-3)) + (-3);
+                    let random =  Math.random() * (Common.size.windowW/500 - (-Common.size.windowW/500)) + (-Common.size.windowW/500);
                     this.mesh_[i].position.x = e.object.position.x + random;
                 } else {
                     this.mesh_[i].position.x = e.object.position.x;
