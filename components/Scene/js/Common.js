@@ -70,13 +70,13 @@ class Common{
         console.log(this.size)
 
 
-        if(this.size.windowW >= 710){
-            this.isMobile = true;
-            console.log(this.isMobile)
-        } else {
-            this.isMobile = false;
-            console.log(this.isMobile)
-        }
+        // if(this.size.windowW >= 710){
+        //     this.isMobile = true;
+        //     console.log(this.isMobile)
+        // } else {
+        //     this.isMobile = false;
+        //     console.log(this.isMobile)
+        // }
 
         if(typeof check !== 'undefined'){
             console.log(check)

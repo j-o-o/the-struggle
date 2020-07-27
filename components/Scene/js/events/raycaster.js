@@ -19,6 +19,7 @@ export default class RayCast{
 
         let hammertime = new Hammer(Common.renderer.domElement);
         hammertime.on('tap', this.tap.bind(this))
+        console.log('tap')
 
     }
 
@@ -47,7 +48,7 @@ export default class RayCast{
 
     mouseMove(e){
         
-        if(Common.isMobile == true){
+        if(Common.isTouch == true){
             
             this.mouse.x = ( e.x / window.innerWidth ) * 2 - 1
             this.mouse.y = - ( e.y / window.innerHeight ) * 2 + 1
@@ -59,8 +60,7 @@ export default class RayCast{
             let wall = Common.scene.getObjectByName( "wall" )
             this.intersect = this.raycaster.intersectObject( wall )
             this.intersects = this.raycaster.intersectObjects( this.image.thumbs, true )
-
-            if(Common.isMobile == true){       
+    
                 if ( this.intersect.length > 0 ) {
                     if(this.onImg == false){
                         EventBus.$emit("RAYCASTERWALL", this.intersect[0])
@@ -68,7 +68,6 @@ export default class RayCast{
                         EventBus.$emit("RAYCASTERWALL", false);
                     }
                 }
-            }
 
             if(this.isIndex == true ){
                 if(Common.isInGallery == false) {
@@ -90,7 +89,7 @@ export default class RayCast{
     }
 
     onClick(){
-        if(Common.isMobile == true){      
+        if(Common.isTouch == false){      
             this.intersects = this.raycaster.intersectObjects( this.image.thumbs )
             if(this.isIndex == true ){
                 if ( this.intersects.length > 0 ) {

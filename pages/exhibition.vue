@@ -372,6 +372,12 @@ ul#artists li .artist_url{
   mask-image: linear-gradient(to bottom, black 50%, transparent 100%);
 
 }
+@media screen and (max-width: 710px) and (orientation: portrait){
+
+  #textcontainer{
+    display: none;
+  }
+}
 #textcontainer:hover{
   height: 100%;
   width: 600px;

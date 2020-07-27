@@ -1,4 +1,11 @@
 export default {
+
+  server: {     
+    port: 8000,   
+    host: '0.0.0.0', 
+  },
+
+
   vue: {
     config: {
       productionTip: true,
@@ -22,6 +29,7 @@ export default {
   ],
   loading: '~/components/loading.vue',
   build: {
+
     vendor: ['hammerjs'],
     analyze: true,
     transpile: ['ImprovedNoise', 'SimplexNoise', 'image-promise'],
