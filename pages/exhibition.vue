@@ -400,4 +400,8 @@ ul#artists li .artist_url{
   opacity: 0;
   transition: visibility 0.5s, opacity 0.5s linear;
 }
+
+#textcontent p{
+  text-indent: 48px;
+}
 </style>

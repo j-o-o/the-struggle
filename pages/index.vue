@@ -18,7 +18,7 @@
             Digital Exhibition
           </li>
           <li>
-            Klasse Julia Albrecht
+            Led by Julia Albrecht
           </li>
           <li>
             Photographic storytelling
@@ -39,29 +39,30 @@
     <div id="intro-text-grid">
       <div class="left">
       <p>
-      Geschichten werden durch viele verschiedene Ausdrucksformen erzählt 
-      und dabei haben sich viele Möglichkeiten etabliert, mit denen man reale 
-      oder abstrakte Ereignisse erzählen kann. Wenn man diesen Aspekt rein in 
-      der Fotografie betrachtet, finden sich auch hier die Möglichkeiten, sich 
-      selbst die nüchternsten Sachinformationen in das&nbsp;Gedächtnis&nbsp;zu&nbsp;prägen. </p><p>
-      Dabei&nbsp;erzählt&nbsp;sich eine Geschichte am einfachsten in einer Bildserie, 
-      gleich ob stringent oder abstrakt. The&nbsp;concept&nbsp;sells&nbsp;the&nbsp;story. 
-      In manchen Fällen reicht sogar nur eine Fotografie aus, um eine ganze 
-      Geschichte zu erzählen. Je mehr Bilder hinzugefügt werden, umso umfangreicher kann diese werden.</p>
+We often have a story of our own that captivates us and we would like to set free: A passion that inspires us to create the best photographic stories. 
+But how do I recognize the right moment for my story? 
+Sometimes it takes a certain amount of persistence and ambition for a topic. Patience is required and careful observation of one's own environment. 
+You have to learn to recognize the story in everyday life, or you plan it and stage it in the appropriate setting. 
+The course took place every week, at regular intervals. In the beginning, technical foundations and various models of photographic storytelling were reviewed with the goal of establishing a common basis amongst the students. 
+From the start of the course, students had to identify and further develop their own story during the semester.
+</p><p>This interdisciplinary course illustrated the aspects of photographic storytelling and paved the way for the students to express their own allegory, conflicts, topics or circumstances. 
+  Stories of a different nature have emerged. 
+</p>
       </div>
       <div class="right">
+        
       <p>
-      Oftmals brennt in uns eine ganz eigene Geschichte, die uns fesselt 
-      und wir gerne befreien möchten. Eine&nbsp;Passion,&nbsp;die&nbsp;uns hilft, 
-      oftmals die besten fotografischen Geschichten zu erzählen. </p><p>
-      Doch wie erkenne ich den richtigen Augenblick für meine Geschichte? 
-      Es&nbsp;erfordert&nbsp;manchmal&nbsp;eine gewisse Ausdauer und Ambition für die Thematik. 
-      Es ist Geduld gefragt und die sorgfältige Beobachtung der eigenen Umwelt. 
-      Man muss lernen, die Geschichte im Alltag zu erkennen, oder man plant diese 
-      und setzt Sie im entsprechendem Setting&nbsp;in&nbsp;Szene.</p>
+In the work of media science student Emilia Haar, we have a visual conversation of memories. <br>
+“Saudade - How much do you miss me?” represents a photographic approach of making this term visually tangible. Harr's diptychs depict two pairs of images as a juxtaposition of distance and proximity as well as past and present. Another work by architecture student Luisa Behrendt, “Dear Perception”, deals with processes of human perception., which were inspired by a quote from Rémy Zaugg, “The Cunning of Innocence”. Henry Boebst, who is based in visual communication, deals with the current pandemic and illustrates how it is experienced from an individual's perspective. 
+      </p>
+      <p>
+In this exhibition, 14 different positions of storytelling can be found. Each one is a kind of personal discourse with theirself and the environment. Alway in the spirit of the title - The struggle is part of the story. 
+</p>
+
       </div>
-    </div>
-    <hr>
+      </div>
+      <hr>
+
 
 
       <div class="intro-container">
@@ -92,6 +93,22 @@
 
 
       </div>
+<hr>
+          <div id="intro-text-grid">
+      
+      <div class="left">
+
+  <p>
+All image and text rights are owned by the author. Any duplication, linking or further use requires the consent of the author. Excerpted reprinting is permitted provided the editors are informed in advance. The copyright applies to all pages and components of this domain. 
+</p>
+</div>
+<div class="right">
+      <p>
+This course was developed within the framework of the Bauhaus University Weimar and the courses of the Bauhaus.Module. </p>
+</div>
+    </div>
+
+
   <hr>
     <div id="footer">
         <ul>
@@ -257,7 +274,7 @@ export default {
   width: 90vw;
   text-align: center;
   font-family: 'font2';
-  font-size: 14vw;
+  font-size: 18vw;
   color: #313131;
 
 }.title_1{
@@ -299,7 +316,7 @@ export default {
   display: inline-block;
 }
 #intro-text-grid p{
-  margin: 0;
+  /* margin: 0; */
   text-indent: 48px;
   /* float: left; */
 }
@@ -339,7 +356,7 @@ p {
 #enter{
   text-align: center;
   font-family: 'font2';
-  font-size: 13vw;
+  font-size: 18vw;
   
   position: absolute;
   top: 50%;
@@ -393,7 +410,7 @@ p {
 @media screen and (max-width: 710px) and (orientation: portrait){
   .title{
     line-height: 80px;
-    font-size: 12vw;
+    font-size: 16vw;
   }
   #enter{
     font-size: 20vw;
