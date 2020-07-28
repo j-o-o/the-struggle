@@ -1,7 +1,8 @@
 
 @font-face{
     font-family: 'font2';
-    src: url('glossydisplaycondensedlight.otf')
+    src: url('GlossyDisplay-LightWeb.woff') format('woff'),
+    url('GlossyDisplay-LightWeb.woff2') format('woff2')
 }
 *{
     -webkit-font-smoothing: antialiased;

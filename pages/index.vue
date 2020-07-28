@@ -257,7 +257,7 @@ export default {
   width: 90vw;
   text-align: center;
   font-family: 'font2';
-  font-size: 18vw;
+  font-size: 14vw;
   color: #313131;
 
 }.title_1{
@@ -339,7 +339,7 @@ p {
 #enter{
   text-align: center;
   font-family: 'font2';
-  font-size: 18vw;
+  font-size: 13vw;
   
   position: absolute;
   top: 50%;
@@ -393,7 +393,7 @@ p {
 @media screen and (max-width: 710px) and (orientation: portrait){
   .title{
     line-height: 80px;
-    font-size: 16vw;
+    font-size: 12vw;
   }
   #enter{
     font-size: 20vw;
