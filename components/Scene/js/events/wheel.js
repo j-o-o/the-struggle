@@ -46,7 +46,7 @@ class Wheel{
 
     panMove(e){
         
-        this.panned = + e.velocityX + e.velocityY;
+        this.panned = + e.velocityX + e.velocityY * 2;
         EventBus.$emit("PANNED", this.panned);
 
     }
