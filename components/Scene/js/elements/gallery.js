@@ -19,7 +19,7 @@ class Gallery{
 
     load(e){
 
-        console.log(e)
+        // console.log(e)
         if(this.imageClicks >= 10){
             this.imageClicks += 10
         }
@@ -44,7 +44,7 @@ class Gallery{
         if(e.object.uuid == 0){
             if(Common.isTouch == true){
                 this.w_width = clamp( 4, 5, Common.size.windowW / 240);
-                console.log(this.w_width)
+                // console.log(this.w_width)
             } else if(Common.isTouch == false) {
                 this.w_width = clamp( 2, 6, Common.size.windowW / 200);
             }
@@ -383,12 +383,12 @@ class Gallery{
 
 
         
-        console.log(this.bigi)
+        // console.log(this.bigi)
         
 
         for (let i = 0; i < images.length; i++) {
             if (this.bigi == true){
-                console.log(' big img')
+                // console.log(' big img')
                 this.sectionHeight = images.length * 10 + 4;
             } else {
                 this.sectionHeight = images.length * 6 + 4;
@@ -419,7 +419,7 @@ class Gallery{
                 if(Common.isTouch == true){
                     this.random = false
                 }
-                console.log(this.random, this.bigi)
+                // console.log(this.random, this.bigi)
                 if(this.random == true){
                     let random =  Math.random() * (Common.size.windowW/500 - (-Common.size.windowW/500)) + (-Common.size.windowW/500);
                     this.mesh_[i].position.x = e.object.position.x + random;
@@ -436,7 +436,7 @@ class Gallery{
 
         // text description
         let text = '../texts/' + e.object.uuid + '.txt'
-        console.log(text)
+        // console.log(text)
         this.readTextFile(text)
         
     }

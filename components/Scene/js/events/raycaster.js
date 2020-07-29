@@ -19,7 +19,7 @@ export default class RayCast{
 
         let hammertime = new Hammer(Common.renderer.domElement);
         hammertime.on('tap', this.tap.bind(this))
-        console.log('tap')
+        // console.log('tap')
 
     }
 
@@ -32,10 +32,10 @@ export default class RayCast{
         this.mouse.x = +(e.center.x / window.innerWidth) * 2 +-1;
         this.mouse.y = -(e.center.y / window.innerHeight) * 2 + 1;
         
-        console.log('tap', this.mouse.x, this.mouse.y, e)
+        // console.log('tap', this.mouse.x, this.mouse.y, e)
         this.raycaster.setFromCamera( this.mouse, Common.camera )
         this.intersects = this.raycaster.intersectObjects( this.image.thumbs )
-        console.log(this.intersects)
+        // console.log(this.intersects)
         if(this.isIndex == true ){
             if ( this.intersects.length > 0 ) {
                 // console.log(this.intersects[0])

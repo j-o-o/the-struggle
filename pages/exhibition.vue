@@ -246,10 +246,10 @@ resize(e){
     let w = window.innerWidth;
     if(w <= 710){
       this.mobile = true
-      console.log('mobile')
+      // console.log('mobile')
     } else {
       this.mobile = false
-      console.log('desktop')
+      // console.log('desktop')
     }
 }
 

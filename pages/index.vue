@@ -153,7 +153,7 @@ export default {
   methods: {
     isTouch(e){
       this.isItTouch = e
-      console.log(e)
+      // console.log(e)
     },
     mouseMove(e){
       if(this.isItTouch == false){
@@ -177,7 +177,7 @@ export default {
 
     countdown(){
       let exp = document.getElementById("expired");
-      console.log(exp)
+      // console.log(exp)
       var countDownDate = new Date("jul 30, 2020 00:00").getTime();
       var x = setInterval(function() {
         var now = new Date().getTime();
