@@ -20,7 +20,7 @@ html, body{
 }
 h1{
 
-    font-family: 'font2';
+    font-family: 'font2', Serif;
     font-weight: inherit;
     font-size: 4.2rem;
 }
