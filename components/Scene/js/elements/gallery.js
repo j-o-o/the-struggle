@@ -42,8 +42,11 @@ class Gallery{
         let images = []
         this.w_width = 0;
         if(e.object.uuid == 0){
-
-            this.w_width = clamp( 2, 6, Common.size.windowW / 200);
+            if(Common.isTouch == true){
+                this.w_width = clamp( 5, 10, Common.size.windowW / 200);
+            } else if(Common.isTouch == false) {
+                this.w_width = clamp( 2, 6, Common.size.windowW / 200);
+            }
             this.bigi = false
             this.random = false;
     
@@ -63,8 +66,12 @@ class Gallery{
             ];
 
         } else if(e.object.uuid == 1){
-            this.bigi = true
-            this.w_width = clamp( 2, 6, Common.size.windowW / 160);
+            this.bigi = true            
+            if(Common.isTouch == true){
+                this.w_width = clamp( 5, 10, Common.size.windowW / 200);
+            } else if(Common.isTouch == false) {
+                this.w_width = clamp( 2, 6, Common.size.windowW / 160);
+            }
             this.random = true;
             images = [
                 '../images/perception/perception2.jpeg',
@@ -84,8 +91,11 @@ class Gallery{
             ];
 
         }else if(e.object.uuid == 2){
-    
-            this.w_width = clamp( 2, 5, Common.size.windowW / 200);
+            if(Common.isTouch == true){
+                this.w_width = clamp( 5, 10, Common.size.windowW / 200);
+            } else if(Common.isTouch == false) {
+                this.w_width = clamp( 2, 5, Common.size.windowW / 200);
+            }
             this.bigi = false
             this.random = true;
 
@@ -107,8 +117,11 @@ class Gallery{
             ];
 
         }else if(e.object.uuid == 3){
-    
-            this.w_width = clamp( 2, 5, Common.size.windowW / 200);
+            if(Common.isTouch == true){
+                this.w_width = clamp( 5, 10, Common.size.windowW / 200);
+            } else if(Common.isTouch == false) {
+                this.w_width = clamp( 2, 5, Common.size.windowW / 200);
+            }
             this.bigi = false
             this.random = true;
             images = [
@@ -142,8 +155,12 @@ class Gallery{
 
         } else if(e.object.uuid == 4){
     
-            this.bigi = false
-            this.w_width = clamp( 2, 5, Common.size.windowW / 200);
+            this.bigi = false            
+            if(Common.isTouch == true){
+                this.w_width = clamp( 5, 10, Common.size.windowW / 200);
+            } else if(Common.isTouch == false) {
+                this.w_width = clamp( 2, 5, Common.size.windowW / 200);
+            }
             this.random = true;
             images = [
                 '../images/masks/masks1.jpg',
@@ -167,7 +184,11 @@ class Gallery{
         } else if(e.object.uuid == 5){
     
             this.bigi = false
-            this.w_width = clamp( 2, 5, Common.size.windowW / 200);
+            if(Common.isTouch == true){
+                this.w_width = clamp( 5, 10, Common.size.windowW / 200);
+            } else if(Common.isTouch == false) {
+                this.w_width = clamp( 2, 5, Common.size.windowW / 200);
+            }
             this.random = true;
             images = [
                 '../images/dazwischen/dazwischen1.jpg',
@@ -292,8 +313,11 @@ class Gallery{
             ];
 
         } else if(e.object.uuid == 10){
-    
-            this.w_width = clamp( 2, 5, Common.size.windowW / 200);
+            if(Common.isTouch == true){
+                this.w_width = clamp( 5, 10, Common.size.windowW / 200);
+            } else if(Common.isTouch == false) {
+                this.w_width = clamp( 2, 5, Common.size.windowW / 200);
+            }
             this.bigi = false
             this.random = true;
             images = [
@@ -319,8 +343,11 @@ class Gallery{
             ];
 
         } else if(e.object.uuid == 11){
-    
-            this.w_width = clamp( 2, 5, Common.size.windowW / 200);
+            if(Common.isTouch == true){
+                this.w_width = clamp( 5, 10, Common.size.windowW / 200);
+            } else if(Common.isTouch == false) {
+                this.w_width = clamp( 2, 5, Common.size.windowW / 200);
+            }
             this.bigi = false;
             this.random = true;
             images = [

@@ -363,10 +363,12 @@ ul#artists li .artist_url{
   /* overflow: scroll; */
   overflow: hidden;
   position: fixed;
+  padding: 0 12px 0 0;
   top: 0px;
   left: 12px;
-  transition: height .6s ease, opacity .6s ease, width .6s ease, mask-image .6s ease, -webkit-mask-image .6s ease;
+  transition: height .6s ease, opacity .6s ease, width .6s ease, mask-image .6s ease, -webkit-mask-image .6s ease, background .3s linear;
   opacity: .5;
+  background: rgba(255,255,255,0);
 
   -webkit-mask-image: linear-gradient(to bottom, black 50%, transparent 100%);
   mask-image: linear-gradient(to bottom, black 50%, transparent 100%);
@@ -382,6 +384,7 @@ ul#artists li .artist_url{
   height: 100%;
   width: 600px;
   opacity: 1;
+  background: rgba(255,255,255,.6);
   -webkit-mask-image: linear-gradient(to bottom, black 50%, black 100%);
   mask-image: linear-gradient(to bottom, black 50%, black 100%);
 }
