@@ -401,7 +401,7 @@ class Gallery{
                 this.mesh_[i].name = 'gallery';
 
 
-                if (this.gallery.bigimagegallery == true){
+                if (this.bigimagegallery == true){
                     
                     this.mesh_[i].position.y =-i * 12 - this.globalHeight + this.sectionHeight - this.clicks;
                 } else {
