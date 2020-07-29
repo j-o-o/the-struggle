@@ -380,10 +380,10 @@ class Gallery{
 
         for (let i = 0; i < images.length; i++) {
 
-            if (this.gallery.bigimagegallery == true){
+            if (this.bigimagegallery == true){
                 console.log(' big img')
                 this.sectionHeight = images.length * 12 + 4;
-            } else if(this.gallery.bigimagegallery == false){
+            } else if(this.bigimagegallery == false){
                 this.sectionHeight = images.length * 6 + 4;
             }
 
