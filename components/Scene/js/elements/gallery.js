@@ -43,7 +43,8 @@ class Gallery{
         this.w_width = 0;
         if(e.object.uuid == 0){
             if(Common.isTouch == true){
-                this.w_width = clamp( 5, 10, Common.size.windowW / 200);
+                this.w_width = clamp( 4, 5, Common.size.windowW / 240);
+                console.log(this.w_width)
             } else if(Common.isTouch == false) {
                 this.w_width = clamp( 2, 6, Common.size.windowW / 200);
             }
