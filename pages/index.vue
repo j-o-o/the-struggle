@@ -27,7 +27,7 @@
             Bauhaus-University Weimar
           </li>
           <li>
-            Sose 2020
+            SoSe 2020
           </li>
         </ul>
       </div>
@@ -113,7 +113,8 @@ This course was developed within the framework of the Bauhaus University Weimar 
     <div id="footer">
         <ul>
           <li>
-            Class provided by <a href="https://www.uni-weimar.de/bauhausmodule/" target="_blank">Bauhaus.Module</a> 
+            <a href="https://www.uni-weimar.de/bauhausmodule/" target="_blank">
+              <img src="Logo_Bauhaus_Module.jpeg" with="70"></a> 
             </li><li>
             Prof. Ursula Damm
             </li><li>
