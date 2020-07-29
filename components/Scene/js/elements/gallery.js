@@ -13,6 +13,7 @@ class Gallery{
         this.imageClicks = 0
         this.shouldBeTop = true
         this.random = true
+        this.bigimagegallery = null
 
     }
 
@@ -43,6 +44,7 @@ class Gallery{
         if(e.object.uuid == 0){
 
             this.w_width = clamp( 2, 6, Common.size.windowW / 200);
+            this.bigimagegallery = false
             this.random = false;
     
             images = [
@@ -62,7 +64,8 @@ class Gallery{
 
         }
         if(e.object.uuid == 1){
-            this.w_width = clamp( 2, 6, Common.size.windowW / 200);
+            this.bigimagegallery = true
+            this.w_width = clamp( 2, 6, Common.size.windowW / 160);
             this.random = true;
             images = [
                 '../images/perception/perception2.jpeg',
@@ -86,6 +89,7 @@ class Gallery{
         if(e.object.uuid == 2){
     
             this.w_width = clamp( 2, 5, Common.size.windowW / 200);
+            this.bigimagegallery = false
             this.random = true;
 
             images = [
@@ -112,6 +116,7 @@ class Gallery{
         if(e.object.uuid == 3){
     
             this.w_width = clamp( 2, 5, Common.size.windowW / 200);
+            this.bigimagegallery = false
             this.random = true;
             images = [
                 '../images/absent/absent1.jpg',
@@ -146,6 +151,7 @@ class Gallery{
         
         if(e.object.uuid == 4){
     
+            this.bigimagegallery = false
             this.w_width = clamp( 2, 5, Common.size.windowW / 200);
             this.random = true;
             images = [
@@ -171,6 +177,7 @@ class Gallery{
 
         if(e.object.uuid == 5){
     
+            this.bigimagegallery = false
             this.w_width = clamp( 2, 5, Common.size.windowW / 200);
             this.random = true;
             images = [
@@ -203,6 +210,7 @@ class Gallery{
             } else if(Common.isTouch == false) {
                 this.w_width = clamp( 2, 5, Common.size.windowW / 200);
             }
+            this.bigimagegallery = true
             this.random = true;
     
             images = [
@@ -225,6 +233,7 @@ class Gallery{
             } else if(Common.isTouch == false) {
                 this.w_width = clamp( 2, 5, Common.size.windowW / 200);
             }
+            this.bigimagegallery = false
             this.random = true;
             images = [
                 '../images/blue/blue3.jpeg',
@@ -253,11 +262,11 @@ class Gallery{
             if(Common.isTouch == true){
                 this.w_width = clamp( 5, 10, Common.size.windowW / 200);
             } else if(Common.isTouch == false) {
-                this.w_width = clamp( 2, 5, Common.size.windowW / 200);
+                this.w_width = clamp( 2, 6, Common.size.windowW / 200);
             }
+            this.gallery.bigimagegallery = true;
             this.random = true;
             images = [
-                '../images/dystopie/dystopie1.jpg',
                 '../images/dystopie/dystopie2.jpg',
                 '../images/dystopie/dystopie3.jpg',
                 '../images/dystopie/dystopie4.jpg',
@@ -272,12 +281,14 @@ class Gallery{
                 '../images/dystopie/dystopie13.jpg',
                 '../images/dystopie/dystopie14.jpg',
                 '../images/dystopie/dystopie15.jpg',
+                '../images/dystopie/dystopie16.jpg',
             ];
 
         }   
         if(e.object.uuid == 9){
     
             this.w_width = clamp( 2, 5, Common.size.windowW / 200);
+            this.bigimagegallery = false
             this.random = true;
             images = [
                 '../images/into/into1.jpg',
@@ -302,6 +313,7 @@ class Gallery{
         if(e.object.uuid == 10){
     
             this.w_width = clamp( 2, 5, Common.size.windowW / 200);
+            this.bigimagegallery = false
             this.random = true;
             images = [
                 '../images/bliznak/bliznak1.jpeg',
@@ -325,6 +337,30 @@ class Gallery{
                 '../images/bliznak/bliznak19.jpeg',
             ];
 
+        }          
+        
+        if(e.object.uuid == 11){
+    
+            this.w_width = clamp( 2, 5, Common.size.windowW / 200);
+            this.bigimagegallery = false
+            this.random = true;
+            images = [
+                '../images/gemeinsam/gemeinsam2.jpg',
+                '../images/gemeinsam/gemeinsam3.jpg',
+                '../images/gemeinsam/gemeinsam4.jpg',
+                '../images/gemeinsam/gemeinsam5.jpg',
+                '../images/gemeinsam/gemeinsam6.jpg',
+                '../images/gemeinsam/gemeinsam7.jpg',
+                '../images/gemeinsam/gemeinsam8.jpg',
+                '../images/gemeinsam/gemeinsam9.jpg',
+                '../images/gemeinsam/gemeinsam10.jpg',
+                '../images/gemeinsam/gemeinsam11.jpg',
+                '../images/gemeinsam/gemeinsam12.jpg',
+                '../images/gemeinsam/gemeinsam13.jpg',
+                '../images/gemeinsam/gemeinsam14.jpg',
+                '../images/gemeinsam/gemeinsam15.jpg',
+            ];
+
         }   
 
 
@@ -343,7 +379,14 @@ class Gallery{
         
 
         for (let i = 0; i < images.length; i++) {
-            this.sectionHeight = images.length * 6 + 4;
+
+            if (this.gallery.bigimagegallery == true){
+                console.log(' big img')
+                this.sectionHeight = images.length * 12 + 4;
+            } else if(this.gallery.bigimagegallery == false){
+                this.sectionHeight = images.length * 6 + 4;
+            }
+            
             this.loadTexture(images[i]).then(texture => {
                 
                 var Ctexture = new THREE.CanvasTexture( texture );
@@ -356,7 +399,16 @@ class Gallery{
 
                 this.mesh_[i] = new THREE.Mesh(new THREE.PlaneBufferGeometry( aspect * this.w_width, this.w_width), material);
                 this.mesh_[i].name = 'gallery';
-                this.mesh_[i].position.y =-i * 6 - this.globalHeight + this.sectionHeight - this.clicks;
+
+
+                if (this.gallery.bigimagegallery == true){
+                    
+                    this.mesh_[i].position.y =-i * 12 - this.globalHeight + this.sectionHeight - this.clicks;
+                } else {
+
+                    this.mesh_[i].position.y =-i * 6 - this.globalHeight + this.sectionHeight - this.clicks;
+                }
+
                 if(Common.isTouch == true){
                     this.random = false
                 }

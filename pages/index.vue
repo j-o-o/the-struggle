@@ -115,7 +115,7 @@ This course was developed within the framework of the Bauhaus University Weimar 
           <li>
             Class provided by <a href="https://www.uni-weimar.de/bauhausmodule/" target="_blank">Bauhaus.Module</a> 
             </li><li>
-            Led by <a href="http://albrechtjulia.de/" target="_blank">Julia Albrecht</a>
+            Prof. Ursula Damm
             </li><li>
             Website by <a href="http://eriksachse.com/" target="_blank">Erik Sachse</a>
             </li><li>

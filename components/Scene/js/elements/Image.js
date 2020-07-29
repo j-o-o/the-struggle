@@ -30,12 +30,13 @@ export default class Image{
             '../images/vergessen/vergessen2.jpg',
             '../images/absent/absent4.jpg',
             '../images/masks/masks5.jpg',
-            '../images/dazwischen/dazwischen6.jpg',
+            '../images/dazwischen/dazwischen3.jpg',
             '../images/ivco/ivco6.jpg',
             '../images/blue/blue8.jpeg',
             '../images/dystopie/dystopie13.jpg',
             '../images/into/into6.jpg',
             '../images/bliznak/bliznak17.jpeg',
+            '../images/gemeinsam/gemeinsam7.jpg',
         ];
         
         // used for the each loop
