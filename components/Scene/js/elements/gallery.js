@@ -404,7 +404,7 @@ class Gallery{
                 if (this.bigimagegallery == true){
                     
                     this.mesh_[i].position.y =-i * 12 - this.globalHeight + this.sectionHeight - this.clicks;
-                } else {
+                } else  if(this.bigimagegallery == false){
 
                     this.mesh_[i].position.y =-i * 6 - this.globalHeight + this.sectionHeight - this.clicks;
                 }
