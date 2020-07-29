@@ -27,7 +27,7 @@
             Bauhaus-University Weimar
           </li>
           <li>
-            SS 2020
+            Sose 2020
           </li>
         </ul>
       </div>
