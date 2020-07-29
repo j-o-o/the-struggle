@@ -13,7 +13,7 @@ class Gallery{
         this.imageClicks = 0
         this.shouldBeTop = true
         this.random = true
-        this.bigimagegallery = null
+        this.bigimagegallery = false
 
     }
 
@@ -386,7 +386,7 @@ class Gallery{
             } else if(this.gallery.bigimagegallery == false){
                 this.sectionHeight = images.length * 6 + 4;
             }
-            
+
             this.loadTexture(images[i]).then(texture => {
                 
                 var Ctexture = new THREE.CanvasTexture( texture );
