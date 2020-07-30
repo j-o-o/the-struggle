@@ -75,6 +75,7 @@ class Gallery{
             }
             this.random = true;
             images = [
+                '../images/perception/perception1.jpeg',
                 '../images/perception/perception2.jpeg',
                 '../images/perception/perception3.jpeg',
                 '../images/perception/perception4.jpeg',
@@ -89,6 +90,7 @@ class Gallery{
                 '../images/perception/perception13.jpeg',
                 '../images/perception/perception14.jpeg',
                 '../images/perception/perception15.jpeg',
+                '../images/perception/perception16.jpeg',
             ];
 
         }else if(e.object.uuid == 2){
