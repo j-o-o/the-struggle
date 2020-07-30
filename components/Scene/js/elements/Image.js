@@ -37,7 +37,7 @@ export default class Image{
             '../images/into/into6.jpg',
             '../images/bliznak/bliznak17.jpeg',
             '../images/gemeinsam/gemeinsam7.jpg',
-            '../images/hause/hause3.jpg',
+            '../images/hausee/hause3.jpg',
         ];
         
         // used for the each loop
