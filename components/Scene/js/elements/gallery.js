@@ -209,8 +209,6 @@ class Gallery{
                 '../images/dazwischen/dazwischen15.jpg',
                 '../images/dazwischen/dazwischen16.jpg',
                 '../images/dazwischen/dazwischen17.jpg',
-                '../images/dazwischen/dazwischen18.jpg',
-                '../images/dazwischen/dazwischen19.jpg',
             ];
 
         } else if(e.object.uuid == 6){
