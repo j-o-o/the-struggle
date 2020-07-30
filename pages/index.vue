@@ -53,7 +53,7 @@ From the start of the course, students had to identify and further develop their
         
       <p>
 In the work of media science student Emilia Haar, we have a visual conversation of memories. <br>
-“Saudade - How much do you miss me?” represents a photographic approach of making this term visually tangible. Harr's diptychs depict two pairs of images as a juxtaposition of distance and proximity as well as past and present. Another work by architecture student Luisa Behrendt, “Dear Perception”, deals with processes of human perception., which were inspired by a quote from Rémy Zaugg, “The Cunning of Innocence”. Henry Boebst, who is based in visual communication, deals with the current pandemic and illustrates how it is experienced from an individual's perspective. 
+“Saudade - How much do you miss me?” represents a photographic approach of making this term visually tangible. Haar's diptychs depict two pairs of images as a juxtaposition of distance and proximity as well as past and present. Another work by architecture student Luisa Behrendt, “Dear Perception”, deals with processes of human perception., which were inspired by a quote from Rémy Zaugg, “The Cunning of Innocence”. Henry Boebst, who is based in visual communication, deals with the current pandemic and illustrates how it is experienced from an individual's perspective. 
       </p>
       <p>
 In this exhibition, 14 different positions of storytelling can be found. Each one is a kind of personal discourse with theirself and the environment. Alway in the spirit of the title - The struggle is part of the story. 
