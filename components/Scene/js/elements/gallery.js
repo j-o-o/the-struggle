@@ -396,6 +396,28 @@ class Gallery{
                 '../images/hausee/hause17.jpg',
             ];
 
+        }   else if(e.object.uuid == 13){
+            if(Common.isTouch == true){
+                this.w_width = clamp( 5, 10, Common.size.windowW / 200);
+            } else if(Common.isTouch == false) {
+                this.w_width = clamp( 2, 5, Common.size.windowW / 200);
+            }
+            this.bigi = false;
+            this.random = true;
+            images = [
+                '../images/character/1.jpg',
+                '../images/character/2.jpg',
+                '../images/character/3.jpg',
+                '../images/character/4.jpg',
+                '../images/character/5.jpg',
+                '../images/character/6.jpg',
+                '../images/character/7.jpg',
+                '../images/character/8.jpg',
+                '../images/character/9.jpg',
+                '../images/character/10.jpg',
+                '../images/character/11.jpg',
+            ];
+
         }   
 
 
