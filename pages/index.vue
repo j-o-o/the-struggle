@@ -114,7 +114,8 @@ This course was developed within the framework of the Bauhaus University Weimar 
         <ul>
           <li>
             <a href="https://www.uni-weimar.de/bauhausmodule/" target="_blank">
-              <img src="Logo_Bauhaus_Module.jpeg" with="70"></a> 
+              <img src="LogoBauhausmodule.svg" width="130">
+            </a> 
             </li><li>
             Prof. Ursula Damm
             </li><li>

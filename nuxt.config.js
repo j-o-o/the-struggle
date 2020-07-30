@@ -42,15 +42,8 @@ export default {
             }
           },
           {
-            test: /\.(png|jpe?g|gif|svg)$/i,
-            use: [
-              {
-                loader: 'file-loader',
-                options: {
-                  esModule: false,
-                },
-              },
-            ],
+            test: /\.(png|jpe?g|gif|svg|webp)$/,
+            loader: 'url-loader',
             }
           );
       }
@@ -70,7 +63,9 @@ export default {
       { id: 8, name: 'Camille Magnin'},
       { id: 9, name: 'Suriñe Garcia-Pozuelo Iglesias'},
       { id: 10, name: 'Artur Meier'},
-      { id: 11, name: 'Kaya Peters'}
+      { id: 11, name: 'Kaya Peters'},
+      { id: 12, name: 'Anika Enke'},
+      { id: 13, name: 'Garo Seferian'},
       // { id: 1, name: '1'},
       // { id: 2, name: '2'},
       // { id: 3, name: '3'},

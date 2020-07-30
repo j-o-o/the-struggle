@@ -368,6 +368,34 @@ class Gallery{
                 '../images/gemeinsam/gemeinsam15.jpg',
             ];
 
+        } else if(e.object.uuid == 12){
+            if(Common.isTouch == true){
+                this.w_width = clamp( 5, 10, Common.size.windowW / 200);
+            } else if(Common.isTouch == false) {
+                this.w_width = clamp( 2, 5, Common.size.windowW / 200);
+            }
+            this.bigi = false;
+            this.random = true;
+            images = [
+                '../images/hause/hause1.jpg',
+                '../images/hause/hause2.jpg',
+                '../images/hause/hause3.jpg',
+                '../images/hause/hause4.jpg',
+                '../images/hause/hause5.jpg',
+                '../images/hause/hause6.jpg',
+                '../images/hause/hause7.jpg',
+                '../images/hause/hause8.jpg',
+                '../images/hause/hause9.jpg',
+                '../images/hause/hause10.jpg',
+                '../images/hause/hause11.jpg',
+                '../images/hause/hause12.jpg',
+                '../images/hause/hause13.jpg',
+                '../images/hause/hause14.jpg',
+                '../images/hause/hause15.jpg',
+                '../images/hause/hause16.jpg',
+                '../images/hause/hause17.jpg',
+            ];
+
         }   
 
 
